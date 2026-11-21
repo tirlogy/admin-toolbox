@@ -14,8 +14,7 @@ const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${self.assetsManifest.version}`;
 const offlineAssetsInclude = [/\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff2?$/, /\.png$/, /\.svg$/, /\.ico$/, /\.dat$/, /\.webmanifest$/];
 const offlineAssetsExclude = [/^service-worker\.js$/];
-const base = '/';
-const baseUrl = new URL(base, self.origin);
+const baseUrl = new URL(self.registration.scope);
 const manifestUrlList = self.assetsManifest.assets.map(asset => new URL(asset.url, baseUrl).href);
 
 async function onInstall() {

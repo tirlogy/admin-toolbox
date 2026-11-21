@@ -9,7 +9,7 @@ Browser tools for IT admins: mail domain check, header analysis, subnet calculat
 helpers. Built with .NET 10 and Blazor WebAssembly. Everything runs in the browser; only DNS
 queries leave it.
 
-**Demo:** https://tools.tiryaki.eu (preview: https://build.admin-toolbox.pages.dev) ·
+**Demo:** https://tools.tiryaki.eu (preview: https://tirlogy.github.io/admin-toolbox/) ·
 **Deutsch:** [README.de.md](README.de.md)
 
 ![Mail domain check with SPF include tree and traffic lights](docs/screenshots/mail-check.png)

@@ -167,6 +167,31 @@ jobs:
           git commit -m "chore: coverage ${COVERAGE}%" || exit 0
           git push origin badges
 
+  pages-preview:
+    name: Preview (GitHub Pages)
+    needs: [e2e, lighthouse]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/build'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: site
+          path: site
+      - name: Adapt to the /admin-toolbox/ sub-path
+        run: python3 tools/pages-subpath.py site /admin-toolbox/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
   deploy-preview:
     name: Deploy preview (Cloudflare Pages)
     needs: [e2e, lighthouse]

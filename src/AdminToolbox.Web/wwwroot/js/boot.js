@@ -57,8 +57,11 @@
   root.lang = current;
 
   // Deep links show a loading line instead of the static home page until Blazor renders the tool.
-  const path = location.pathname.replace(/\/+$/, '');
-  const isHome = path === '' || path === '/index.html';
+  // Path relative to <base href>, so the app also works under a sub-path (GitHub Pages preview).
+  const basePath = new URL(document.baseURI).pathname;
+  const path = (location.pathname.startsWith(basePath) ? location.pathname.slice(basePath.length) : location.pathname)
+    .replace(/^\/+|\/+$/g, '');
+  const isHome = path === '' || path === 'index.html';
   if (!isHome) root.classList.add('atb-deeplink');
 
   // Static shell texts for DE and TR. Kept equal to AppText.*.resx by LocalizationTests.
@@ -190,7 +193,7 @@
       document.querySelectorAll('[data-i18n-label]').forEach(el => { el.setAttribute('aria-label', texts[el.dataset.i18nLabel] ?? ''); });
     }
     if (!isHome) {
-      const route = (ROUTES[current] ?? ROUTES.en)[path.split('/')[1]];
+      const route = (ROUTES[current] ?? ROUTES.en)[path.split('/')[0]];
       const box = document.querySelector('.shell-route');
       if (route && box) {
         box.querySelector('h1').textContent = route[0];
