@@ -50,7 +50,7 @@ jobs:
           PY
           echo "### Coverage" >> "$GITHUB_STEP_SUMMARY"
           grep line= "$GITHUB_OUTPUT" | tail -1 >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: tests/*/coverage.cobertura.xml
@@ -65,7 +65,7 @@ jobs:
             find publish/wwwroot/_framework -name '*.br' -printf '%s\n' | awk '{s+=$1} END {printf "total: %.0f KB\n", s/1024}'
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site
           path: publish/wwwroot
@@ -95,7 +95,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Run Playwright
         run: npx playwright test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: playwright-report
@@ -133,7 +133,7 @@ jobs:
               const s=Object.entries(r.summary).map(([k,v])=>k+' '+Math.round(v*100)).join(', ');
               console.log('- '+r.url+': '+s);
             }" >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: lighthouse
