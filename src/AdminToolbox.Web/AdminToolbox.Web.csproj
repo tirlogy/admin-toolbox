@@ -25,6 +25,8 @@
     <BlazorWebAssemblyLazyLoad Include="AdminToolbox.Tools.wasm" />
     <BlazorWebAssemblyLazyLoad Include="AdminToolbox.Core.wasm" />
     <BlazorWebAssemblyLazyLoad Include="AdminToolbox.Dns.wasm" />
+    <!-- The host never touches tool types directly, so the trimmer must keep the tools assembly. -->
+    <TrimmerRootAssembly Include="AdminToolbox.Tools" />
   </ItemGroup>
   <ItemGroup>
     <ServiceWorker Include="wwwroot/service-worker.js" PublishedContent="wwwroot/service-worker.published.js" />
