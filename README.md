@@ -86,17 +86,20 @@ otherwise it is skipped.
 ## Quality
 
 - C# with `Nullable` enabled and warnings as errors, `dotnet format` in CI.
-- Unit tests: 199 (Core 98 % line coverage, Dns 100 %), CI fails below 80 %.
-- E2E: Playwright on desktop and mobile Chrome, under the production CSP, with mocked DNS and an
-  offline (service worker) test.
-- Lighthouse CI on every push (mobile): performance ≥ 90 and accessibility = 100 on the start page.
+- Unit tests: 201 (Core 98 % line coverage, Dns 100 %), CI fails below 80 %.
+- E2E: 12 Playwright tests on desktop and mobile Chrome, under the production CSP, with mocked DNS,
+  an offline (service worker) test and a PWA installability check.
+- Lighthouse CI on every push (mobile, median of 3): start page 100 / 100 / 100 / 100 (performance,
+  accessibility, best practices, SEO); tool pages opened directly reach accessibility 100 and
+  performance about 67 because of the .NET runtime start ([ADR 0005](docs/adr/0005-lazy-loading-tools-assembly.md)).
+- Bundle: about 2.3 MB Brotli for the runtime and shell, the tools add about 0.1 MB on first use.
 - Dependabot for NuGet, npm and GitHub Actions.
 
 ## Free tier limits
 
 | Service | Limit | Usage |
 |---|---|---|
-| Cloudflare Pages (Free) | unlimited static requests and bandwidth, 500 deployments per month, 20 000 files per deployment, 25 MiB per file | about 120 files, largest about 3 MB |
+| Cloudflare Pages (Free) | unlimited static requests and bandwidth, 500 deployments per month, 20 000 files per deployment, 25 MiB per file | about 200 files (incl. pre-compressed copies), largest about 3 MB |
 | Cloudflare DNS over HTTPS | no published quota, fair use | one mail check ≈ 40 queries, cached per TTL |
 | Google Public DNS (fallback) | per-client rate limits, fair use | only used when Cloudflare fails |
 | GitHub Actions | free for public repositories | about 8 minutes per push |
