@@ -65,6 +65,38 @@ public partial class LocalizationTests
     }
 
     [Fact]
+    public void StaticShellMatchesResources()
+    {
+        // boot.js carries the DE/TR texts of the static home page, index.html the English ones.
+        var boot = File.ReadAllText(Path.Combine(Root, "src/AdminToolbox.Web/wwwroot/js/boot.js"));
+        var start = boot.IndexOf("const SHELL = ", StringComparison.Ordinal) + "const SHELL = ".Length;
+        var end = boot.IndexOf("/*END*/", StringComparison.Ordinal);
+        var json = boot[start..end].Trim().TrimEnd(';');
+        using var doc = System.Text.Json.JsonDocument.Parse(json);
+        foreach (var lang in new[] { "de", "tr" })
+        {
+            var resx = Load($"src/AdminToolbox.Web/AppText.{lang}.resx");
+            foreach (var p in doc.RootElement.GetProperty(lang).EnumerateObject())
+            {
+                Assert.Equal(resx[p.Name], p.Value.GetString());
+            }
+        }
+
+        var en = Load("src/AdminToolbox.Web/AppText.resx");
+        var html = File.ReadAllText(Path.Combine(Root, "src/AdminToolbox.Web/wwwroot/index.html"));
+        var marked = ShellText().Matches(html).ToList();
+        Assert.True(marked.Count >= 15);
+        foreach (Match m in marked)
+        {
+            Assert.Equal(en[m.Groups[1].Value], m.Groups[2].Value);
+            Assert.True(doc.RootElement.GetProperty("de").TryGetProperty(m.Groups[1].Value, out _), m.Groups[1].Value);
+        }
+    }
+
+    [GeneratedRegex(@"data-i18n=""([^""]+)""[^>]*>([^<]+)<")]
+    private static partial Regex ShellText();
+
+    [Fact]
     public void GermanTextsFollowStyleRules()
     {
         foreach (var file in new[] { "src/AdminToolbox.Tools/ToolText.de.resx", "src/AdminToolbox.Web/AppText.de.resx" })

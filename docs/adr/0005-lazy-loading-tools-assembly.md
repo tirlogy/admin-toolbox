@@ -17,8 +17,15 @@ then live in a separate assembly that the host does not reference at start-up.
   to any tool route and adds them to the router.
 - To keep the host free of references to lazy types, the tools create their own services
   (`ToolServices.Dns`, `BrowserStore`) instead of registering them in `Program.cs`.
-- `index.html` contains a static copy of the English home page, so the first contentful and largest
-  contentful paint happen before WebAssembly starts. Blazor renders the same markup on top.
+- `index.html` contains a static copy of the home page (English in the HTML, German and Turkish
+  applied by `boot.js` before the first paint), so the first contentful and largest contentful
+  paint happen before WebAssembly starts.
+- **Deferred start on the home page only.** The home page is complete as static HTML (all links are
+  plain links), so `Blazor.start()` runs on the first interaction (pointer, key, touch, focus) or
+  5 s after `load`. Deep links to a tool start .NET immediately and show a loading line instead of
+  the home content. Measured before this change: Lighthouse mobile performance about 70 on every
+  route, with 1.2 to 2.7 s total blocking time caused by the runtime start on a throttled CPU.
+- The service worker serves only same-origin requests; DNS-over-HTTPS calls are never cached or proxied.
 
 ## Alternatives
 - **Pages in the host with lazy Core/Dns only**: fewer projects, but page types would reference lazy
@@ -29,4 +36,7 @@ then live in a separate assembly that the host does not reference at start-up.
 ## Consequences
 - The home page downloads only the framework and the shell; the tools follow on demand and are
   cached by the service worker for offline use.
-- The static shell has to be kept in sync with `Home.razor` (comment in both files).
+- The static shell has to be kept in sync with `Home.razor` and the resources; a unit test compares
+  the shell texts in `index.html` and `boot.js` with `AppText*.resx`.
+- Tool pages opened directly still pay the runtime start (Lighthouse mobile about 70 there); the
+  language switcher and theme button appear on the home page once .NET has started.

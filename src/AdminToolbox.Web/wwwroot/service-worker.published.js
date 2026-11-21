@@ -4,7 +4,11 @@
 self.importScripts('./service-worker-assets.js');
 self.addEventListener('install', event => event.waitUntil(onInstall()));
 self.addEventListener('activate', event => event.waitUntil(onActivate()));
-self.addEventListener('fetch', event => event.respondWith(onFetch(event)));
+self.addEventListener('fetch', event => {
+  // Only same-origin GET requests are served from the cache. DNS-over-HTTPS calls go straight to the network.
+  if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
+  event.respondWith(onFetch(event));
+});
 
 const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${self.assetsManifest.version}`;
@@ -31,12 +35,9 @@ async function onActivate() {
 }
 
 async function onFetch(event) {
-  if (event.request.method === 'GET') {
-    const shouldServeIndexHtml = event.request.mode === 'navigate' && !manifestUrlList.some(url => url === event.request.url);
-    const request = shouldServeIndexHtml ? 'index.html' : event.request;
-    const cache = await caches.open(cacheName);
-    const cached = await cache.match(request);
-    if (cached) return cached;
-  }
-  return fetch(event.request);
+  const shouldServeIndexHtml = event.request.mode === 'navigate' && !manifestUrlList.some(url => url === event.request.url);
+  const request = shouldServeIndexHtml ? 'index.html' : event.request;
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  return cached || fetch(event.request);
 }
