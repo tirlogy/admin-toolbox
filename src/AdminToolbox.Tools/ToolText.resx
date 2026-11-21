@@ -293,7 +293,7 @@
   <data name="spf.macro" xml:space="preserve"><value>Macros (%{{…}}) found. They depend on the sender and are not resolved here.</value></data>
   <data name="spf.multiple" xml:space="preserve"><value>{0} has {1} SPF records. Exactly one is allowed, otherwise SPF fails (permerror).</value></data>
   <data name="spf.multiple.fix" xml:space="preserve"><value>Merge all entries into a single "v=spf1 …" record.</value></data>
-  <data name="spf.node.lookups" xml:space="preserve"><value>{0} lookups</value></data>
+  <data name="spf.node.lookups" xml:space="preserve"><value>lookups: {0}</value></data>
   <data name="spf.none" xml:space="preserve"><value>No SPF record found.</value></data>
   <data name="spf.none.fix" xml:space="preserve"><value>Add a TXT record at the domain, e.g. "v=spf1 mx -all" or with your mail provider's include. If the domain never sends mail: "v=spf1 -all".</value></data>
   <data name="spf.ptr" xml:space="preserve"><value>The ptr mechanism is deprecated (RFC 7208), slow and unreliable.</value></data>

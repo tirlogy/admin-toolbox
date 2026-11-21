@@ -293,7 +293,7 @@
   <data name="spf.macro" xml:space="preserve"><value>Makros (%{{…}}) gefunden. Sie hängen vom Absender ab und werden hier nicht aufgelöst.</value></data>
   <data name="spf.multiple" xml:space="preserve"><value>{0} hat {1} SPF-Einträge. Erlaubt ist genau einer, sonst schlägt SPF fehl (permerror).</value></data>
   <data name="spf.multiple.fix" xml:space="preserve"><value>Alle Einträge zu einem einzigen "v=spf1 …" zusammenführen.</value></data>
-  <data name="spf.node.lookups" xml:space="preserve"><value>{0} Lookups</value></data>
+  <data name="spf.node.lookups" xml:space="preserve"><value>Lookups: {0}</value></data>
   <data name="spf.none" xml:space="preserve"><value>Kein SPF-Eintrag gefunden.</value></data>
   <data name="spf.none.fix" xml:space="preserve"><value>TXT-Eintrag an der Domain anlegen, zum Beispiel "v=spf1 mx -all" oder mit dem include des Mailanbieters. Sendet die Domain nie Mails: "v=spf1 -all".</value></data>
   <data name="spf.ptr" xml:space="preserve"><value>Der Mechanismus ptr ist veraltet (RFC 7208), langsam und unzuverlässig.</value></data>

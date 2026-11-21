@@ -293,7 +293,7 @@
   <data name="spf.macro" xml:space="preserve"><value>Makrolar (%{{…}}) bulundu. Gönderene bağlıdır ve burada çözümlenmez.</value></data>
   <data name="spf.multiple" xml:space="preserve"><value>{0} için {1} SPF kaydı var. Yalnızca bir taneye izin verilir, aksi halde SPF başarısız olur (permerror).</value></data>
   <data name="spf.multiple.fix" xml:space="preserve"><value>Tüm girdileri tek bir "v=spf1 …" kaydında birleştirin.</value></data>
-  <data name="spf.node.lookups" xml:space="preserve"><value>{0} sorgu</value></data>
+  <data name="spf.node.lookups" xml:space="preserve"><value>sorgu: {0}</value></data>
   <data name="spf.none" xml:space="preserve"><value>SPF kaydı bulunamadı.</value></data>
   <data name="spf.none.fix" xml:space="preserve"><value>Alan adına bir TXT kaydı ekleyin, örneğin "v=spf1 mx -all" veya e-posta sağlayıcınızın include'u ile. Alan adı hiç e-posta göndermiyorsa: "v=spf1 -all".</value></data>
   <data name="spf.ptr" xml:space="preserve"><value>ptr mekanizması kullanımdan kaldırılmıştır (RFC 7208), yavaş ve güvenilmezdir.</value></data>

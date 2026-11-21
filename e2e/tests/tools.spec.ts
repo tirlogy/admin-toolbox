@@ -94,3 +94,14 @@ test('helpers keep working offline (PWA)', async ({ page, context }) => {
   await expect(page.locator('[data-hash="Sha1"]')).toHaveText('a9993e364706816aba3e25717850c26c9cd0d89d');
   await context.setOffline(false);
 });
+
+test('PWA is installable (Chrome installability check)', async ({ page }) => {
+  await page.goto('/helpers');
+  await waitForBlazor(page);
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  const cdp = await page.context().newCDPSession(page);
+  const { installabilityErrors } = await cdp.send('Page.getInstallabilityErrors');
+  expect(installabilityErrors).toEqual([]);
+  const manifest = await page.evaluate(async () => (await fetch('manifest.webmanifest')).json());
+  expect(manifest.icons.map((i: { sizes: string }) => i.sizes)).toEqual(expect.arrayContaining(['192x192', '512x512']));
+});
