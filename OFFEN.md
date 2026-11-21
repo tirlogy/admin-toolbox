@@ -3,9 +3,9 @@
 Was Ömer tun muss. Claude ergänzt diese Liste während des Baus.
 
 ## Von Anfang an bekannt
-- [ ] Merge und Custom Domain tools.tiryaki.eu eintragen (Schritte 2 und 3 unten)
+- [x] (erledigt 21.11.2026) Merge und Custom Domain tools.tiryaki.eu eintragen (Schritte 2 und 3 unten)
 - [ ] Ergebnis prüfen: Vorschau-Adresse https://tirlogy.github.io/admin-toolbox/ öffnen, `ERKLAERT.md` lesen
-- [ ] Pull Request `build` → `main` mergen (Schritt 2)
+- [x] (erledigt 21.11.2026) Pull Request `build` → `main` mergen (Schritt 2)
 
 ## Während des Baus ergänzt
 
@@ -48,8 +48,8 @@ Danach in `.github/workflows/ci.yml` beim Job „Preview (GitHub Pages)“ nicht
 
 ### 3. Produktiv-Domain
 - [ ] Cloudflare Dashboard → Workers & Pages → `admin-toolbox` → Settings → Production branch `main` prüfen und einmal von `main` deployen (Variante 1b deployt nur `build`; für Produktion `--branch main` statt `--branch build`)
-- [ ] Custom domains → `tools.tiryaki.eu` hinzufügen (den DNS-Eintrag legt Cloudflare an, wenn tiryaki.eu dort liegt)
-- [ ] Nach dem Go-live in `portfolio.json` `"status": "in-arbeit"` auf `"live"` setzen
+- [x] (erledigt 21.11.2026) Custom domains → `tools.tiryaki.eu` hinzufügen (den DNS-Eintrag legt Cloudflare an, wenn tiryaki.eu dort liegt)
+- [x] (erledigt 21.11.2026) Nach dem Go-live in `portfolio.json` `"status": "in-arbeit"` auf `"live"` setzen
 
 ### 4. Release
 - [ ] Tag `v1.0.0` liegt auf `build`. Optional auf GitHub ein Release dazu anlegen: `gh release create v1.0.0 --repo tirlogy/admin-toolbox --title "v1.0.0" --notes-file CHANGELOG.md`
