@@ -2,7 +2,6 @@
   <!-- Routable tool pages. Loaded lazily by AdminToolbox.Web on first navigation to a tool (docs/adr/0005). -->
   <PropertyGroup>
     <RootNamespace>AdminToolbox.Tools</RootNamespace>
-    <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
   <ItemGroup>
     <SupportedPlatform Include="browser" />

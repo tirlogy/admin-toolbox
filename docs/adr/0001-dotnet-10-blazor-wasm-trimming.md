@@ -12,8 +12,10 @@ The tools are light on CPU (parsing a few kilobytes, 128-bit integer math).
 
 ## Decision
 - Target `net10.0` for all projects.
-- Publish with IL trimming (`PublishTrimmed`, `TrimMode=full`) and the default Brotli/gzip
-  pre-compression. No AOT.
+- Publish with IL trimming in the default `partial` mode: the framework and the assemblies marked
+  `IsTrimmable` (Core, Dns) are trimmed, the Razor assemblies are kept whole. `TrimMode=full` was
+  tried and removed component constructors that Blazor creates via reflection (`CtorNotLocated`).
+  Default Brotli/gzip pre-compression. No AOT.
 - `InvariantGlobalization=true` with `PredefinedCulturesOnly=false`: no ICU data download; the
   three UI cultures (de, en, tr) only drive resource lookup (see ADR 0003).
 - SDK pinning is left to CI (`actions/setup-dotnet` with `10.0.x`) instead of a `global.json`, so the

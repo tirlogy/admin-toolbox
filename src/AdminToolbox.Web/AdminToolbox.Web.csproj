@@ -8,7 +8,6 @@
     <SatelliteResourceLanguages>de;tr</SatelliteResourceLanguages>
     <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
     <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>full</TrimMode>
     <WasmEnableSIMD>true</WasmEnableSIMD>
     <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
     <!-- Plain _framework file names: no inline import map needed, so the CSP can forbid inline scripts (docs/adr/0004). -->
