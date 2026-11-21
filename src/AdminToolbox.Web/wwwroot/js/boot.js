@@ -105,6 +105,78 @@
   };
   /*END*/
 
+  // Title and intro of each tool page, shown statically on deep links until the tool has rendered.
+  /*ROUTES*/
+  const ROUTES = {
+    "en": {
+      "mail": [
+        "Mail domain check",
+        "Checks MX, SPF, DKIM, DMARC, BIMI, MTA-STS and TLS-RPT of a domain and suggests concrete improvements."
+      ],
+      "header": [
+        "Mail header analysis",
+        "Paste the headers of an e-mail. The analysis shows the route as a timeline, the SPF, DKIM and DMARC results, spam hints and suspicious mismatches."
+      ],
+      "subnet": [
+        "Subnet calculator",
+        "IPv4 and IPv6: network, broadcast, host range, splitting into subnets, summarizing and checking whether an IP is in the network."
+      ],
+      "dns-diff": [
+        "DNS diff",
+        "Compare records from before a migration (zone file or list) with live DNS. Shows missing, changed and new values."
+      ],
+      "helpers": [
+        "Helpers",
+        "Tools that run completely offline in the browser."
+      ]
+    },
+    "de": {
+      "mail": [
+        "Mail-Domain-Check",
+        "Prüft MX, SPF, DKIM, DMARC, BIMI, MTA-STS und TLS-RPT einer Domain und schlägt konkrete Verbesserungen vor."
+      ],
+      "header": [
+        "Mail-Header-Analyse",
+        "Header einer E-Mail einfügen. Die Analyse zeigt den Weg der Mail als Zeitleiste, die Ergebnisse von SPF, DKIM und DMARC, Spam-Hinweise und verdächtige Abweichungen."
+      ],
+      "subnet": [
+        "Subnetzrechner",
+        "IPv4 und IPv6: Netz, Broadcast, Hostbereich, Aufteilen in Subnetze, Zusammenfassen und Prüfen, ob eine IP im Netz liegt."
+      ],
+      "dns-diff": [
+        "DNS-Vergleich",
+        "Einträge vor einem Umzug (Zonendatei oder Liste) mit der Live-Abfrage vergleichen. Zeigt fehlende, geänderte und neue Werte."
+      ],
+      "helpers": [
+        "Helfer",
+        "Werkzeuge, die vollständig offline im Browser laufen."
+      ]
+    },
+    "tr": {
+      "mail": [
+        "E-posta alan adı kontrolü",
+        "Bir alan adının MX, SPF, DKIM, DMARC, BIMI, MTA-STS ve TLS-RPT kayıtlarını kontrol eder ve somut iyileştirmeler önerir."
+      ],
+      "header": [
+        "E-posta başlığı analizi",
+        "Bir e-postanın başlıklarını yapıştırın. Analiz; yolu zaman çizelgesi olarak, SPF, DKIM ve DMARC sonuçlarını, spam işaretlerini ve şüpheli uyumsuzlukları gösterir."
+      ],
+      "subnet": [
+        "Alt ağ hesaplayıcı",
+        "IPv4 ve IPv6: ağ, yayın adresi, ana bilgisayar aralığı, alt ağlara bölme, birleştirme ve bir IP'nin ağda olup olmadığını kontrol etme."
+      ],
+      "dns-diff": [
+        "DNS karşılaştırma",
+        "Taşıma öncesindeki kayıtları (bölge dosyası veya liste) canlı DNS ile karşılaştırın. Eksik, değişen ve yeni değerleri gösterir."
+      ],
+      "helpers": [
+        "Yardımcılar",
+        "Tamamen çevrimdışı olarak tarayıcıda çalışan araçlar."
+      ]
+    }
+  };
+  /*ENDROUTES*/
+
   const startBlazor = () => {
     if (window.__atbStarted || !window.Blazor) return;
     window.__atbStarted = true;
@@ -117,7 +189,17 @@
       document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = texts[el.dataset.i18n] ?? el.textContent; });
       document.querySelectorAll('[data-i18n-label]').forEach(el => { el.setAttribute('aria-label', texts[el.dataset.i18nLabel] ?? ''); });
     }
-    if (!isHome) { startBlazor(); return; }
+    if (!isHome) {
+      const route = (ROUTES[current] ?? ROUTES.en)[path.split('/')[1]];
+      const box = document.querySelector('.shell-route');
+      if (route && box) {
+        box.querySelector('h1').textContent = route[0];
+        box.querySelector('p').textContent = route[1];
+        root.classList.add('atb-route');
+      }
+      startBlazor();
+      return;
+    }
     // The home page is complete as static HTML. .NET starts on the first interaction or when the page has been idle.
     for (const type of ['pointerdown', 'keydown', 'touchstart', 'focusin']) {
       window.addEventListener(type, startBlazor, { once: true, passive: true });

@@ -93,6 +93,26 @@ public partial class LocalizationTests
         }
     }
 
+    [Fact]
+    public void StaticRouteTitlesMatchToolResources()
+    {
+        var boot = File.ReadAllText(Path.Combine(Root, "src/AdminToolbox.Web/wwwroot/js/boot.js"));
+        var start = boot.IndexOf("const ROUTES = ", StringComparison.Ordinal) + "const ROUTES = ".Length;
+        var end = boot.IndexOf("/*ENDROUTES*/", StringComparison.Ordinal);
+        using var doc = System.Text.Json.JsonDocument.Parse(boot[start..end].Trim().TrimEnd(';'));
+        var keys = new Dictionary<string, string> { ["mail"] = "mail", ["header"] = "header", ["subnet"] = "subnet", ["dns-diff"] = "diff", ["helpers"] = "helpers" };
+        foreach (var (lang, suffix) in new[] { ("en", ""), ("de", ".de"), ("tr", ".tr") })
+        {
+            var resx = Load($"src/AdminToolbox.Tools/ToolText{suffix}.resx");
+            foreach (var (route, key) in keys)
+            {
+                var pair = doc.RootElement.GetProperty(lang).GetProperty(route);
+                Assert.Equal(resx[key + ".title"], pair[0].GetString());
+                Assert.Equal(resx[key + ".lead"], pair[1].GetString());
+            }
+        }
+    }
+
     [GeneratedRegex(@"data-i18n=""([^""]+)""[^>]*>([^<]+)<")]
     private static partial Regex ShellText();
 
