@@ -1,0 +1,30 @@
+@if (Findings.Count > 0)
+{
+    <ul class="findings">
+        @foreach (var f in Findings.OrderByDescending(x => x.Severity))
+        {
+            var fix = L[f.Code + ".fix", Format.Args(f)];
+            <li class="finding">
+                <Light Severity="f.Severity" />
+                <div>
+                    <p>@Text(f)</p>
+                    @if (!fix.ResourceNotFound && f.Severity >= Severity.Info)
+                    {
+                        <p class="fix"><strong>@L["ui.fix"]</strong> @fix.Value</p>
+                    }
+                </div>
+            </li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public IReadOnlyList<Finding> Findings { get; set; } = Array.Empty<Finding>();
+
+    private string Text(Finding f)
+    {
+        var s = L[f.Code, Format.Args(f)];
+        return s.ResourceNotFound ? f.Code + " " + string.Join(", ", f.Args) : s.Value;
+    }
+}

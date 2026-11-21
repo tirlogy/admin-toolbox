@@ -1,0 +1,30 @@
+@using AdminToolbox.Core.Helpers
+
+<section class="card" aria-labelledby="h-hash">
+    <h2 id="h-hash">@L["helpers.hash"]</h2>
+    <div class="field">
+        <label for="hash-input">@L["hash.input"]</label>
+        <textarea id="hash-input" rows="4" spellcheck="false" @bind="_input" @bind:event="oninput"></textarea>
+        <small>@L["hash.utf8"]</small>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <caption class="sr-only">@L["helpers.hash"]</caption>
+            <thead><tr><th scope="col">@L["hash.algorithm"]</th><th scope="col">@L["hash.value"]</th></tr></thead>
+            <tbody>
+                @foreach (var k in Hashing.All)
+                {
+                    <tr>
+                        <th scope="row">@L["hash." + k] @if (Hashing.IsWeak(k)) { <span class="tag tag-missing">@L["hash.weak"]</span> }</th>
+                        <td class="mono wrap" data-hash="@k">@Hashing.Hex(k, _input)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="muted">@L["hash.weaknote"]</p>
+</section>
+
+@code {
+    private string _input = string.Empty;
+}

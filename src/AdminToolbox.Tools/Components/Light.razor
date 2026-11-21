@@ -1,0 +1,7 @@
+@* Traffic light: color plus text, never color alone (WCAG 1.4.1). *@
+<span class="light light-@Format.Css(Severity)"><span class="light-dot" aria-hidden="true"></span>@L["sev." + Severity]</span>
+
+@code {
+    [Parameter]
+    public Severity Severity { get; set; }
+}

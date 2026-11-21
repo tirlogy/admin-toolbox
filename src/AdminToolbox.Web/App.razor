@@ -1,0 +1,32 @@
+@using System.Reflection
+@inject LazyAssemblyLoader AssemblyLoader
+
+<Router AppAssembly="typeof(App).Assembly" AdditionalAssemblies="_lazyAssemblies" OnNavigateAsync="OnNavigateAsync" NotFoundPage="typeof(Pages.NotFound)">
+    <Navigating>
+        <p class="loading" role="status">@T["loading"]</p>
+    </Navigating>
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+</Router>
+
+@code {
+    private static readonly string[] ShellPaths = { "", "privacy", "not-found" };
+    private static readonly string[] ToolAssemblies = { "AdminToolbox.Core.wasm", "AdminToolbox.Dns.wasm", "AdminToolbox.Tools.wasm" };
+    private readonly List<Assembly> _lazyAssemblies = new();
+    private bool _toolsLoaded;
+
+    private async Task OnNavigateAsync(NavigationContext context)
+    {
+        var path = context.Path.Split('?', '#')[0].Trim('/');
+        if (_toolsLoaded || ShellPaths.Contains(path, StringComparer.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        var assemblies = await AssemblyLoader.LoadAssembliesAsync(ToolAssemblies);
+        _lazyAssemblies.AddRange(assemblies);
+        _toolsLoaded = true;
+    }
+}

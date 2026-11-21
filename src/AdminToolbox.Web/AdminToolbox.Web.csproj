@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+  <PropertyGroup>
+    <RootNamespace>AdminToolbox.Web</RootNamespace>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+    <!-- Size: no ICU data download, cultures only drive resource lookup (docs/adr/0001, 0003). -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <PredefinedCulturesOnly>false</PredefinedCulturesOnly>
+    <SatelliteResourceLanguages>de;tr</SatelliteResourceLanguages>
+    <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>full</TrimMode>
+    <WasmEnableSIMD>true</WasmEnableSIMD>
+    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.15" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.15" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../AdminToolbox.Tools/AdminToolbox.Tools.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Tool pages and their logic are downloaded on first navigation to a tool (docs/adr/0005). -->
+    <BlazorWebAssemblyLazyLoad Include="AdminToolbox.Tools.wasm" />
+    <BlazorWebAssemblyLazyLoad Include="AdminToolbox.Core.wasm" />
+    <BlazorWebAssemblyLazyLoad Include="AdminToolbox.Dns.wasm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot/service-worker.js" PublishedContent="wwwroot/service-worker.published.js" />
+  </ItemGroup>
+</Project>

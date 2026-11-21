@@ -1,0 +1,30 @@
+@page "/"
+@* Keep the markup in sync with the static shell in wwwroot/index.html (fast first paint, see docs/adr/0005). *@
+
+<PageTitle>Admin Toolbox</PageTitle>
+
+<section class="hero">
+    <h1>@T["home.title"]</h1>
+    <p class="lead">@T["home.lead"]</p>
+</section>
+
+<ul class="tool-grid">
+    @foreach (var (key, href) in Tools)
+    {
+        <li>
+            <a class="tool-card" href="@href">
+                <span class="tool-name">@T["tool." + key]</span>
+                <span class="tool-desc">@T["tool." + key + ".desc"]</span>
+            </a>
+        </li>
+    }
+</ul>
+
+<p class="notice">@T["home.privacy"]</p>
+
+@code {
+    private static readonly (string Key, string Href)[] Tools =
+    {
+        ("mail", "mail"), ("header", "header"), ("subnet", "subnet"), ("diff", "dns-diff"), ("helpers", "helpers"),
+    };
+}

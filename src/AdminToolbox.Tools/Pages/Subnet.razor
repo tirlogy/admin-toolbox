@@ -1,0 +1,213 @@
+@page "/subnet"
+@using System.Numerics
+@using AdminToolbox.Core.Network
+@inject IJSRuntime JS
+
+<PageTitle>@L["subnet.title"] · Admin Toolbox</PageTitle>
+
+<h1>@L["subnet.title"]</h1>
+<p class="lead">@L["subnet.lead"]</p>
+
+<form class="tool-form" @onsubmit="CalculateAsync">
+    <div class="field">
+        <label for="subnet-input">@L["subnet.input"]</label>
+        <input id="subnet-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="192.168.10.0/24"
+               aria-describedby="subnet-hint" @bind="_input" @bind:event="oninput" />
+        <small id="subnet-hint">@L["subnet.hint"]</small>
+    </div>
+    <button type="submit" class="btn">@L["subnet.run"]</button>
+</form>
+
+<History Items="_history" OnPick="PickAsync" OnClear="ClearHistoryAsync" />
+
+<div aria-live="polite">
+    @if (_error is not null)
+    {
+        <p class="alert" role="alert">@_error</p>
+    }
+</div>
+
+@if (_info is { } i)
+{
+    <section class="card" aria-labelledby="h-net">
+        <h2 id="h-net">@i.Network.Normalized</h2>
+        <dl class="kv">
+            <dt>@L["subnet.address"]</dt><dd class="mono">@i.Input</dd>
+            <dt>@L["subnet.network"]</dt><dd class="mono">@i.NetworkAddress/@i.Network.Prefix</dd>
+            @if (i.Netmask is not null)
+            {
+                <dt>@L["subnet.netmask"]</dt><dd class="mono">@i.Netmask</dd>
+                <dt>@L["subnet.wildcard"]</dt><dd class="mono">@i.Wildcard</dd>
+            }
+            @if (i.Broadcast is not null)
+            {
+                <dt>@L["subnet.broadcast"]</dt><dd class="mono">@i.Broadcast</dd>
+            }
+            <dt>@L["subnet.range"]</dt><dd class="mono">@i.FirstHost – @i.LastHost</dd>
+            <dt>@L["subnet.total"]</dt><dd>@Format.Number(i.TotalAddresses)</dd>
+            <dt>@L["subnet.usable"]</dt><dd>@Format.Number(i.UsableHosts)</dd>
+            <dt>@L["subnet.type"]</dt><dd>@L["iptype." + i.AddressType]</dd>
+            <dt>@L["subnet.reverse"]</dt><dd class="mono">@i.ReverseZone</dd>
+            @if (i.Binary is not null)
+            {
+                <dt>@L["subnet.binary"]</dt><dd class="mono wrap">@i.Binary</dd>
+            }
+        </dl>
+        @if (i.Network.Family == IpFamily.V4 && i.Network.Prefix >= 31)
+        {
+            <p class="muted">@L["subnet.p2p"]</p>
+        }
+    </section>
+
+    <section class="card" aria-labelledby="h-contains">
+        <h2 id="h-contains">@L["subnet.contains"]</h2>
+        <div class="field">
+            <label for="contains-input">@L["subnet.contains.input"]</label>
+            <input id="contains-input" type="text" autocomplete="off" spellcheck="false" @bind="_ip" @bind:event="oninput" />
+        </div>
+        <p aria-live="polite">@ContainsText()</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-split">
+        <h2 id="h-split">@L["subnet.split"]</h2>
+        <div class="field">
+            <label for="split-prefix">@L["subnet.split.prefix"]</label>
+            <input id="split-prefix" type="number" min="@i.Network.Prefix" max="@i.Network.MaxBits" @bind="_splitPrefix" @bind:event="oninput" />
+        </div>
+        @if (Split() is { } split)
+        {
+            <p>@L["subnet.split.count", Format.Number(split.Total), split.Items.Count]</p>
+            <ol class="mono columns">
+                @foreach (var s in split.Items)
+                {
+                    <li>@s</li>
+                }
+            </ol>
+        }
+        else
+        {
+            <p class="muted">@L["subnet.split.range", i.Network.Prefix, i.Network.MaxBits]</p>
+        }
+    </section>
+}
+
+<section class="card" aria-labelledby="h-summarize">
+    <h2 id="h-summarize">@L["subnet.summarize"]</h2>
+    <p class="muted">@L["subnet.summarize.lead"]</p>
+    <div class="field">
+        <label for="summarize-input">@L["subnet.summarize.input"]</label>
+        <textarea id="summarize-input" rows="6" spellcheck="false" @bind="_list" @bind:event="oninput"></textarea>
+    </div>
+    @if (Summarize() is { } sum)
+    {
+        @if (sum.Invalid.Count > 0)
+        {
+            <p class="alert" role="alert">@L["subnet.summarize.invalid", string.Join(", ", sum.Invalid)]</p>
+        }
+        @if (sum.Result.Count > 0)
+        {
+            <h3>@L["subnet.summarize.result"]</h3>
+            <pre class="record">@string.Join("\n", sum.Result)</pre>
+            @if (sum.Supernet is not null)
+            {
+                <p>@L["subnet.supernet"] <code>@sum.Supernet</code></p>
+            }
+        }
+    }
+</section>
+
+@code {
+    private const string HistoryKey = "subnet";
+    private string _input = string.Empty;
+    private string _ip = string.Empty;
+    private string _list = string.Empty;
+    private int _splitPrefix;
+    private string? _error;
+    private SubnetInfo? _info;
+    private List<string> _history = new();
+
+    protected override async Task OnInitializedAsync() => _history = await new BrowserStore(JS).GetHistoryAsync(HistoryKey);
+
+    private async Task CalculateAsync()
+    {
+        _error = null;
+        if (!IpNetwork.TryParse(_input, out var net))
+        {
+            _info = null;
+            _error = L["subnet.invalid"];
+            return;
+        }
+
+        _info = SubnetCalculator.Describe(net);
+        _splitPrefix = Math.Min(net.MaxBits, net.Prefix + (net.Family == IpFamily.V4 ? 2 : 16));
+        _history = await new BrowserStore(JS).PushHistoryAsync(HistoryKey, _input.Trim());
+    }
+
+    private async Task PickAsync(string value)
+    {
+        _input = value;
+        await CalculateAsync();
+    }
+
+    private async Task ClearHistoryAsync()
+    {
+        await new BrowserStore(JS).ClearHistoryAsync(HistoryKey);
+        _history = new List<string>();
+    }
+
+    private string ContainsText()
+    {
+        if (_info is null || string.IsNullOrWhiteSpace(_ip))
+        {
+            return string.Empty;
+        }
+
+        if (!IpNetwork.TryParseAddress(_ip, out var family, out var value))
+        {
+            return L["subnet.contains.invalid"].Value;
+        }
+
+        var inside = family == _info.Network.Family && _info.Network.Contains(value);
+        return L[inside ? "subnet.contains.yes" : "subnet.contains.no", _ip.Trim(), _info.Network.Normalized].Value;
+    }
+
+    private (IReadOnlyList<IpNetwork> Items, BigInteger Total)? Split()
+    {
+        if (_info is null || _splitPrefix < _info.Network.Prefix || _splitPrefix > _info.Network.MaxBits)
+        {
+            return null;
+        }
+
+        var items = SubnetCalculator.Split(_info.Network.Normalized, _splitPrefix, out var total, 256);
+        return (items, total);
+    }
+
+    private (List<string> Result, List<string> Invalid, IpNetwork? Supernet)? Summarize()
+    {
+        var lines = _list.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .SelectMany(l => l.Split(new[] { ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries))
+            .Take(2000)
+            .ToList();
+        if (lines.Count == 0)
+        {
+            return null;
+        }
+
+        var nets = new List<IpNetwork>();
+        var invalid = new List<string>();
+        foreach (var line in lines)
+        {
+            if (IpNetwork.TryParse(line, out var n))
+            {
+                nets.Add(n);
+            }
+            else
+            {
+                invalid.Add(line);
+            }
+        }
+
+        var result = SubnetCalculator.Summarize(nets).Select(n => n.ToString()).ToList();
+        return (result, invalid, SubnetCalculator.Supernet(nets));
+    }
+}

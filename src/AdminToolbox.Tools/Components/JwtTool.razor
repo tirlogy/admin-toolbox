@@ -1,0 +1,61 @@
+@using AdminToolbox.Core.Helpers
+
+<section class="card" aria-labelledby="h-jwt">
+    <h2 id="h-jwt">@L["helpers.jwt"]</h2>
+    <div class="field">
+        <label for="jwt-input">@L["jwt.input"]</label>
+        <textarea id="jwt-input" rows="5" spellcheck="false" autocomplete="off" aria-describedby="jwt-hint" @bind="_token" @bind:event="oninput" @bind:after="Decode"></textarea>
+        <small id="jwt-hint">@L["jwt.hint"]</small>
+    </div>
+    @if (_error is not null)
+    {
+        <p class="alert" role="alert">@_error</p>
+    }
+    @if (_info is { } i)
+    {
+        <p>
+            <Light Severity="@(i.Status == JwtStatus.Valid ? Severity.Ok : i.Status == JwtStatus.NoExpiry ? Severity.Info : Severity.Warning)" />
+            @L["jwt.status." + i.Status]
+        </p>
+        <dl class="kv">
+            <dt>alg</dt><dd class="mono">@(i.Algorithm ?? "–")</dd>
+            <dt>iat</dt><dd>@Format.Time(i.IssuedAt)</dd>
+            <dt>nbf</dt><dd>@Format.Time(i.NotBefore)</dd>
+            <dt>exp</dt><dd>@Format.Time(i.Expires)</dd>
+        </dl>
+        @if (i.Unsigned)
+        {
+            <p class="alert">@L["jwt.unsigned"]</p>
+        }
+        <h3>Header</h3>
+        <pre class="record">@i.HeaderJson</pre>
+        <h3>Payload</h3>
+        <pre class="record">@i.PayloadJson</pre>
+        <p class="muted">@L["jwt.noverify"]</p>
+    }
+</section>
+
+@code {
+    private string _token = string.Empty;
+    private JwtInfo? _info;
+    private string? _error;
+
+    private void Decode()
+    {
+        _info = null;
+        _error = null;
+        if (string.IsNullOrWhiteSpace(_token))
+        {
+            return;
+        }
+
+        try
+        {
+            _info = JwtDecoder.Decode(_token, DateTimeOffset.UtcNow);
+        }
+        catch (FormatException ex)
+        {
+            _error = L[ex.Message];
+        }
+    }
+}

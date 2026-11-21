@@ -1,0 +1,26 @@
+@if (Items.Count > 0)
+{
+    <div class="history">
+        <span class="history-label" id="@_labelId">@L["ui.history"]</span>
+        <ul aria-labelledby="@_labelId">
+            @foreach (var item in Items)
+            {
+                <li><button type="button" class="chip" @onclick="() => OnPick.InvokeAsync(item)">@item</button></li>
+            }
+        </ul>
+        <button type="button" class="link-button" @onclick="OnClear">@L["ui.history.clear"]</button>
+    </div>
+}
+
+@code {
+    private readonly string _labelId = "history-" + Guid.NewGuid().ToString("N")[..8];
+
+    [Parameter]
+    public IReadOnlyList<string> Items { get; set; } = Array.Empty<string>();
+
+    [Parameter]
+    public EventCallback<string> OnPick { get; set; }
+
+    [Parameter]
+    public EventCallback OnClear { get; set; }
+}

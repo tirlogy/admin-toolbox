@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Toolbox</title>
+  <meta name="description" content="Browser tools for IT admins: mail domain check, header analysis, subnet calculator, DNS diff and helpers." />
+  <meta name="theme-color" content="#0b6b6b" />
+  <base href="/" />
+  <link rel="preload" id="webassembly" />
+  <link rel="stylesheet" href="css/app.css" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <script src="js/boot.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Static shell: same markup as MainLayout + Home (English), painted before WebAssembly starts. -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="">
+          <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" /><path d="M8 11l6 5-6 5" /><path d="M16 22h8" /></svg>
+          <span>Admin Toolbox</span>
+        </a>
+        <div class="header-controls"></div>
+      </div>
+      <nav class="container main-nav" aria-label="Tools">
+        <a href="mail">Mail domain check</a>
+        <a href="header">Header analysis</a>
+        <a href="subnet">Subnet calculator</a>
+        <a href="dns-diff">DNS diff</a>
+        <a href="helpers">Helpers</a>
+      </nav>
+    </header>
+    <main id="main" class="container">
+      <section class="hero">
+        <h1>Tools for IT admins</h1>
+        <p class="lead">Check mail security, DNS and networks right in the browser. No account, no server, input stays local.</p>
+      </section>
+      <ul class="tool-grid">
+        <li><a class="tool-card" href="mail"><span class="tool-name">Mail domain check</span><span class="tool-desc">MX, SPF with lookup count, DKIM, DMARC, BIMI, MTA-STS and TLS-RPT with traffic lights and suggestions.</span></a></li>
+        <li><a class="tool-card" href="header"><span class="tool-name">Header analysis</span><span class="tool-desc">Route as a timeline, SPF/DKIM/DMARC results, spam hints and suspicious mismatches.</span></a></li>
+        <li><a class="tool-card" href="subnet"><span class="tool-name">Subnet calculator</span><span class="tool-desc">IPv4 and IPv6, splitting, summarizing and IP-in-network check.</span></a></li>
+        <li><a class="tool-card" href="dns-diff"><span class="tool-name">DNS diff</span><span class="tool-desc">Zone file from before against live DNS. Ideal for DNS migrations.</span></a></li>
+        <li><a class="tool-card" href="helpers"><span class="tool-name">Helpers</span><span class="tool-desc">Passwords, JWT, Base64/URL/hex, hashes and certificates. Works offline.</span></a></li>
+      </ul>
+      <p class="notice">Only the mail domain check and DNS diff send DNS queries to Cloudflare DNS (fallback Google Public DNS). Everything else runs offline.</p>
+      <noscript><p class="alert">This app needs JavaScript and WebAssembly.</p></noscript>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Built by Ömer Tiryaki · <a href="https://tiryaki.eu" rel="noopener">tiryaki.eu</a></p>
+        <p><a href="privacy">Privacy</a> · <a href="https://tiryaki.eu/impressum" rel="noopener">Imprint</a> · <a href="https://github.com/tirlogy/admin-toolbox" rel="noopener">GitHub</a> · <span>MIT</span></p>
+      </div>
+    </footer>
+  </div>
+
+  <div id="blazor-error-ui" role="alert">
+    An error occurred. <a href="" class="reload">Reload</a>
+  </div>
+  <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
+</body>
+</html>

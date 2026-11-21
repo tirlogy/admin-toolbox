@@ -1,0 +1,16 @@
+@inject IJSRuntime JS
+<button type="button" class="btn btn-small" @onclick="CopyAsync" disabled="@string.IsNullOrEmpty(Text)">@(_copied ? L["ui.copied"] : L["ui.copy"])</button>
+
+@code {
+    private bool _copied;
+
+    [Parameter]
+    public string? Text { get; set; }
+
+    private async Task CopyAsync()
+    {
+        _copied = await new BrowserStore(JS).CopyAsync(Text ?? string.Empty);
+    }
+
+    protected override void OnParametersSet() => _copied = false;
+}
