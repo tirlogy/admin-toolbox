@@ -10,7 +10,7 @@
     "en": "Browser tools for IT admins: mail domain check, header analysis, subnet calculator, DNS diff and helpers. Built with .NET and Blazor WebAssembly.",
     "tr": "BT yöneticileri için tarayıcı araçları: e-posta alan adı kontrolü, başlık analizi, alt ağ hesaplayıcı, DNS karşılaştırma ve yardımcılar. .NET ve Blazor WebAssembly ile geliştirildi."
   },
-  "status": "in-arbeit",
+  "status": "live",
   "flaggschiff": false,
   "profile": [
     "it-prozesse"
