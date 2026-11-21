@@ -25,8 +25,8 @@ jobs:
     outputs:
       coverage: ${{ steps.coverage.outputs.line }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
       - name: Restore
@@ -50,7 +50,7 @@ jobs:
           PY
           echo "### Coverage" >> "$GITHUB_STEP_SUMMARY"
           grep line= "$GITHUB_OUTPUT" | tail -1 >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: tests/*/coverage.cobertura.xml
@@ -65,7 +65,7 @@ jobs:
             find publish/wwwroot/_framework -name '*.br' -printf '%s\n' | awk '{s+=$1} END {printf "total: %.0f KB\n", s/1024}'
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site
           path: publish/wwwroot
@@ -79,13 +79,13 @@ jobs:
       run:
         working-directory: e2e
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
           cache-dependency-path: e2e/package-lock.json
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: site
           path: publish/wwwroot
@@ -95,7 +95,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Run Playwright
         run: npx playwright test
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: playwright-report
@@ -110,13 +110,13 @@ jobs:
       run:
         working-directory: e2e
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
           cache-dependency-path: e2e/package-lock.json
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: site
           path: publish/wwwroot
@@ -133,7 +133,7 @@ jobs:
               const s=Object.entries(r.summary).map(([k,v])=>k+' '+Math.round(v*100)).join(', ');
               console.log('- '+r.url+': '+s);
             }" >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: lighthouse
@@ -148,14 +148,14 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Publish coverage.json to the badges branch
         env:
           COVERAGE: ${{ needs.dotnet.outputs.coverage }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin badges || true
+          git fetch origin badges:refs/remotes/origin/badges || true
           git switch badges 2>/dev/null || git switch --orphan badges
           git rm -rq . 2>/dev/null || true
           echo "{\"schemaVersion\":1,\"label\":\"coverage\",\"message\":\"${COVERAGE}%\",\"color\":\"brightgreen\"}" > coverage.json
@@ -172,7 +172,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: site
           path: publish/wwwroot
