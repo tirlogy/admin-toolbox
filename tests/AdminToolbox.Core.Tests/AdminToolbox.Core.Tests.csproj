@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Include>[AdminToolbox.Core]*</Include>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/AdminToolbox.Core/AdminToolbox.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples/**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

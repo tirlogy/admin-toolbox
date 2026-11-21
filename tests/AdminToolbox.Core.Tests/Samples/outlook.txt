@@ -1,0 +1,33 @@
+Received: from AM9PR01MB1234.eurprd01.prod.exchangelabs.com (2603:10a6:20b:1::12)
+ by DB9PR01MB5678.eurprd01.prod.exchangelabs.com with HTTPS; Wed, 18 Nov 2026
+ 08:15:31 +0000
+Received: from DU2PR04CA0001.eurprd04.prod.outlook.com (2603:10a6:10:3b::6) by
+ AM9PR01MB1234.eurprd01.prod.exchangelabs.com (2603:10a6:20b:1::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8158.12; Wed, 18 Nov
+ 2026 08:15:30 +0000
+Received: from DB1PEPF00012345.eurprd03.prod.outlook.com
+ (2603:10a6:10:3b:cafe::aa) by DU2PR04CA0001.outlook.office365.com
+ (2603:10a6:10:3b::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8158.12 via Frontend Transport; Wed,
+ 18 Nov 2026 08:15:30 +0000
+Authentication-Results: spf=softfail (sender IP is 198.51.100.23)
+ smtp.mailfrom=billing.example.net; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine
+ header.from=example.com;compauth=fail reason=000
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ billing.example.net discourages use of 198.51.100.23 as permitted sender)
+Received: from mail.example.net (198.51.100.23) by
+ DB1PEPF00012345.mail.protection.outlook.com (10.167.242.2) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8158.12 via Frontend Transport; Wed, 18 Nov 2026 08:15:29 +0000
+X-MS-Exchange-Organization-SCL: 5
+X-Forefront-Antispam-Report: CIP:198.51.100.23;CTRY:NL;LANG:de;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:mail.example.net;PTR:mail.example.net;CAT:SPOOF;SFS:(13230040);DIR:INB;
+X-Microsoft-Antispam: BCL:0;ARA:13230040;
+From: "service@bank.example <rechnung@example.com>" <rechnung@example.com>
+Reply-To: zahlung@payments.example
+Return-Path: bounce@billing.example.net
+To: Erika Musterfrau <erika@firma.example>
+Subject: Offene Rechnung 2026-1142
+Date: Wed, 18 Nov 2026 09:15:20 +0100
+Message-ID: <abc123@mail.example.net>

@@ -1,0 +1,41 @@
+Delivered-To: max.mustermann@gmail.com
+Received: by 2002:a05:7300:1234:b0:12a:abcd:ef01 with SMTP id k18csp123456dyb;
+        Tue, 17 Nov 2026 01:02:05 -0800 (PST)
+X-Received: by 2002:a17:907:7b94:b0:a9a:1234:5678 with SMTP id ne20mr123456ejc.12.1763370125123;
+        Tue, 17 Nov 2026 01:02:05 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1763370125; cv=none;
+        d=google.com; s=arc-20240605;
+        b=AbCdEfGhIjKlMnOpQrStUvWxYz0123456789
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:mime-version:dkim-signature;
+        bh=AbCdEfGhIjKlMnOpQrStUvWxYz0123456789=; b=AbCdEf
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@example.org header.s=s1 header.b=AbCdEf12;
+       spf=pass (google.com: domain of news@example.org designates 192.0.2.10 as permitted sender) smtp.mailfrom=news@example.org;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=example.org
+Return-Path: <news@example.org>
+Received: from mail.example.org (mail.example.org. [192.0.2.10])
+        by mx.google.com with ESMTPS id a640c23a62f3a-a9a12345678si123456ejc.123.2026.11.17.01.02.04
+        for <max.mustermann@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 17 Nov 2026 01:02:04 -0800 (PST)
+Received-SPF: pass (google.com: domain of news@example.org designates 192.0.2.10 as permitted sender) client-ip=192.0.2.10;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@example.org header.s=s1 header.b=AbCdEf12;
+       spf=pass (google.com: domain of news@example.org designates 192.0.2.10 as permitted sender) smtp.mailfrom=news@example.org;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=example.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.org; s=s1;
+        h=from:to:subject:date:message-id; bh=AbCdEf=; b=AbCdEf=
+Received: from localhost (localhost [127.0.0.1])
+        by mail.example.org (Postfix) with ESMTP id 4XyZ1a2b3c
+        for <max.mustermann@gmail.com>; Tue, 17 Nov 2026 10:02:01 +0100 (CET)
+From: Example Newsletter <news@example.org>
+To: max.mustermann@gmail.com
+Subject: Ihr Newsletter im November
+Date: Tue, 17 Nov 2026 10:02:00 +0100
+Message-ID: <20261117090200.ABC123@mail.example.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+Hallo Max,
+Received: from body.example (fake) by not.a.header; Tue, 17 Nov 2026 10:00:00 +0000
