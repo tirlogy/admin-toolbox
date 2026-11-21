@@ -14,6 +14,10 @@ No server component, zero running cost, strict CSP and security headers are requ
   `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy: no-referrer`, `Permissions-Policy`,
   `Cross-Origin-Opener-Policy` and HSTS.
 - All JavaScript lives in `js/boot.js`; Razor components never use inline `style` attributes.
+- `WasmFingerprintAssets=false`: with fingerprinted framework files, .NET 10 needs an inline
+  `<script type="importmap">` to resolve `dotnet.js`, which a strict CSP would only allow with a
+  per-build hash. Plain file names avoid the inline script; the service worker manifest still pins
+  every file with its SHA-256 integrity, and Pages revalidates with ETags.
 - The E2E server (`e2e/server.mjs`) applies the same `_headers` file, so Playwright tests run under
   the production CSP and fail on CSP violations (console errors).
 - Preview deploys go to the `build` branch alias (`build.admin-toolbox.pages.dev`). The production
