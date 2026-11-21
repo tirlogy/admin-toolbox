@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"atlassian.com","type":15}],"Answer":[{"name":"atlassian.com","type":15,"TTL":300,"data":"10 mxa-001d9801.gslb.pphosted.com."},{"name":"atlassian.com","type":15,"TTL":300,"data":"10 mxb-001d9801.gslb.pphosted.com."}]}

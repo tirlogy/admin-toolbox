@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"spf1.atlassian.com","type":16}],"Answer":[{"name":"spf1.atlassian.com","type":16,"TTL":300,"data":"\"v=spf1 ip4:208.117.48.0/20 ip4:52.38.191.241 ~all\""}]}

@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"spf-001d9801.pphosted.com","type":16}],"Answer":[{"name":"spf-001d9801.pphosted.com","type":16,"TTL":1800,"data":"\"v=spf1 ip4:67.231.152.116 ip4:208.84.65.201\""}]}

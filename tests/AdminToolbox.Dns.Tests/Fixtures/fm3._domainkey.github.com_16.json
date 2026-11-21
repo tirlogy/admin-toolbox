@@ -1,0 +1,1 @@
+{"Status":3,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"fm3._domainkey.github.com","type":16}],"Authority":[{"name":"github.com","type":6,"TTL":3600,"data":"dns1.p08.nsone.net. hostmaster.nsone.net. 1656468023 43200 7200 1209600 3600"}]}
