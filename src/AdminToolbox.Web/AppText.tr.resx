@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="home.lead" xml:space="preserve"><value>E-posta güvenliğini, DNS'i ve ağları doğrudan tarayıcıda kontrol edin. Hesap yok, sunucu yok, girdiler yerel kalır.</value></data>
+  <data name="home.privacy" xml:space="preserve"><value>Yalnızca e-posta alan adı kontrolü ve DNS karşılaştırma, Cloudflare DNS'e (yedek Google Public DNS) DNS sorguları gönderir. Geri kalan her şey çevrimdışı çalışır.</value></data>
+  <data name="home.title" xml:space="preserve"><value>BT yöneticileri için araçlar</value></data>
+  <data name="imprint" xml:space="preserve"><value>Künye</value></data>
+  <data name="language" xml:space="preserve"><value>Dil</value></data>
+  <data name="loading" xml:space="preserve"><value>Yükleniyor …</value></data>
+  <data name="nav" xml:space="preserve"><value>Araçlar</value></data>
+  <data name="notfound" xml:space="preserve"><value>Sayfa bulunamadı</value></data>
+  <data name="notfound.home" xml:space="preserve"><value>Ana sayfaya dön</value></data>
+  <data name="privacy" xml:space="preserve"><value>Gizlilik</value></data>
+  <data name="privacy.dns" xml:space="preserve"><value>E-posta alan adı kontrolü ve DNS karşılaştırma, DNS kayıtlarını DNS over HTTPS ile Cloudflare'den (cloudflare-dns.com), sorun olursa Google'dan (dns.google) sorgular. Yalnızca sorgulanan adlar ve türler ile teknik nedenlerle cihazın IP adresi iletilir.</value></data>
+  <data name="privacy.dns.title" xml:space="preserve"><value>DNS sorguları</value></data>
+  <data name="privacy.hosting" xml:space="preserve"><value>Statik dosyalar Cloudflare Pages üzerinden sunulur. Cloudflare, teslimat için gerekli bağlantı verilerini işler.</value></data>
+  <data name="privacy.hosting.title" xml:space="preserve"><value>Barındırma</value></data>
+  <data name="privacy.local" xml:space="preserve"><value>Dil, renk şeması ve e-posta alan adı kontrolü ile alt ağ hesaplayıcının geçmişi tarayıcının localStorage alanında tutulur. Başlıklar, parolalar, tokenlar ve sertifikalar asla saklanmaz. Geçmiş araçlar içinden silinebilir.</value></data>
+  <data name="privacy.local.title" xml:space="preserve"><value>Yerel depolama</value></data>
+  <data name="privacy.p1" xml:space="preserve"><value>Bu uygulamanın sunucu bileşeni, hesap sistemi ve izlemesi yoktur. Tüm hesaplamalar tarayıcıda çalışır.</value></data>
+  <data name="skip" xml:space="preserve"><value>İçeriğe atla</value></data>
+  <data name="theme.dark" xml:space="preserve"><value>Renk şeması: koyu (değiştir)</value></data>
+  <data name="theme.light" xml:space="preserve"><value>Renk şeması: açık (değiştir)</value></data>
+  <data name="theme.system" xml:space="preserve"><value>Renk şeması: sistem (değiştir)</value></data>
+  <data name="tool.diff" xml:space="preserve"><value>DNS karşılaştırma</value></data>
+  <data name="tool.diff.desc" xml:space="preserve"><value>Önceki bölge dosyasını canlı DNS ile karşılaştırır. DNS taşımaları için ideal.</value></data>
+  <data name="tool.header" xml:space="preserve"><value>Başlık analizi</value></data>
+  <data name="tool.header.desc" xml:space="preserve"><value>Zaman çizelgesi olarak yol, SPF/DKIM/DMARC sonuçları, spam işaretleri ve şüpheli uyumsuzluklar.</value></data>
+  <data name="tool.helpers" xml:space="preserve"><value>Yardımcılar</value></data>
+  <data name="tool.helpers.desc" xml:space="preserve"><value>Parolalar, JWT, Base64/URL/hex, özetler ve sertifikalar. Çevrimdışı çalışır.</value></data>
+  <data name="tool.mail" xml:space="preserve"><value>E-posta alan adı kontrolü</value></data>
+  <data name="tool.mail.desc" xml:space="preserve"><value>MX, sorgu sayımlı SPF, DKIM, DMARC, BIMI, MTA-STS ve TLS-RPT; trafik ışıkları ve önerilerle.</value></data>
+  <data name="tool.subnet" xml:space="preserve"><value>Alt ağ hesaplayıcı</value></data>
+  <data name="tool.subnet.desc" xml:space="preserve"><value>IPv4 ve IPv6, bölme, birleştirme ve IP'nin ağda olup olmadığının kontrolü.</value></data>
+</root>

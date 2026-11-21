@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="auth.missing" xml:space="preserve"><value>Kein Ergebnis für {0}.</value></data>
+  <data name="auth.none" xml:space="preserve"><value>Keine Authentifizierungsergebnisse (Authentication-Results) im Header.</value></data>
+  <data name="auth.notpass" xml:space="preserve"><value>{0} nicht bestanden ({1}).</value></data>
+  <data name="auth.notpass.fix" xml:space="preserve"><value>Beim Absender SPF, DKIM und DMARC prüfen, etwa mit dem Mail-Domain-Check. Bei fremden Absendern ist das ein Warnsignal für Fälschung.</value></data>
+  <data name="auth.pass" xml:space="preserve"><value>{0} bestanden ({1}).</value></data>
+  <data name="bimi.dmarc" xml:space="preserve"><value>BIMI wirkt nur mit DMARC p=quarantine oder p=reject bei pct=100.</value></data>
+  <data name="bimi.dmarc.fix" xml:space="preserve"><value>Zuerst DMARC durchsetzen.</value></data>
+  <data name="bimi.logo.invalid" xml:space="preserve"><value>Logo-URL ungültig ("{0}"). Erwartet wird eine https-Adresse auf eine .svg-Datei.</value></data>
+  <data name="bimi.logo.invalid.fix" xml:space="preserve"><value>l=https://…/logo.svg setzen.</value></data>
+  <data name="bimi.none" xml:space="preserve"><value>Kein BIMI-Eintrag (optional).</value></data>
+  <data name="bimi.none.fix" xml:space="preserve"><value>Für ein Logo im Posteingang: "v=BIMI1; l=https://example.com/logo.svg" unter default._bimi, Logo als SVG Tiny PS.</value></data>
+  <data name="bimi.novmc" xml:space="preserve"><value>Kein Zertifikat (a=). Gmail und Apple zeigen das Logo nur mit VMC oder CMC.</value></data>
+  <data name="bimi.ok" xml:space="preserve"><value>BIMI ist vollständig eingerichtet.</value></data>
+  <data name="bimi.vmc" xml:space="preserve"><value>Zertifikat (VMC/CMC) ist hinterlegt.</value></data>
+  <data name="cert.csr" xml:space="preserve"><value>Das ist eine Zertifikatsanforderung (CSR), kein Zertifikat.</value></data>
+  <data name="cert.expired" xml:space="preserve"><value>Seit {0} Tagen abgelaufen.</value></data>
+  <data name="cert.hint" xml:space="preserve"><value>Ein oder mehrere Zertifikate mit BEGIN CERTIFICATE. Niemals private Schlüssel einfügen.</value></data>
+  <data name="cert.input" xml:space="preserve"><value>Zertifikat (PEM)</value></data>
+  <data name="cert.invalid" xml:space="preserve"><value>Das Zertifikat konnte nicht gelesen werden.</value></data>
+  <data name="cert.issuer" xml:space="preserve"><value>Aussteller</value></data>
+  <data name="cert.key" xml:space="preserve"><value>Schlüssel</value></data>
+  <data name="cert.none" xml:space="preserve"><value>Kein Zertifikat gefunden.</value></data>
+  <data name="cert.number" xml:space="preserve"><value>Zertifikat {0}</value></data>
+  <data name="cert.privatekey" xml:space="preserve"><value>Das ist ein privater Schlüssel. Er wurde nicht verarbeitet. Private Schlüssel nie in Webseiten einfügen.</value></data>
+  <data name="cert.self" xml:space="preserve"><value>(selbst ausgestellt)</value></data>
+  <data name="cert.serial" xml:space="preserve"><value>Seriennummer</value></data>
+  <data name="cert.sigalg" xml:space="preserve"><value>Signatur</value></data>
+  <data name="cert.subject" xml:space="preserve"><value>Inhaber</value></data>
+  <data name="cert.valid" xml:space="preserve"><value>Gültig, läuft in {0} Tagen ab.</value></data>
+  <data name="cert.validity" xml:space="preserve"><value>Gültigkeit</value></data>
+  <data name="check.Bimi" xml:space="preserve"><value>BIMI</value></data>
+  <data name="check.Bimi.about" xml:space="preserve"><value>BIMI zeigt das Markenlogo in unterstützten Postfächern. Setzt eine durchgesetzte DMARC-Richtlinie voraus.</value></data>
+  <data name="check.Dkim" xml:space="preserve"><value>DKIM</value></data>
+  <data name="check.Dkim.about" xml:space="preserve"><value>DKIM signiert ausgehende E-Mails. Der öffentliche Schlüssel liegt unter selektor._domainkey.domain.</value></data>
+  <data name="check.Dmarc" xml:space="preserve"><value>DMARC</value></data>
+  <data name="check.Dmarc.about" xml:space="preserve"><value>DMARC sagt Empfängern, was mit E-Mails passieren soll, die SPF und DKIM nicht bestehen, und wohin Berichte gehen.</value></data>
+  <data name="check.MtaSts" xml:space="preserve"><value>MTA-STS</value></data>
+  <data name="check.MtaSts.about" xml:space="preserve"><value>MTA-STS erzwingt verschlüsselte Zustellung (TLS) zu den MX-Servern.</value></data>
+  <data name="check.Mx" xml:space="preserve"><value>MX</value></data>
+  <data name="check.Mx.about" xml:space="preserve"><value>MX-Einträge legen fest, welche Server E-Mails für die Domain annehmen.</value></data>
+  <data name="check.Spf" xml:space="preserve"><value>SPF</value></data>
+  <data name="check.Spf.about" xml:space="preserve"><value>SPF listet die Server, die im Namen der Domain senden dürfen. Erlaubt sind höchstens 10 DNS-Lookups.</value></data>
+  <data name="check.TlsRpt" xml:space="preserve"><value>TLS-RPT</value></data>
+  <data name="check.TlsRpt.about" xml:space="preserve"><value>TLS-RPT liefert Berichte über Probleme bei der verschlüsselten Zustellung.</value></data>
+  <data name="diff.aftercol" xml:space="preserve"><value>Live (nachher)</value></data>
+  <data name="diff.before" xml:space="preserve"><value>Vorher: Zonendatei oder Liste</value></data>
+  <data name="diff.before.hint" xml:space="preserve"><value>BIND-Zonendatei, Export des alten Anbieters oder Zeilen wie "www CNAME example.com."</value></data>
+  <data name="diff.beforecol" xml:space="preserve"><value>Vorher</value></data>
+  <data name="diff.empty" xml:space="preserve"><value>Keine gültigen Einträge gefunden.</value></data>
+  <data name="diff.lead" xml:space="preserve"><value>Einträge vor einem Umzug (Zonendatei oder Liste) mit der Live-Abfrage vergleichen. Zeigt fehlende, geänderte und neue Werte.</value></data>
+  <data name="diff.line" xml:space="preserve"><value>Zeile {0}:</value></data>
+  <data name="diff.name" xml:space="preserve"><value>Name</value></data>
+  <data name="diff.onlychanges" xml:space="preserve"><value>Nur Unterschiede zeigen</value></data>
+  <data name="diff.origin" xml:space="preserve"><value>Domain (Origin)</value></data>
+  <data name="diff.origin.hint" xml:space="preserve"><value>Für relative Namen wie www oder @. Ein $ORIGIN in der Datei hat Vorrang.</value></data>
+  <data name="diff.parseerrors" xml:space="preserve"><value>Nicht gelesene Zeilen</value></data>
+  <data name="diff.result" xml:space="preserve"><value>Ergebnis</value></data>
+  <data name="diff.run" xml:space="preserve"><value>Vergleichen</value></data>
+  <data name="diff.sample" xml:space="preserve"><value>Beispiel laden</value></data>
+  <data name="diff.soa" xml:space="preserve"><value>SOA wird übersprungen, da sich die Seriennummer bei jeder Änderung ändert.</value></data>
+  <data name="diff.state" xml:space="preserve"><value>Status</value></data>
+  <data name="diff.status.Added" xml:space="preserve"><value>neu</value></data>
+  <data name="diff.status.Changed" xml:space="preserve"><value>geändert</value></data>
+  <data name="diff.status.Error" xml:space="preserve"><value>Fehler</value></data>
+  <data name="diff.status.Missing" xml:space="preserve"><value>fehlt</value></data>
+  <data name="diff.status.Unchanged" xml:space="preserve"><value>unverändert</value></data>
+  <data name="diff.title" xml:space="preserve"><value>DNS-Vergleich</value></data>
+  <data name="diff.type" xml:space="preserve"><value>Typ</value></data>
+  <data name="dkim.1024" xml:space="preserve"><value>DKIM-Schlüssel {0} hat {1} Bit. Noch akzeptiert, empfohlen sind 2048 Bit.</value></data>
+  <data name="dkim.1024.fix" xml:space="preserve"><value>Neuen Schlüssel mit 2048 Bit erzeugen und den alten nach dem Wechsel widerrufen.</value></data>
+  <data name="dkim.bits" xml:space="preserve"><value>Schlüssellänge (Bit)</value></data>
+  <data name="dkim.found" xml:space="preserve"><value>DKIM-Schlüssel {0} gefunden ({1}, {2} Bit).</value></data>
+  <data name="dkim.invalidkey" xml:space="preserve"><value>DKIM-Schlüssel {0} lässt sich nicht lesen (p= ist kein gültiger Schlüssel).</value></data>
+  <data name="dkim.invalidkey.fix" xml:space="preserve"><value>Schlüssel neu aus dem Mailsystem kopieren. Lange Schlüssel auf mehrere Strings verteilen, ohne Zeichen zu verlieren.</value></data>
+  <data name="dkim.notfound" xml:space="preserve"><value>Unter {0} gängigen Selektoren wurde kein DKIM-Schlüssel gefunden.</value></data>
+  <data name="dkim.notfound.fix" xml:space="preserve"><value>Den Selektor aus dem DKIM-Signature-Header einer gesendeten Mail (s=…) oben eintragen. Fehlt DKIM ganz, beim Mailanbieter aktivieren.</value></data>
+  <data name="dkim.revoked" xml:space="preserve"><value>DKIM-Schlüssel {0} ist widerrufen (leeres p=).</value></data>
+  <data name="dkim.revoked.fix" xml:space="preserve"><value>In Ordnung, wenn der Schlüssel bewusst ausgemustert wurde. Sonst neuen Schlüssel veröffentlichen.</value></data>
+  <data name="dkim.revokedshort" xml:space="preserve"><value>widerrufen</value></data>
+  <data name="dkim.selector" xml:space="preserve"><value>Selektor</value></data>
+  <data name="dkim.selector.invalid" xml:space="preserve"><value>"{0}" ist kein gültiger Selektor.</value></data>
+  <data name="dkim.selector.notfound" xml:space="preserve"><value>Unter dem Selektor {0} gibt es keinen DKIM-Schlüssel.</value></data>
+  <data name="dkim.selector.notfound.fix" xml:space="preserve"><value>Schreibweise prüfen. Der Eintrag muss unter {0}._domainkey liegen.</value></data>
+  <data name="dkim.testing" xml:space="preserve"><value>DKIM-Schlüssel {0} ist im Testmodus (t=y). Empfänger dürfen Fehler ignorieren.</value></data>
+  <data name="dkim.testing.fix" xml:space="preserve"><value>Nach erfolgreichem Test t=y entfernen.</value></data>
+  <data name="dkim.type" xml:space="preserve"><value>Typ</value></data>
+  <data name="dkim.version" xml:space="preserve"><value>DKIM-Schlüssel {0}: ungültige Version (v= muss DKIM1 sein).</value></data>
+  <data name="dkim.weak" xml:space="preserve"><value>DKIM-Schlüssel {0} hat nur {1} Bit. Das gilt als unsicher.</value></data>
+  <data name="dkim.weak.fix" xml:space="preserve"><value>Neuen Schlüssel mit 2048 Bit erzeugen und den alten nach dem Wechsel widerrufen.</value></data>
+  <data name="dmarc.inherited" xml:space="preserve"><value>Kein eigener Eintrag. Es gilt die Richtlinie der Organisationsdomain {0}.</value></data>
+  <data name="dmarc.multiple" xml:space="preserve"><value>{0} DMARC-Einträge gefunden. Erlaubt ist genau einer, sonst wird DMARC ignoriert.</value></data>
+  <data name="dmarc.multiple.fix" xml:space="preserve"><value>Zu einem Eintrag zusammenführen.</value></data>
+  <data name="dmarc.none" xml:space="preserve"><value>Kein DMARC-Eintrag unter _dmarc.</value></data>
+  <data name="dmarc.none.fix" xml:space="preserve"><value>Mit Überwachung starten: TXT unter _dmarc mit "v=DMARC1; p=none; rua=mailto:dmarc@example.com". Nach Auswertung der Berichte auf quarantine und reject erhöhen.</value></data>
+  <data name="dmarc.p.invalid" xml:space="preserve"><value>Richtlinie p fehlt oder ist ungültig ("{0}").</value></data>
+  <data name="dmarc.p.invalid.fix" xml:space="preserve"><value>p=none, p=quarantine oder p=reject setzen.</value></data>
+  <data name="dmarc.p.none" xml:space="preserve"><value>Richtlinie p=none: Nur Überwachung, gefälschte Mails werden zugestellt.</value></data>
+  <data name="dmarc.p.none.fix" xml:space="preserve"><value>Berichte auswerten und dann auf p=quarantine, später p=reject umstellen.</value></data>
+  <data name="dmarc.p.quarantine" xml:space="preserve"><value>Richtlinie p=quarantine: Nicht authentifizierte Mails landen im Spam.</value></data>
+  <data name="dmarc.p.reject" xml:space="preserve"><value>Richtlinie p=reject: Nicht authentifizierte Mails werden abgewiesen.</value></data>
+  <data name="dmarc.pct" xml:space="preserve"><value>Die Richtlinie gilt nur für {0} % der Mails (pct).</value></data>
+  <data name="dmarc.pct.fix" xml:space="preserve"><value>pct schrittweise auf 100 erhöhen oder entfernen.</value></data>
+  <data name="dmarc.rua.invalid" xml:space="preserve"><value>Ungültige Berichtsadresse: {0}. Erlaubt sind mailto:-Adressen.</value></data>
+  <data name="dmarc.rua.invalid.fix" xml:space="preserve"><value>Als mailto:adresse@domain angeben, mehrere durch Komma getrennt.</value></data>
+  <data name="dmarc.rua.missing" xml:space="preserve"><value>Keine Berichtsadresse (rua). Ohne Berichte bleibt Missbrauch unsichtbar.</value></data>
+  <data name="dmarc.rua.missing.fix" xml:space="preserve"><value>rua=mailto:dmarc@example.com ergänzen (Adresse anpassen).</value></data>
+  <data name="dmarc.rua.ok" xml:space="preserve"><value>Aggregierte Berichte gehen an {0}.</value></data>
+  <data name="dmarc.ruf" xml:space="preserve"><value>Forensische Berichte (ruf) angefordert. Viele Anbieter senden sie aus Datenschutzgründen nicht.</value></data>
+  <data name="dmarc.sp.none" xml:space="preserve"><value>Subdomains sind mit sp=none ausgenommen und damit fälschbar.</value></data>
+  <data name="dmarc.sp.none.fix" xml:space="preserve"><value>sp entfernen (dann gilt p) oder sp=reject setzen.</value></data>
+  <data name="dmarc.strict" xml:space="preserve"><value>Strikte Ausrichtung für {0}. Subdomains als Absender bestehen DMARC dann nicht.</value></data>
+  <data name="dmarc.syntax" xml:space="preserve"><value>Ungültiger DMARC-Bestandteil: {0}</value></data>
+  <data name="dmarc.syntax.fix" xml:space="preserve"><value>Format: tag=wert, getrennt durch Semikolons, zum Beispiel "v=DMARC1; p=reject; rua=mailto:…".</value></data>
+  <data name="dns.error" xml:space="preserve"><value>DNS-Abfrage fehlgeschlagen: {0}</value></data>
+  <data name="dns.error.fix" xml:space="preserve"><value>Später erneut versuchen. Bei anhaltenden Fehlern Netzwerk oder Werbeblocker prüfen.</value></data>
+  <data name="enc.Base64" xml:space="preserve"><value>Base64</value></data>
+  <data name="enc.Base64Url" xml:space="preserve"><value>Base64url</value></data>
+  <data name="enc.Hex" xml:space="preserve"><value>Hex</value></data>
+  <data name="enc.Url" xml:space="preserve"><value>URL (Prozentkodierung)</value></data>
+  <data name="enc.binary" xml:space="preserve"><value>Das Ergebnis ist kein gültiger UTF-8-Text und wird als Hex angezeigt.</value></data>
+  <data name="enc.decode" xml:space="preserve"><value>Dekodieren</value></data>
+  <data name="enc.encode" xml:space="preserve"><value>Kodieren</value></data>
+  <data name="enc.input" xml:space="preserve"><value>Eingabe</value></data>
+  <data name="enc.invalid" xml:space="preserve"><value>Die Eingabe lässt sich mit diesem Verfahren nicht dekodieren.</value></data>
+  <data name="enc.kind" xml:space="preserve"><value>Verfahren</value></data>
+  <data name="enc.output" xml:space="preserve"><value>Ausgabe</value></data>
+  <data name="hash.Md5" xml:space="preserve"><value>MD5</value></data>
+  <data name="hash.Sha1" xml:space="preserve"><value>SHA-1</value></data>
+  <data name="hash.Sha256" xml:space="preserve"><value>SHA-256</value></data>
+  <data name="hash.Sha512" xml:space="preserve"><value>SHA-512</value></data>
+  <data name="hash.algorithm" xml:space="preserve"><value>Verfahren</value></data>
+  <data name="hash.input" xml:space="preserve"><value>Text</value></data>
+  <data name="hash.utf8" xml:space="preserve"><value>Wird als UTF-8 gehasht.</value></data>
+  <data name="hash.value" xml:space="preserve"><value>Hash</value></data>
+  <data name="hash.weak" xml:space="preserve"><value>unsicher</value></data>
+  <data name="hash.weaknote" xml:space="preserve"><value>MD5 und SHA-1 sind gebrochen. Nur für Prüfsummen alter Systeme verwenden, nie für Passwörter oder Signaturen.</value></data>
+  <data name="header.auth" xml:space="preserve"><value>Authentifizierung</value></data>
+  <data name="header.date.missing" xml:space="preserve"><value>Kein Date-Header.</value></data>
+  <data name="header.details" xml:space="preserve"><value>Details</value></data>
+  <data name="header.dkim.notaligned" xml:space="preserve"><value>DKIM-Signatur von {0} passt nicht zur Absenderdomain {1}.</value></data>
+  <data name="header.dkim.notaligned.fix" xml:space="preserve"><value>Beim Versanddienst eine eigene DKIM-Signatur für die Absenderdomain einrichten, damit DMARC per DKIM besteht.</value></data>
+  <data name="header.empty" xml:space="preserve"><value>Keine Header erkannt.</value></data>
+  <data name="header.empty.fix" xml:space="preserve"><value>Den vollständigen Header-Block einfügen, beginnend mit Zeilen wie Received: oder From:.</value></data>
+  <data name="header.findings" xml:space="preserve"><value>Auffälligkeiten</value></data>
+  <data name="header.from.displayname" xml:space="preserve"><value>Der Anzeigename enthält die Adresse {0}, gesendet wurde aber von {1}.</value></data>
+  <data name="header.from.displayname.fix" xml:space="preserve"><value>Klassischer Täuschungsversuch. Nur die Adresse in spitzen Klammern zählt.</value></data>
+  <data name="header.from.missing" xml:space="preserve"><value>Kein From-Header.</value></data>
+  <data name="header.hint" xml:space="preserve"><value>Gmail: Original anzeigen. Outlook: Datei, Eigenschaften, Internetkopfzeilen.</value></data>
+  <data name="header.input" xml:space="preserve"><value>Mail-Header</value></data>
+  <data name="header.lead" xml:space="preserve"><value>Header einer E-Mail einfügen. Die Analyse zeigt den Weg der Mail als Zeitleiste, die Ergebnisse von SPF, DKIM und DMARC, Spam-Hinweise und verdächtige Abweichungen.</value></data>
+  <data name="header.local" xml:space="preserve"><value>Die Analyse läuft vollständig im Browser. Der Header wird nirgendwohin gesendet und nicht gespeichert.</value></data>
+  <data name="header.messageid.domain" xml:space="preserve"><value>Message-ID stammt von {0}, nicht von der Absenderdomain.</value></data>
+  <data name="header.messageid.missing" xml:space="preserve"><value>Keine Message-ID. Seriöse Mailserver setzen sie immer.</value></data>
+  <data name="header.method" xml:space="preserve"><value>Methode</value></data>
+  <data name="header.rating" xml:space="preserve"><value>Bewertung</value></data>
+  <data name="header.replyto.mismatch" xml:space="preserve"><value>Antworten gehen an {1}, nicht an die Absenderdomain {0}.</value></data>
+  <data name="header.replyto.mismatch.fix" xml:space="preserve"><value>Typisches Muster bei Phishing und Rechnungsbetrug. Vor einer Antwort die Adresse prüfen.</value></data>
+  <data name="header.result" xml:space="preserve"><value>Ergebnis</value></data>
+  <data name="header.returnpath.mismatch" xml:space="preserve"><value>Absender {0} und Return-Path {1} gehören zu verschiedenen Domains.</value></data>
+  <data name="header.returnpath.mismatch.fix" xml:space="preserve"><value>Bei Newsletter-Diensten normal. Sonst ein Hinweis auf Fälschung, besonders wenn DMARC nicht bestanden ist.</value></data>
+  <data name="header.route" xml:space="preserve"><value>Route</value></data>
+  <data name="header.run" xml:space="preserve"><value>Analysieren</value></data>
+  <data name="header.sample" xml:space="preserve"><value>Beispiel laden</value></data>
+  <data name="header.source" xml:space="preserve"><value>Quelle</value></data>
+  <data name="header.spam" xml:space="preserve"><value>Spam-Hinweise</value></data>
+  <data name="header.summary" xml:space="preserve"><value>Überblick</value></data>
+  <data name="header.title" xml:space="preserve"><value>Mail-Header-Analyse</value></data>
+  <data name="header.total" xml:space="preserve"><value>Gesamtlaufzeit {0} über {1} Stationen.</value></data>
+  <data name="header.value" xml:space="preserve"><value>Wert</value></data>
+  <data name="header.with" xml:space="preserve"><value>Protokoll</value></data>
+  <data name="helpers.cert" xml:space="preserve"><value>Zertifikat</value></data>
+  <data name="helpers.encode" xml:space="preserve"><value>Encoder</value></data>
+  <data name="helpers.hash" xml:space="preserve"><value>Hashes</value></data>
+  <data name="helpers.jwt" xml:space="preserve"><value>JWT-Decoder</value></data>
+  <data name="helpers.lead" xml:space="preserve"><value>Werkzeuge, die vollständig offline im Browser laufen.</value></data>
+  <data name="helpers.password" xml:space="preserve"><value>Passwort-Generator</value></data>
+  <data name="helpers.title" xml:space="preserve"><value>Helfer</value></data>
+  <data name="hop.clockskew" xml:space="preserve"><value>Station {0} liegt zeitlich vor der vorherigen. Vermutlich geht eine Serveruhr falsch.</value></data>
+  <data name="hop.none" xml:space="preserve"><value>Keine Received-Header gefunden. Die Route ist nicht nachvollziehbar.</value></data>
+  <data name="hop.slow" xml:space="preserve"><value>Station {0} hat {1} Minuten Verzögerung.</value></data>
+  <data name="hop.slow.fix" xml:space="preserve"><value>Häufige Ursachen: Greylisting, Warteschlangen beim Absender oder Spamfilter.</value></data>
+  <data name="iptype.benchmark" xml:space="preserve"><value>Benchmarking (RFC 2544)</value></data>
+  <data name="iptype.broadcast" xml:space="preserve"><value>Broadcast</value></data>
+  <data name="iptype.cgnat" xml:space="preserve"><value>Carrier-Grade-NAT (RFC 6598)</value></data>
+  <data name="iptype.documentation" xml:space="preserve"><value>Dokumentation (RFC 5737/3849)</value></data>
+  <data name="iptype.linklocal" xml:space="preserve"><value>Link-Local</value></data>
+  <data name="iptype.loopback" xml:space="preserve"><value>Loopback</value></data>
+  <data name="iptype.multicast" xml:space="preserve"><value>Multicast</value></data>
+  <data name="iptype.nat64" xml:space="preserve"><value>NAT64 (RFC 6052)</value></data>
+  <data name="iptype.private" xml:space="preserve"><value>Privat (RFC 1918)</value></data>
+  <data name="iptype.public" xml:space="preserve"><value>Öffentlich</value></data>
+  <data name="iptype.reserved" xml:space="preserve"><value>Reserviert</value></data>
+  <data name="iptype.thisnetwork" xml:space="preserve"><value>Dieses Netz (0.0.0.0/8)</value></data>
+  <data name="iptype.ula" xml:space="preserve"><value>Unique Local (ULA, fc00::/7)</value></data>
+  <data name="iptype.unspecified" xml:space="preserve"><value>Unspezifiziert (::)</value></data>
+  <data name="iptype.v4mapped" xml:space="preserve"><value>IPv4-gemappt</value></data>
+  <data name="jwt.base64" xml:space="preserve"><value>Ungültiges Base64url in Header oder Payload.</value></data>
+  <data name="jwt.format" xml:space="preserve"><value>Kein JWT. Erwartet werden drei Teile, getrennt durch Punkte.</value></data>
+  <data name="jwt.hint" xml:space="preserve"><value>Wird nur lokal dekodiert. Die Signatur wird nicht geprüft.</value></data>
+  <data name="jwt.input" xml:space="preserve"><value>Token</value></data>
+  <data name="jwt.json" xml:space="preserve"><value>Header oder Payload ist kein JSON-Objekt.</value></data>
+  <data name="jwt.jwe" xml:space="preserve"><value>Verschlüsseltes Token (JWE). Ohne Schlüssel nicht lesbar.</value></data>
+  <data name="jwt.noverify" xml:space="preserve"><value>Hinweis: Die Signatur wird nicht geprüft, dafür wäre der Schlüssel nötig.</value></data>
+  <data name="jwt.status.Expired" xml:space="preserve"><value>Abgelaufen.</value></data>
+  <data name="jwt.status.NoExpiry" xml:space="preserve"><value>Kein Ablaufdatum (exp fehlt).</value></data>
+  <data name="jwt.status.NotYetValid" xml:space="preserve"><value>Noch nicht gültig (nbf liegt in der Zukunft).</value></data>
+  <data name="jwt.status.Valid" xml:space="preserve"><value>Gültig (nicht abgelaufen).</value></data>
+  <data name="jwt.unsigned" xml:space="preserve"><value>Token ist nicht signiert (alg=none oder leere Signatur). Niemals vertrauen.</value></data>
+  <data name="mail.domain" xml:space="preserve"><value>Domain</value></data>
+  <data name="mail.domain.hint" xml:space="preserve"><value>Domain, E-Mail-Adresse oder URL</value></data>
+  <data name="mail.invalid" xml:space="preserve"><value>Bitte eine gültige Domain eingeben, zum Beispiel example.com.</value></data>
+  <data name="mail.lead" xml:space="preserve"><value>Prüft MX, SPF, DKIM, DMARC, BIMI, MTA-STS und TLS-RPT einer Domain und schlägt konkrete Verbesserungen vor.</value></data>
+  <data name="mail.run" xml:space="preserve"><value>Prüfen</value></data>
+  <data name="mail.selector" xml:space="preserve"><value>Eigener DKIM-Selektor (optional)</value></data>
+  <data name="mail.selector.hint" xml:space="preserve"><value>Steht im DKIM-Signature-Header nach s=. Gängige Selektoren werden automatisch getestet.</value></data>
+  <data name="mail.summary" xml:space="preserve"><value>Ergebnis für {0}</value></data>
+  <data name="mail.title" xml:space="preserve"><value>Mail-Domain-Check</value></data>
+  <data name="mtasts.found" xml:space="preserve"><value>MTA-STS-Eintrag vorhanden, Host auflösbar.</value></data>
+  <data name="mtasts.host.missing" xml:space="preserve"><value>{0} ist nicht auflösbar. Ohne diesen Host kann die Richtlinie nicht abgerufen werden.</value></data>
+  <data name="mtasts.host.missing.fix" xml:space="preserve"><value>A/AAAA oder CNAME für den Host anlegen und dort per HTTPS die Richtlinie ausliefern.</value></data>
+  <data name="mtasts.id.invalid" xml:space="preserve"><value>Ungültige id "{0}" (1 bis 32 Buchstaben oder Ziffern).</value></data>
+  <data name="mtasts.id.invalid.fix" xml:space="preserve"><value>Zum Beispiel ein Datum wie id=20261121 verwenden und bei jeder Richtlinienänderung erhöhen.</value></data>
+  <data name="mtasts.multiple" xml:space="preserve"><value>Mehrere MTA-STS-Einträge. MTA-STS wird dann ignoriert.</value></data>
+  <data name="mtasts.multiple.fix" xml:space="preserve"><value>Auf einen Eintrag reduzieren.</value></data>
+  <data name="mtasts.none" xml:space="preserve"><value>Kein MTA-STS (optional, empfohlen).</value></data>
+  <data name="mtasts.none.fix" xml:space="preserve"><value>TXT "v=STSv1; id=20260101" unter _mta-sts anlegen und die Richtlinie unter https://mta-sts.domain/.well-known/mta-sts.txt bereitstellen.</value></data>
+  <data name="mtasts.policy.manual" xml:space="preserve"><value>Die Richtliniendatei selbst kann aus dem Browser nicht geprüft werden: {0}</value></data>
+  <data name="mtasts.policy.manual.fix" xml:space="preserve"><value>Datei im Browser öffnen und mode: enforce, mx: und max_age prüfen.</value></data>
+  <data name="mx.cname" xml:space="preserve"><value>MX-Ziel {0} ist ein CNAME. RFC 2181 verbietet das, manche Server lehnen es ab.</value></data>
+  <data name="mx.cname.fix" xml:space="preserve"><value>Im MX direkt auf den Hostnamen mit A/AAAA-Eintrag verweisen.</value></data>
+  <data name="mx.implicit" xml:space="preserve"><value>Kein MX-Eintrag. Absender liefern dann an den A-Eintrag der Domain (implizites MX).</value></data>
+  <data name="mx.implicit.fix" xml:space="preserve"><value>Explizite MX-Einträge setzen oder mit Null-MX "0 ." klarstellen, dass keine Mails angenommen werden.</value></data>
+  <data name="mx.ip" xml:space="preserve"><value>MX-Eintrag zeigt auf eine IP-Adresse ({0}). MX muss auf einen Hostnamen zeigen.</value></data>
+  <data name="mx.ip.fix" xml:space="preserve"><value>Einen A-Eintrag wie mail.example.com anlegen und im MX auf diesen Namen verweisen.</value></data>
+  <data name="mx.none" xml:space="preserve"><value>Keine MX-Einträge und kein A-Eintrag: E-Mails an diese Domain können nicht zugestellt werden.</value></data>
+  <data name="mx.none.fix" xml:space="preserve"><value>MX-Einträge des Mailanbieters eintragen, zum Beispiel "10 mx.example.net.". Soll die Domain keine Mails empfangen, Null-MX "0 ." setzen.</value></data>
+  <data name="mx.null" xml:space="preserve"><value>Null-MX gesetzt: Die Domain nimmt ausdrücklich keine E-Mails an (RFC 7505).</value></data>
+  <data name="mx.null.fix" xml:space="preserve"><value>Passend dazu SPF auf "v=spf1 -all" und DMARC auf p=reject setzen.</value></data>
+  <data name="mx.nxdomain" xml:space="preserve"><value>Die Domain {0} existiert nicht (NXDOMAIN).</value></data>
+  <data name="mx.nxdomain.fix" xml:space="preserve"><value>Schreibweise prüfen oder die Domain registrieren.</value></data>
+  <data name="mx.ok" xml:space="preserve"><value>{0} MX-Server gefunden, alle auflösbar.</value></data>
+  <data name="mx.single" xml:space="preserve"><value>Ein MX-Server gefunden und auflösbar.</value></data>
+  <data name="mx.single.fix" xml:space="preserve"><value>Für Ausfallsicherheit einen zweiten MX mit höherem Prioritätswert ergänzen, falls der Anbieter das anbietet.</value></data>
+  <data name="mx.unresolvable" xml:space="preserve"><value>MX-Ziel {0} hat weder A- noch AAAA-Eintrag.</value></data>
+  <data name="mx.unresolvable.fix" xml:space="preserve"><value>Tippfehler im MX prüfen oder den fehlenden A/AAAA-Eintrag anlegen.</value></data>
+  <data name="pw.ambiguous" xml:space="preserve"><value>Verwechselbare Zeichen weglassen (Il1O0o|)</value></data>
+  <data name="pw.capitalize" xml:space="preserve"><value>Großbuchstaben am Wortanfang</value></data>
+  <data name="pw.length" xml:space="preserve"><value>Länge</value></data>
+  <data name="pw.local" xml:space="preserve"><value>Erzeugt mit kryptografisch sicherem Zufall im Browser. Nichts wird gespeichert oder gesendet.</value></data>
+  <data name="pw.mode" xml:space="preserve"><value>Art</value></data>
+  <data name="pw.mode.passphrase" xml:space="preserve"><value>Passphrase</value></data>
+  <data name="pw.mode.password" xml:space="preserve"><value>Passwort</value></data>
+  <data name="pw.new" xml:space="preserve"><value>Neu erzeugen</value></data>
+  <data name="pw.noclass" xml:space="preserve"><value>Mindestens eine Zeichenart auswählen.</value></data>
+  <data name="pw.number" xml:space="preserve"><value>Zahl anhängen</value></data>
+  <data name="pw.result" xml:space="preserve"><value>Ergebnis</value></data>
+  <data name="pw.separator" xml:space="preserve"><value>Trennzeichen</value></data>
+  <data name="pw.strength" xml:space="preserve"><value>Stärke: {0} ({1} Bit Entropie)</value></data>
+  <data name="pw.wordlist" xml:space="preserve"><value>Wörter aus der EFF-Wortliste (1296 Wörter, CC BY 3.0).</value></data>
+  <data name="pw.words" xml:space="preserve"><value>Anzahl Wörter</value></data>
+  <data name="sev.Error" xml:space="preserve"><value>Fehler</value></data>
+  <data name="sev.Info" xml:space="preserve"><value>Hinweis</value></data>
+  <data name="sev.Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="sev.Warning" xml:space="preserve"><value>Warnung</value></data>
+  <data name="spam.clean" xml:space="preserve"><value>Spamfilter haben die Mail nicht beanstandet.</value></data>
+  <data name="spam.flagged" xml:space="preserve"><value>Mindestens ein Spamfilter hat die Mail als verdächtig eingestuft.</value></data>
+  <data name="spf.all.fail" xml:space="preserve"><value>-all: Nicht gelistete Server werden abgewiesen.</value></data>
+  <data name="spf.all.missing" xml:space="preserve"><value>Kein "all" am Ende. Nicht gelistete Server erhalten das Ergebnis neutral.</value></data>
+  <data name="spf.all.missing.fix" xml:space="preserve"><value>~all oder -all anhängen.</value></data>
+  <data name="spf.all.neutral" xml:space="preserve"><value>?all ist neutral und bietet praktisch keinen Schutz.</value></data>
+  <data name="spf.all.neutral.fix" xml:space="preserve"><value>Auf ~all umstellen und nach einer Beobachtungsphase auf -all.</value></data>
+  <data name="spf.all.notlast" xml:space="preserve"><value>Nach "all" stehen weitere Einträge. Sie werden nie ausgewertet.</value></data>
+  <data name="spf.all.notlast.fix" xml:space="preserve"><value>"all" an das Ende verschieben.</value></data>
+  <data name="spf.all.pass" xml:space="preserve"><value>+all erlaubt jedem Server der Welt, im Namen der Domain zu senden.</value></data>
+  <data name="spf.all.pass.fix" xml:space="preserve"><value>+all durch ~all oder -all ersetzen.</value></data>
+  <data name="spf.all.softfail" xml:space="preserve"><value>~all (Softfail): Fremde Server werden markiert, nicht abgewiesen. Mit DMARC üblich.</value></data>
+  <data name="spf.include.missing" xml:space="preserve"><value>Eingebundene Domain {0} hat keinen SPF-Eintrag (permerror).</value></data>
+  <data name="spf.include.missing.fix" xml:space="preserve"><value>Den include entfernen oder die richtige Schreibweise beim Anbieter nachschlagen.</value></data>
+  <data name="spf.lookups" xml:space="preserve"><value>DNS-Lookups: {0} von {1}</value></data>
+  <data name="spf.lookups.exceeded" xml:space="preserve"><value>{0} DNS-Lookups, das Limit von 10 ist überschritten. Empfänger werten SPF als permerror.</value></data>
+  <data name="spf.lookups.exceeded.fix" xml:space="preserve"><value>Nicht mehr genutzte Dienste entfernen, ptr/a/mx durch ip4/ip6 ersetzen oder Versanddienste auf eine Subdomain mit eigenem SPF verlagern.</value></data>
+  <data name="spf.lookups.near" xml:space="preserve"><value>{0} von 10 DNS-Lookups belegt. Jeder weitere Dienst sprengt das Limit.</value></data>
+  <data name="spf.lookups.near.fix" xml:space="preserve"><value>Vorsorglich ungenutzte includes entfernen oder statische Netze als ip4/ip6 eintragen.</value></data>
+  <data name="spf.lookups.ok" xml:space="preserve"><value>{0} von 10 DNS-Lookups belegt.</value></data>
+  <data name="spf.loop" xml:space="preserve"><value>Endlosschleife: {0} wird erneut eingebunden.</value></data>
+  <data name="spf.loop.fix" xml:space="preserve"><value>Den include entfernen, der auf eine bereits eingebundene Domain zurückzeigt.</value></data>
+  <data name="spf.macro" xml:space="preserve"><value>Makros (%{{…}}) gefunden. Sie hängen vom Absender ab und werden hier nicht aufgelöst.</value></data>
+  <data name="spf.multiple" xml:space="preserve"><value>{0} hat {1} SPF-Einträge. Erlaubt ist genau einer, sonst schlägt SPF fehl (permerror).</value></data>
+  <data name="spf.multiple.fix" xml:space="preserve"><value>Alle Einträge zu einem einzigen "v=spf1 …" zusammenführen.</value></data>
+  <data name="spf.node.lookups" xml:space="preserve"><value>Lookups: {0}</value></data>
+  <data name="spf.none" xml:space="preserve"><value>Kein SPF-Eintrag gefunden.</value></data>
+  <data name="spf.none.fix" xml:space="preserve"><value>TXT-Eintrag an der Domain anlegen, zum Beispiel "v=spf1 mx -all" oder mit dem include des Mailanbieters. Sendet die Domain nie Mails: "v=spf1 -all".</value></data>
+  <data name="spf.ptr" xml:space="preserve"><value>Der Mechanismus ptr ist veraltet (RFC 7208), langsam und unzuverlässig.</value></data>
+  <data name="spf.ptr.fix" xml:space="preserve"><value>ptr durch ip4/ip6 oder a ersetzen.</value></data>
+  <data name="spf.redirect.ignored" xml:space="preserve"><value>redirect= wird ignoriert, weil der Eintrag ein "all" enthält.</value></data>
+  <data name="spf.redirect.ignored.fix" xml:space="preserve"><value>Entweder redirect= oder all verwenden, nicht beides.</value></data>
+  <data name="spf.syntax" xml:space="preserve"><value>Ungültiger SPF-Ausdruck "{1}" in {0}.</value></data>
+  <data name="spf.syntax.fix" xml:space="preserve"><value>Schreibweise prüfen. Gültig sind zum Beispiel ip4:192.0.2.0/24, include:_spf.example.net, mx, -all.</value></data>
+  <data name="spf.toodeep" xml:space="preserve"><value>Mehr als {0} verschachtelte SPF-Einträge, Auswertung abgebrochen.</value></data>
+  <data name="spf.toodeep.fix" xml:space="preserve"><value>Includes reduzieren, siehe Lookup-Limit.</value></data>
+  <data name="spf.voidlookups" xml:space="preserve"><value>{0} Lookups ohne Ergebnis (Limit 2). Empfänger dürfen SPF dann als permerror werten.</value></data>
+  <data name="spf.voidlookups.fix" xml:space="preserve"><value>Verweise auf nicht existierende Domains und Hosts entfernen.</value></data>
+  <data name="strength.Fair" xml:space="preserve"><value>mittel</value></data>
+  <data name="strength.Strong" xml:space="preserve"><value>stark</value></data>
+  <data name="strength.VeryStrong" xml:space="preserve"><value>sehr stark</value></data>
+  <data name="strength.VeryWeak" xml:space="preserve"><value>sehr schwach</value></data>
+  <data name="strength.Weak" xml:space="preserve"><value>schwach</value></data>
+  <data name="subnet.address" xml:space="preserve"><value>Eingabe</value></data>
+  <data name="subnet.binary" xml:space="preserve"><value>Binär</value></data>
+  <data name="subnet.broadcast" xml:space="preserve"><value>Broadcast</value></data>
+  <data name="subnet.contains" xml:space="preserve"><value>Liegt eine IP im Netz?</value></data>
+  <data name="subnet.contains.input" xml:space="preserve"><value>IP-Adresse</value></data>
+  <data name="subnet.contains.invalid" xml:space="preserve"><value>Keine gültige IP-Adresse.</value></data>
+  <data name="subnet.contains.no" xml:space="preserve"><value>Nein, {0} liegt nicht in {1}.</value></data>
+  <data name="subnet.contains.yes" xml:space="preserve"><value>Ja, {0} liegt in {1}.</value></data>
+  <data name="subnet.hint" xml:space="preserve"><value>Zum Beispiel 192.168.10.0/24, 10.0.0.1 255.255.0.0 oder 2001:db8::/48</value></data>
+  <data name="subnet.input" xml:space="preserve"><value>Netz oder Adresse</value></data>
+  <data name="subnet.invalid" xml:space="preserve"><value>Ungültige Eingabe. Erwartet wird eine IP mit optionaler Präfixlänge oder Netzmaske.</value></data>
+  <data name="subnet.lead" xml:space="preserve"><value>IPv4 und IPv6: Netz, Broadcast, Hostbereich, Aufteilen in Subnetze, Zusammenfassen und Prüfen, ob eine IP im Netz liegt.</value></data>
+  <data name="subnet.netmask" xml:space="preserve"><value>Netzmaske</value></data>
+  <data name="subnet.network" xml:space="preserve"><value>Netz</value></data>
+  <data name="subnet.p2p" xml:space="preserve"><value>/31 und /32 haben keine Netz- und Broadcast-Adresse (RFC 3021), alle Adressen sind nutzbar.</value></data>
+  <data name="subnet.range" xml:space="preserve"><value>Nutzbarer Bereich</value></data>
+  <data name="subnet.reverse" xml:space="preserve"><value>Reverse-Zone</value></data>
+  <data name="subnet.run" xml:space="preserve"><value>Berechnen</value></data>
+  <data name="subnet.split" xml:space="preserve"><value>In Subnetze aufteilen</value></data>
+  <data name="subnet.split.count" xml:space="preserve"><value>{0} Subnetze, die ersten {1} werden angezeigt.</value></data>
+  <data name="subnet.split.prefix" xml:space="preserve"><value>Neue Präfixlänge</value></data>
+  <data name="subnet.split.range" xml:space="preserve"><value>Präfixlänge zwischen {0} und {1} eingeben.</value></data>
+  <data name="subnet.summarize" xml:space="preserve"><value>Zusammenfassen (Supernetting)</value></data>
+  <data name="subnet.summarize.input" xml:space="preserve"><value>Netze, eins pro Zeile</value></data>
+  <data name="subnet.summarize.invalid" xml:space="preserve"><value>Ignoriert, weil ungültig: {0}</value></data>
+  <data name="subnet.summarize.lead" xml:space="preserve"><value>Fasst Netze und Adressen zur kleinsten Liste von CIDR-Blöcken zusammen, die genau dieselben Adressen abdeckt.</value></data>
+  <data name="subnet.summarize.result" xml:space="preserve"><value>Zusammengefasst</value></data>
+  <data name="subnet.supernet" xml:space="preserve"><value>Kleinstes gemeinsames Netz:</value></data>
+  <data name="subnet.title" xml:space="preserve"><value>Subnetzrechner</value></data>
+  <data name="subnet.total" xml:space="preserve"><value>Adressen gesamt</value></data>
+  <data name="subnet.type" xml:space="preserve"><value>Adresstyp</value></data>
+  <data name="subnet.usable" xml:space="preserve"><value>Nutzbare Hosts</value></data>
+  <data name="subnet.wildcard" xml:space="preserve"><value>Wildcard-Maske</value></data>
+  <data name="tlsrpt.multiple" xml:space="preserve"><value>Mehrere TLS-RPT-Einträge.</value></data>
+  <data name="tlsrpt.multiple.fix" xml:space="preserve"><value>Auf einen Eintrag reduzieren.</value></data>
+  <data name="tlsrpt.none" xml:space="preserve"><value>Kein TLS-RPT (optional).</value></data>
+  <data name="tlsrpt.none.fix" xml:space="preserve"><value>TXT "v=TLSRPTv1; rua=mailto:tls-reports@example.com" unter _smtp._tls anlegen.</value></data>
+  <data name="tlsrpt.none.sts" xml:space="preserve"><value>MTA-STS ist aktiv, aber TLS-RPT fehlt. Zustellprobleme bleiben unbemerkt.</value></data>
+  <data name="tlsrpt.none.sts.fix" xml:space="preserve"><value>TXT "v=TLSRPTv1; rua=mailto:tls-reports@example.com" unter _smtp._tls anlegen.</value></data>
+  <data name="tlsrpt.ok" xml:space="preserve"><value>TLS-Berichte gehen an {0}.</value></data>
+  <data name="tlsrpt.rua.invalid" xml:space="preserve"><value>Ungültige Berichtsadresse "{0}". Erlaubt sind mailto: und https:.</value></data>
+  <data name="tlsrpt.rua.invalid.fix" xml:space="preserve"><value>rua=mailto:tls-reports@example.com setzen.</value></data>
+  <data name="ui.checking" xml:space="preserve"><value>Prüfe …</value></data>
+  <data name="ui.copied" xml:space="preserve"><value>Kopiert</value></data>
+  <data name="ui.copy" xml:space="preserve"><value>Kopieren</value></data>
+  <data name="ui.dnsnotice" xml:space="preserve"><value>Eingaben bleiben im Browser. Nur die DNS-Abfragen gehen verschlüsselt an Cloudflare DNS (Fallback: Google Public DNS).</value></data>
+  <data name="ui.fix" xml:space="preserve"><value>Vorschlag:</value></data>
+  <data name="ui.history" xml:space="preserve"><value>Verlauf (nur lokal):</value></data>
+  <data name="ui.history.clear" xml:space="preserve"><value>Verlauf löschen</value></data>
+  <data name="ui.no" xml:space="preserve"><value>Nein</value></data>
+  <data name="ui.yes" xml:space="preserve"><value>Ja</value></data>
+  <data name="zone.directive" xml:space="preserve"><value>Direktive nicht unterstützt: {0}</value></data>
+  <data name="zone.owner" xml:space="preserve"><value>Zeile beginnt mit Leerzeichen, aber es gibt keinen vorherigen Namen: {0}</value></data>
+  <data name="zone.rdata" xml:space="preserve"><value>Ungültige Daten: {0}</value></data>
+  <data name="zone.toomany" xml:space="preserve"><value>Mehr als {0} Einträge, Rest ignoriert.</value></data>
+  <data name="zone.type" xml:space="preserve"><value>Unbekannter oder nicht unterstützter Typ: {0}</value></data>
+</root>

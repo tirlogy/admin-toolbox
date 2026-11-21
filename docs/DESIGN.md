@@ -1,0 +1,65 @@
+# Design · Admin Toolbox
+
+A calm "admin console" look: dense information, clear traffic lights, monospace for data. No web
+fonts, no images besides the icon, so the first paint is fast.
+
+## Principles
+- **Data first.** Records, headers and addresses are shown in monospace and wrap anywhere, so long
+  DKIM keys and SPF records never break the layout on phones.
+- **Traffic light with words.** Every status shows a colored dot *and* a text label
+  (OK, Info, Warning, Error). Color is never the only signal (WCAG 1.4.1).
+- **One accent.** Teal for links, primary buttons and the active navigation item.
+- **Mobile first.** Single column below 640 px, tool grid with 2/3 columns above. Touch targets are
+  at least 40 px high, form fields 44 px.
+
+## Color tokens
+Defined as CSS custom properties in `src/AdminToolbox.Web/wwwroot/css/app.css`. Dark mode follows
+`prefers-color-scheme` unless the user picked a scheme with the header button (stored as
+`data-theme` on `<html>`).
+
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| `--bg` | `#f4f6f8` | `#0e1217` | page background |
+| `--surface` | `#ffffff` | `#161b22` | cards, header, footer |
+| `--surface-2` | `#eef1f4` | `#1d242d` | code blocks, summary tiles, notices |
+| `--text` | `#141a21` | `#e6eaef` | body text |
+| `--muted` | `#4b5563` | `#a6b0bc` | secondary text |
+| `--border` | `#d3d9e0` | `#2d3540` | lines |
+| `--accent` | `#0b6b6b` | `#3cc2bd` | links, buttons, active nav |
+| `--ok` | `#166c2c` | `#4ac26b` | traffic light OK |
+| `--info` | `#0a58ad` | `#79b8ff` | traffic light Info |
+| `--warn` | `#8a5300` | `#e3b341` | traffic light Warning |
+| `--error` | `#b42318` | `#ff8b80` | traffic light Error |
+| `--focus` | `#1d4ed8` | `#8ab4ff` | focus outline |
+
+All text colors reach at least 4.5:1 against `--surface` and `--surface-2` in both themes
+(lowest pair: `--ok` on `--surface-2` light, about 5:1).
+
+## Typography
+- Text: `system-ui` stack, 16 px base, line height 1.55.
+- Data: `ui-monospace, SFMono-Regular, Menlo, Consolas` at 0.9 em.
+- Headings: h1 1.75 rem (2 rem on the home hero), h2 1.2 rem, h3 1 rem.
+
+## Components
+| Component | Where | Notes |
+|---|---|---|
+| `Light` | `Tools/Components/Light.razor` | pill with dot and localized label |
+| `FindingItems` | `Tools/Components/FindingItems.razor` | explanation plus "Suggestion:" line per finding, sorted by severity |
+| `SpfTree` | `Tools/Components/SpfTree.razor` | recursive include/redirect tree with lookups per record |
+| `History` | `Tools/Components/History.razor` | chips with recent inputs (localStorage only) |
+| `CopyButton` | `Tools/Components/CopyButton.razor` | clipboard with "Copied" feedback |
+| Timeline | `.timeline` in `app.css` | numbered hops, slow hops in warning color |
+| Tabs | `.tabs` | helpers use real links (`/helpers/jwt`), so every tool has a URL |
+| Static shell | `wwwroot/index.html` | English copy of the home page for the first paint |
+
+## Accessibility
+- Skip link, landmarks (`header`, `nav`, `main`, `footer`), one `h1` per page, focus moves to the
+  `h1` after navigation (`FocusOnNavigate`).
+- Every input has a visible `<label>`; hints are linked with `aria-describedby`.
+- Results that appear after an action are in `aria-live="polite"` regions; errors use `role="alert"`.
+- Tables have captions (visually hidden) and `scope` on header cells.
+- Visible focus outline (3 px) on all interactive elements.
+
+## Icon
+`wwwroot/icons/icon.svg`: dark rounded square with a teal shell prompt (`>_`). PNG sizes 192 and 512
+plus a maskable 512 version for the PWA.

@@ -1,0 +1,35 @@
+<li>
+    <div class="spf-node">
+        <code>@Node.Domain</code>
+        @if (Node.Via is { } via)
+        {
+            <span class="tag">@(via == SpfTermKind.Redirect ? "redirect" : "include")</span>
+        }
+        @if (Node.Record is not null)
+        {
+            <span class="muted">@L["spf.node.lookups", Node.OwnLookups]</span>
+        }
+        @if (Node.Error is not null)
+        {
+            <Light Severity="Severity.Error" />
+        }
+    </div>
+    @if (Node.Record is not null)
+    {
+        <pre class="record">@Node.Record.Text</pre>
+    }
+    @if (Node.Children.Count > 0)
+    {
+        <ul class="spf-tree">
+            @foreach (var child in Node.Children)
+            {
+                <SpfTree Node="child" />
+            }
+        </ul>
+    }
+</li>
+
+@code {
+    [Parameter, EditorRequired]
+    public SpfNode Node { get; set; } = null!;
+}

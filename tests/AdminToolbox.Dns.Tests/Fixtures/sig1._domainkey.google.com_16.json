@@ -1,0 +1,1 @@
+{"Status":3,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"sig1._domainkey.google.com","type":16}],"Authority":[{"name":"google.com","type":6,"TTL":60,"data":"ns1.google.com. dns-admin.google.com. 1026338024 900 900 1800 60"}]}

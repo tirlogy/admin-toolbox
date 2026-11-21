@@ -1,0 +1,22 @@
+name: Bug report
+description: Something does not work as expected
+labels: [bug]
+body:
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Tool
+      options: [Mail domain check, Header analysis, Subnet calculator, DNS diff, Helpers, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: Please remove personal data and real e-mail addresses from inputs before pasting them.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version

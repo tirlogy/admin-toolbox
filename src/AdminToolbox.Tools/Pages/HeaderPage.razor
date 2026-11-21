@@ -1,0 +1,139 @@
+@page "/header"
+@using AdminToolbox.Core.Headers
+
+<PageTitle>@L["header.title"] · Admin Toolbox</PageTitle>
+
+<h1>@L["header.title"]</h1>
+<p class="lead">@L["header.lead"]</p>
+<p class="notice"><span aria-hidden="true">ⓘ</span> @L["header.local"]</p>
+
+<form class="tool-form" @onsubmit="Analyze">
+    <div class="field">
+        <label for="header-input">@L["header.input"]</label>
+        <textarea id="header-input" rows="10" spellcheck="false" autocomplete="off" aria-describedby="header-hint" @bind="_input" @bind:event="oninput"></textarea>
+        <small id="header-hint">@L["header.hint"]</small>
+    </div>
+    <div class="button-row">
+        <button type="submit" class="btn">@L["header.run"]</button>
+        <button type="button" class="btn btn-secondary" @onclick="LoadSample">@L["header.sample"]</button>
+    </div>
+</form>
+
+@if (_result is { } a)
+{
+    <section class="card" aria-labelledby="h-summary">
+        <div class="card-head"><h2 id="h-summary">@L["header.summary"]</h2><Light Severity="a.Severity" /></div>
+        <dl class="kv">
+            <dt>From</dt><dd>@(a.From ?? "–")</dd>
+            <dt>To</dt><dd>@(a.To ?? "–")</dd>
+            <dt>Subject</dt><dd>@(a.Subject ?? "–")</dd>
+            <dt>Date</dt><dd>@(a.Date ?? "–")</dd>
+            <dt>Return-Path</dt><dd>@(a.ReturnPath ?? "–")</dd>
+            <dt>Reply-To</dt><dd>@(a.ReplyTo ?? "–")</dd>
+            <dt>Message-ID</dt><dd class="mono">@(a.MessageId ?? "–")</dd>
+        </dl>
+    </section>
+
+    <section class="card" aria-labelledby="h-auth">
+        <h2 id="h-auth">@L["header.auth"]</h2>
+        <ul class="summary-grid">
+            @foreach (var m in new[] { "spf", "dkim", "dmarc" })
+            {
+                var verdict = a.Verdicts.TryGetValue(m, out var v) ? v : null;
+                <li><strong>@m.ToUpperInvariant()</strong> <span class="mono">@(verdict ?? "–")</span> <Light Severity="@VerdictSeverity(verdict)" /></li>
+            }
+        </ul>
+        @if (a.AuthResults.Count > 0)
+        {
+            <div class="table-wrap">
+                <table>
+                    <caption class="sr-only">@L["header.auth"]</caption>
+                    <thead><tr><th scope="col">@L["header.source"]</th><th scope="col">@L["header.method"]</th><th scope="col">@L["header.result"]</th><th scope="col">@L["header.details"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var ar in a.AuthResults)
+                        {
+                            <tr>
+                                <td>@(ar.AuthServId is null ? ar.Source : ar.Source + " (" + ar.AuthServId + ")")</td>
+                                <td>@ar.Method</td>
+                                <td>@ar.Result</td>
+                                <td class="mono">@string.Join(" ", ar.Properties.Select(p => p.Key + "=" + p.Value))</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </section>
+
+    <section class="card" aria-labelledby="h-route">
+        <h2 id="h-route">@L["header.route"]</h2>
+        @if (a.TotalDelay is { } total)
+        {
+            <p>@L["header.total", Format.Duration(total), a.Hops.Count]</p>
+        }
+        <ol class="timeline">
+            @foreach (var hop in a.Hops)
+            {
+                <li class="@(hop.Delay > MailHeaderParser.SlowHop ? "slow" : "")">
+                    <div class="hop-head">
+                        <span class="hop-index">@hop.Index</span>
+                        <span><span class="mono">@(hop.From ?? "?")</span> → <span class="mono">@(hop.By ?? "?")</span></span>
+                    </div>
+                    <div class="hop-meta">
+                        @if (hop.Ip is not null) { <span>IP <span class="mono">@hop.Ip</span></span> }
+                        @if (hop.With is not null) { <span>@L["header.with"] <span class="mono">@hop.With</span></span> }
+                        <span>@Format.Time(hop.Date)</span>
+                        @if (hop.Delay is not null) { <span class="tag">@Format.Duration(hop.Delay)</span> }
+                    </div>
+                </li>
+            }
+        </ol>
+    </section>
+
+    @if (a.Spam.Count > 0)
+    {
+        <section class="card" aria-labelledby="h-spam">
+            <h2 id="h-spam">@L["header.spam"]</h2>
+            <div class="table-wrap">
+                <table>
+                    <caption class="sr-only">@L["header.spam"]</caption>
+                    <thead><tr><th scope="col">Header</th><th scope="col">@L["header.value"]</th><th scope="col">@L["header.rating"]</th></tr></thead>
+                    <tbody>
+                        @foreach (var s in a.Spam)
+                        {
+                            <tr><td class="mono">@s.Header</td><td class="mono wrap">@s.Value</td><td><Light Severity="s.Severity" /></td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+
+    <section class="card" aria-labelledby="h-findings">
+        <h2 id="h-findings">@L["header.findings"]</h2>
+        <FindingItems Findings="a.Findings" />
+    </section>
+}
+
+@code {
+    private string _input = string.Empty;
+    private HeaderAnalysis? _result;
+
+    private void Analyze() => _result = MailHeaderParser.Analyze(_input);
+
+    private void LoadSample()
+    {
+        _input = Samples.Header;
+        Analyze();
+    }
+
+    private static Severity VerdictSeverity(string? verdict) => verdict switch
+    {
+        "pass" => Severity.Ok,
+        "fail" or "permerror" => Severity.Error,
+        null => Severity.Info,
+        "neutral" => Severity.Info,
+        _ => Severity.Warning,
+    };
+
+}

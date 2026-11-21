@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="home.lead" xml:space="preserve"><value>Mail-Sicherheit, DNS und Netzwerke direkt im Browser prüfen. Ohne Konto, ohne Server, Eingaben bleiben lokal.</value></data>
+  <data name="home.privacy" xml:space="preserve"><value>Nur Mail-Domain-Check und DNS-Vergleich stellen DNS-Abfragen an Cloudflare DNS (Fallback Google Public DNS). Alles andere läuft offline.</value></data>
+  <data name="home.title" xml:space="preserve"><value>Werkzeuge für IT-Admins</value></data>
+  <data name="imprint" xml:space="preserve"><value>Impressum</value></data>
+  <data name="language" xml:space="preserve"><value>Sprache</value></data>
+  <data name="loading" xml:space="preserve"><value>Lädt …</value></data>
+  <data name="nav" xml:space="preserve"><value>Werkzeuge</value></data>
+  <data name="notfound" xml:space="preserve"><value>Seite nicht gefunden</value></data>
+  <data name="notfound.home" xml:space="preserve"><value>Zur Startseite</value></data>
+  <data name="privacy" xml:space="preserve"><value>Datenschutz</value></data>
+  <data name="privacy.dns" xml:space="preserve"><value>Mail-Domain-Check und DNS-Vergleich fragen DNS-Einträge per DNS-over-HTTPS bei Cloudflare (cloudflare-dns.com) ab, bei Störungen bei Google (dns.google). Übertragen werden nur die abgefragten Namen und Typen sowie technisch bedingt die IP-Adresse des Geräts.</value></data>
+  <data name="privacy.dns.title" xml:space="preserve"><value>DNS-Abfragen</value></data>
+  <data name="privacy.hosting" xml:space="preserve"><value>Die statischen Dateien werden über Cloudflare Pages ausgeliefert. Cloudflare verarbeitet dabei technisch notwendige Verbindungsdaten.</value></data>
+  <data name="privacy.hosting.title" xml:space="preserve"><value>Hosting</value></data>
+  <data name="privacy.local" xml:space="preserve"><value>Sprache, Farbschema und der Verlauf von Mail-Domain-Check und Subnetzrechner liegen im localStorage des Browsers. Header, Passwörter, Tokens und Zertifikate werden nie gespeichert. Der Verlauf lässt sich in den Werkzeugen löschen.</value></data>
+  <data name="privacy.local.title" xml:space="preserve"><value>Lokale Speicherung</value></data>
+  <data name="privacy.p1" xml:space="preserve"><value>Diese App hat keine Server-Komponente, keine Konten und kein Tracking. Alle Berechnungen laufen im Browser.</value></data>
+  <data name="skip" xml:space="preserve"><value>Zum Inhalt springen</value></data>
+  <data name="theme.dark" xml:space="preserve"><value>Farbschema: dunkel (wechseln)</value></data>
+  <data name="theme.light" xml:space="preserve"><value>Farbschema: hell (wechseln)</value></data>
+  <data name="theme.system" xml:space="preserve"><value>Farbschema: System (wechseln)</value></data>
+  <data name="tool.diff" xml:space="preserve"><value>DNS-Vergleich</value></data>
+  <data name="tool.diff.desc" xml:space="preserve"><value>Zonendatei von vorher gegen die Live-Abfrage. Ideal beim DNS-Umzug.</value></data>
+  <data name="tool.header" xml:space="preserve"><value>Header-Analyse</value></data>
+  <data name="tool.header.desc" xml:space="preserve"><value>Route als Zeitleiste, SPF/DKIM/DMARC-Ergebnisse, Spam-Hinweise und verdächtige Abweichungen.</value></data>
+  <data name="tool.helpers" xml:space="preserve"><value>Helfer</value></data>
+  <data name="tool.helpers.desc" xml:space="preserve"><value>Passwörter, JWT, Base64/URL/Hex, Hashes und Zertifikate. Offline nutzbar.</value></data>
+  <data name="tool.mail" xml:space="preserve"><value>Mail-Domain-Check</value></data>
+  <data name="tool.mail.desc" xml:space="preserve"><value>MX, SPF mit Lookup-Zählung, DKIM, DMARC, BIMI, MTA-STS und TLS-RPT mit Ampel und Vorschlägen.</value></data>
+  <data name="tool.subnet" xml:space="preserve"><value>Subnetzrechner</value></data>
+  <data name="tool.subnet.desc" xml:space="preserve"><value>IPv4 und IPv6, Aufteilen, Zusammenfassen und Prüfung, ob eine IP im Netz liegt.</value></data>
+</root>

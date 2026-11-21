@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Include>[AdminToolbox.Dns]*</Include>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../src/AdminToolbox.Dns/AdminToolbox.Dns.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fixtures/**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

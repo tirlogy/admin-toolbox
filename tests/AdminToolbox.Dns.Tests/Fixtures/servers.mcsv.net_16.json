@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"servers.mcsv.net","type":16}],"Answer":[{"name":"servers.mcsv.net","type":16,"TTL":415,"data":"\"v=spf1 ip4:205.201.128.0/20 ip4:198.2.128.0/18 ip4:148.105.0.0/16 -all\""}]}

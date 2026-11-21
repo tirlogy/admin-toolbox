@@ -1,0 +1,67 @@
+@using AdminToolbox.Core.Helpers
+
+<section class="card" aria-labelledby="h-enc">
+    <h2 id="h-enc">@L["helpers.encode"]</h2>
+    <div class="field">
+        <label for="enc-kind">@L["enc.kind"]</label>
+        <select id="enc-kind" @bind="_kind">
+            @foreach (var k in Enum.GetValues<EncodingKind>())
+            {
+                <option value="@k">@L["enc." + k]</option>
+            }
+        </select>
+    </div>
+    <div class="field">
+        <label for="enc-input">@L["enc.input"]</label>
+        <textarea id="enc-input" rows="5" spellcheck="false" @bind="_input" @bind:event="oninput"></textarea>
+    </div>
+    <div class="button-row">
+        <button type="button" class="btn" @onclick="Encode">@L["enc.encode"]</button>
+        <button type="button" class="btn btn-secondary" @onclick="Decode">@L["enc.decode"]</button>
+    </div>
+    @if (_error is not null)
+    {
+        <p class="alert" role="alert">@_error</p>
+    }
+    <div class="field">
+        <label for="enc-output">@L["enc.output"]</label>
+        <textarea id="enc-output" rows="5" readonly spellcheck="false" class="mono" value="@_output"></textarea>
+    </div>
+    @if (_binary)
+    {
+        <p class="muted">@L["enc.binary"]</p>
+    }
+    <CopyButton Text="@_output" />
+</section>
+
+@code {
+    private EncodingKind _kind = EncodingKind.Base64;
+    private string _input = string.Empty;
+    private string _output = string.Empty;
+    private string? _error;
+    private bool _binary;
+
+    private void Encode()
+    {
+        _error = null;
+        _binary = false;
+        _output = Encoders.Encode(_kind, _input);
+    }
+
+    private void Decode()
+    {
+        _error = null;
+        try
+        {
+            var r = Encoders.Decode(_kind, _input);
+            _output = r.Text;
+            _binary = r.IsBinary;
+        }
+        catch (FormatException)
+        {
+            _output = string.Empty;
+            _binary = false;
+            _error = L["enc.invalid"];
+        }
+    }
+}

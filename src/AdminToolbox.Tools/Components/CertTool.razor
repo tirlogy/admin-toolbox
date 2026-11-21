@@ -1,0 +1,64 @@
+@using AdminToolbox.Core.Helpers
+
+<section class="card" aria-labelledby="h-cert">
+    <h2 id="h-cert">@L["helpers.cert"]</h2>
+    <div class="field">
+        <label for="cert-input">@L["cert.input"]</label>
+        <textarea id="cert-input" rows="8" spellcheck="false" autocomplete="off" aria-describedby="cert-hint" @bind="_pem" @bind:event="oninput" @bind:after="Decode"></textarea>
+        <small id="cert-hint">@L["cert.hint"]</small>
+    </div>
+    @if (_error is not null)
+    {
+        <p class="alert" role="alert">@_error</p>
+    }
+    @foreach (var (c, index) in _certs.Select((c, i) => (c, i)))
+    {
+        var days = c.DaysRemaining(DateTimeOffset.UtcNow);
+        <article class="subcard" aria-label="@L["cert.number", index + 1]">
+            <h3>@L["cert.number", index + 1]</h3>
+            <p>
+                <Light Severity="@(days < 0 ? Severity.Error : days < 30 ? Severity.Warning : Severity.Ok)" />
+                @(days < 0 ? L["cert.expired", -days] : L["cert.valid", days])
+            </p>
+            <dl class="kv">
+                <dt>@L["cert.subject"]</dt><dd class="wrap">@c.Subject</dd>
+                <dt>@L["cert.issuer"]</dt><dd class="wrap">@c.Issuer @(c.SelfIssued ? L["cert.self"] : "")</dd>
+                <dt>@L["cert.validity"]</dt><dd>@Format.Time(c.NotBefore) – @Format.Time(c.NotAfter)</dd>
+                <dt>SAN</dt><dd class="mono wrap">@(c.SubjectAltNames.Count == 0 ? "–" : string.Join(", ", c.SubjectAltNames))</dd>
+                <dt>@L["cert.key"]</dt><dd>@c.PublicKey.Algorithm @c.PublicKey.Bits @c.PublicKey.Curve</dd>
+                <dt>@L["cert.sigalg"]</dt><dd class="mono">@c.SignatureAlgorithm</dd>
+                <dt>@L["cert.serial"]</dt><dd class="mono wrap">@c.SerialNumber</dd>
+                <dt>CA</dt><dd>@(c.IsCa == true ? L["ui.yes"] : L["ui.no"])@(c.PathLength is { } pl ? " (pathlen " + pl + ")" : "")</dd>
+                <dt>Key Usage</dt><dd>@(c.KeyUsages.Count == 0 ? "–" : string.Join(", ", c.KeyUsages))</dd>
+                <dt>Extended Key Usage</dt><dd>@(c.ExtendedKeyUsages.Count == 0 ? "–" : string.Join(", ", c.ExtendedKeyUsages))</dd>
+                <dt>SHA-256</dt><dd class="mono wrap">@c.Sha256Fingerprint</dd>
+                <dt>SHA-1</dt><dd class="mono wrap">@c.Sha1Fingerprint</dd>
+            </dl>
+        </article>
+    }
+</section>
+
+@code {
+    private string _pem = string.Empty;
+    private IReadOnlyList<CertificateInfo> _certs = Array.Empty<CertificateInfo>();
+    private string? _error;
+
+    private void Decode()
+    {
+        _error = null;
+        _certs = Array.Empty<CertificateInfo>();
+        if (string.IsNullOrWhiteSpace(_pem))
+        {
+            return;
+        }
+
+        try
+        {
+            _certs = CertificateDecoder.DecodePem(_pem);
+        }
+        catch (FormatException ex)
+        {
+            _error = L[ex.Message];
+        }
+    }
+}

@@ -1,0 +1,17 @@
+Return-Path: <info@example.org>
+Received: from mout.kundenserver.de ([212.227.126.131]) by mx.kundenserver.de
+ (mxeue010 [217.72.192.67]) with ESMTPS (Nemesis) id 1MxYzA-1abcDE2Fgh-00AbCd
+ for <kontakt@example.de>; Thu, 19 Nov 2026 14:42:12 +0100
+Received: from [192.168.178.20] ([203.0.113.45]) by mrelayeu.kundenserver.de
+ (mreue106 [212.227.15.183]) with ESMTPSA (Nemesis) id 1M2abC-1xyzAB3CDe-00EfGh
+ for <kontakt@example.de>; Thu, 19 Nov 2026 14:30:10 +0100
+X-UI-Filterresults: notjunk:1;V03:K0:aBcDeFgHiJk=:LmNoPqRsTuV
+X-UI-Out-Filterresults: notjunk:1;V03:K0:XyZ123=:AbC456
+X-Spam-Flag: NO
+Authentication-Results: mx.kundenserver.de; dkim=pass header.d=mailer.example header.s=s1-ionos header.b=Ab12;
+ spf=pass smtp.mailfrom=info@example.org; dmarc=pass header.from=example.org
+From: Info <info@example.org>
+To: kontakt@example.de
+Subject: Termin am Freitag
+Date: Thu, 19 Nov 2026 14:30:09 +0100
+Message-ID: <a1b2c3d4-e5f6-7890-abcd-ef1234567890@example.org>

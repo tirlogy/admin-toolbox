@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"default._bimi.atlassian.com","type":16}],"Answer":[{"name":"default._bimi.atlassian.com","type":16,"TTL":230,"data":"\"v=BIMI1; l=https://vmc.digicert.com/ad1c2acd-2d54-462c-a78d-57351f374742.svg; a=https://vmc.digicert.com/ad1c2acd-2d54-462c-a78d-57351f374742.pem\""}]}

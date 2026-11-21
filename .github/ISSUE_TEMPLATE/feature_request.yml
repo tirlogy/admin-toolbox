@@ -1,0 +1,11 @@
+name: Feature request
+description: Suggest an improvement or a new check
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What should the toolbox do and which admin task does it help with?
+    validations:
+      required: true

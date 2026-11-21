@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <!-- Routable tool pages. Loaded lazily by AdminToolbox.Web on first navigation to a tool (docs/adr/0005). -->
+  <PropertyGroup>
+    <RootNamespace>AdminToolbox.Tools</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(LocalNet7)' != 'true'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.15" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.15" />
+  </ItemGroup>
+  <!-- Local compile check of the Razor pages on an older SDK only (see docs/adr/0001). -->
+  <ItemGroup Condition="'$(LocalNet7)' == 'true'">
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.20" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.20" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../AdminToolbox.Core/AdminToolbox.Core.csproj" />
+    <ProjectReference Include="../AdminToolbox.Dns/AdminToolbox.Dns.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"smtp.google.com","type":1}],"Answer":[{"name":"smtp.google.com","type":1,"TTL":227,"data":"142.251.127.26"},{"name":"smtp.google.com","type":1,"TTL":227,"data":"142.251.127.27"}]}

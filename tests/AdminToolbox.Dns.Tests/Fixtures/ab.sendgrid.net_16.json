@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"ab.sendgrid.net","type":16}],"Answer":[{"name":"ab.sendgrid.net","type":16,"TTL":1452,"data":"\"v=spf1 ip4:223.165.113.0/24 ip4:223.165.115.0/24 ip4:223.165.118.0/23 ip4:223.165.120.0/23 ip4:137.22.245.0/24 ip4:137.22.246.0/24 ~all\""}]}

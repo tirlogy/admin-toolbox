@@ -1,0 +1,132 @@
+// SPDX-License-Identifier: MIT
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
+
+namespace AdminToolbox.Core.Tests;
+
+/// <summary>Guards that every finding code has a text in DE, EN and TR and that placeholders match.</summary>
+public partial class LocalizationTests
+{
+    private static readonly string Root = FindRoot();
+
+    private static string FindRoot()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir is not null && !File.Exists(Path.Combine(dir.FullName, "AdminToolbox.sln")))
+        {
+            dir = dir.Parent;
+        }
+
+        return dir?.FullName ?? throw new InvalidOperationException("repository root not found");
+    }
+
+    private static Dictionary<string, string> Load(string relative) =>
+        XDocument.Load(Path.Combine(Root, relative)).Root!.Elements("data")
+            .ToDictionary(d => d.Attribute("name")!.Value, d => d.Element("value")!.Value);
+
+    [GeneratedRegex(@"""((?:spf|dns|mx|dkim|dmarc|bimi|mtasts|tlsrpt|header|hop|auth|spam|zone|jwt|cert)\.[a-z0-9.]+)""")]
+    private static partial Regex CodePattern();
+
+    [GeneratedRegex(@"\{(\d+)\}")]
+    private static partial Regex Placeholder();
+
+    [Theory]
+    [InlineData("src/AdminToolbox.Tools/ToolText")]
+    [InlineData("src/AdminToolbox.Web/AppText")]
+    public void AllLanguagesHaveSameKeysAndPlaceholders(string baseName)
+    {
+        var en = Load(baseName + ".resx");
+        foreach (var lang in new[] { ".de", ".tr" })
+        {
+            var other = Load(baseName + lang + ".resx");
+            Assert.Equal(en.Keys.OrderBy(k => k), other.Keys.OrderBy(k => k));
+            foreach (var (key, value) in en)
+            {
+                var a = Placeholder().Matches(value).Select(m => m.Value).Distinct().OrderBy(x => x);
+                var b = Placeholder().Matches(other[key]).Select(m => m.Value).Distinct().OrderBy(x => x);
+                Assert.True(a.SequenceEqual(b), $"{lang} {key}: placeholders differ");
+                Assert.False(string.IsNullOrWhiteSpace(other[key]), $"{lang} {key} is empty");
+            }
+        }
+    }
+
+    [Fact]
+    public void EveryFindingCodeIsTranslated()
+    {
+        var keys = Load("src/AdminToolbox.Tools/ToolText.resx");
+        var codes = Directory.GetFiles(Path.Combine(Root, "src/AdminToolbox.Core"), "*.cs", SearchOption.AllDirectories)
+            .SelectMany(f => CodePattern().Matches(File.ReadAllText(f)).Select(m => m.Groups[1].Value))
+            .Where(c => !c.EndsWith('.') && c != "header.d") // header.d is an Authentication-Results property
+            .Distinct()
+            .ToList();
+        Assert.True(codes.Count > 80, "code scan found too few codes");
+        var missing = codes.Where(c => !keys.ContainsKey(c)).ToList();
+        Assert.Empty(missing);
+    }
+
+    [Fact]
+    public void StaticShellMatchesResources()
+    {
+        // boot.js carries the DE/TR texts of the static home page, index.html the English ones.
+        var boot = File.ReadAllText(Path.Combine(Root, "src/AdminToolbox.Web/wwwroot/js/boot.js"));
+        var start = boot.IndexOf("const SHELL = ", StringComparison.Ordinal) + "const SHELL = ".Length;
+        var end = boot.IndexOf("/*END*/", StringComparison.Ordinal);
+        var json = boot[start..end].Trim().TrimEnd(';');
+        using var doc = System.Text.Json.JsonDocument.Parse(json);
+        foreach (var lang in new[] { "de", "tr" })
+        {
+            var resx = Load($"src/AdminToolbox.Web/AppText.{lang}.resx");
+            foreach (var p in doc.RootElement.GetProperty(lang).EnumerateObject())
+            {
+                Assert.Equal(resx[p.Name], p.Value.GetString());
+            }
+        }
+
+        var en = Load("src/AdminToolbox.Web/AppText.resx");
+        var html = File.ReadAllText(Path.Combine(Root, "src/AdminToolbox.Web/wwwroot/index.html"));
+        var marked = ShellText().Matches(html).ToList();
+        Assert.True(marked.Count >= 15);
+        foreach (Match m in marked)
+        {
+            Assert.Equal(en[m.Groups[1].Value], m.Groups[2].Value);
+            Assert.True(doc.RootElement.GetProperty("de").TryGetProperty(m.Groups[1].Value, out _), m.Groups[1].Value);
+        }
+    }
+
+    [Fact]
+    public void StaticRouteTitlesMatchToolResources()
+    {
+        var boot = File.ReadAllText(Path.Combine(Root, "src/AdminToolbox.Web/wwwroot/js/boot.js"));
+        var start = boot.IndexOf("const ROUTES = ", StringComparison.Ordinal) + "const ROUTES = ".Length;
+        var end = boot.IndexOf("/*ENDROUTES*/", StringComparison.Ordinal);
+        using var doc = System.Text.Json.JsonDocument.Parse(boot[start..end].Trim().TrimEnd(';'));
+        var keys = new Dictionary<string, string> { ["mail"] = "mail", ["header"] = "header", ["subnet"] = "subnet", ["dns-diff"] = "diff", ["helpers"] = "helpers" };
+        foreach (var (lang, suffix) in new[] { ("en", ""), ("de", ".de"), ("tr", ".tr") })
+        {
+            var resx = Load($"src/AdminToolbox.Tools/ToolText{suffix}.resx");
+            foreach (var (route, key) in keys)
+            {
+                var pair = doc.RootElement.GetProperty(lang).GetProperty(route);
+                Assert.Equal(resx[key + ".title"], pair[0].GetString());
+                Assert.Equal(resx[key + ".lead"], pair[1].GetString());
+            }
+        }
+    }
+
+    [GeneratedRegex(@"data-i18n=""([^""]+)""[^>]*>([^<]+)<")]
+    private static partial Regex ShellText();
+
+    [Fact]
+    public void GermanTextsFollowStyleRules()
+    {
+        foreach (var file in new[] { "src/AdminToolbox.Tools/ToolText.de.resx", "src/AdminToolbox.Web/AppText.de.resx" })
+        {
+            foreach (var (key, value) in Load(file))
+            {
+                Assert.DoesNotContain(" – ", value);
+                Assert.DoesNotContain(" - ", value);
+                Assert.False(Regex.IsMatch(value, @"\bAI\b"), $"{key} uses AI instead of KI");
+            }
+        }
+    }
+}

@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"s1._domainkey.outlook.com","type":16}],"Authority":[{"name":"outlook.com","type":6,"TTL":60,"data":"ns1-05.azure-dns.com. msnhst.microsoft.com. 2017971531 300 120 2419200 60"}]}

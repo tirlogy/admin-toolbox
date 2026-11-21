@@ -1,0 +1,42 @@
+@page "/helpers"
+@page "/helpers/{Tab}"
+
+<PageTitle>@L["helpers.title"] · Admin Toolbox</PageTitle>
+
+<h1>@L["helpers.title"]</h1>
+<p class="lead">@L["helpers.lead"]</p>
+
+<nav class="tabs" aria-label="@L["helpers.title"]">
+    @foreach (var t in Tabs)
+    {
+        <a href="@($"helpers/{t}")" class="@(t == Current ? "active" : "")" aria-current="@(t == Current ? "page" : null)">@L["helpers." + t]</a>
+    }
+</nav>
+
+@switch (Current)
+{
+    case "jwt":
+        <JwtTool />
+        break;
+    case "encode":
+        <EncodeTool />
+        break;
+    case "hash":
+        <HashTool />
+        break;
+    case "cert":
+        <CertTool />
+        break;
+    default:
+        <PasswordTool />
+        break;
+}
+
+@code {
+    private static readonly string[] Tabs = { "password", "jwt", "encode", "hash", "cert" };
+
+    [Parameter]
+    public string? Tab { get; set; }
+
+    private string Current => Tab is not null && Tabs.Contains(Tab) ? Tab : "password";
+}

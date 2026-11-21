@@ -10,32 +10,132 @@
     "en": "Browser tools for IT admins: mail domain check, header analysis, subnet calculator, DNS diff and helpers. Built with .NET and Blazor WebAssembly.",
     "tr": "BT yöneticileri için tarayıcı araçları: e-posta alan adı kontrolü, başlık analizi, alt ağ hesaplayıcı, DNS karşılaştırma ve yardımcılar. .NET ve Blazor WebAssembly ile geliştirildi."
   },
-  "status": "geplant",
+  "status": "in-arbeit",
   "flaggschiff": false,
   "profile": [
     "it-prozesse"
   ],
   "stack": [
-    ".NET (LTS)",
+    ".NET 10 (LTS)",
     "C#",
     "Blazor WebAssembly",
     "PWA",
     "DNS-over-HTTPS",
     "xUnit",
     "Playwright",
+    "Lighthouse CI",
     "Cloudflare Pages"
   ],
   "repo": "https://github.com/tirlogy/admin-toolbox",
   "lizenz": "MIT",
   "zeitraum": {
-    "von": "2026"
+    "von": "2026-11",
+    "bis": "2026-11"
   },
   "skills": [
     ".NET / WebAssembly",
     "Netzwerkgrundlagen",
     "Microsoft 365 Administration (Exchange Online, SharePoint, Teams)"
   ],
-  "kennzahlen": [],
-  "screenshots": [],
+  "kennzahlen": [
+    {
+      "label": {
+        "de": "Unit-Tests",
+        "en": "Unit tests",
+        "tr": "Birim testleri"
+      },
+      "wert": "201"
+    },
+    {
+      "label": {
+        "de": "Testabdeckung Kernlogik",
+        "en": "Core logic coverage",
+        "tr": "Çekirdek mantık kapsamı"
+      },
+      "wert": "98 %"
+    },
+    {
+      "label": {
+        "de": "E2E-Tests (Playwright)",
+        "en": "E2E tests (Playwright)",
+        "tr": "E2E testleri (Playwright)"
+      },
+      "wert": "12"
+    },
+    {
+      "label": {
+        "de": "Lighthouse mobil (Performance / Barrierefreiheit)",
+        "en": "Lighthouse mobile (performance / accessibility)",
+        "tr": "Lighthouse mobil (performans / erişilebilirlik)"
+      },
+      "wert": "100 / 100"
+    },
+    {
+      "label": {
+        "de": "Download Startseite (Brotli)",
+        "en": "Start page download (Brotli)",
+        "tr": "Başlangıç sayfası indirme (Brotli)"
+      },
+      "wert": "≈ 2,3 MB, Werkzeuge +0,1 MB lazy"
+    },
+    {
+      "label": {
+        "de": "Sprachen",
+        "en": "Languages",
+        "tr": "Diller"
+      },
+      "wert": "DE · EN · TR"
+    },
+    {
+      "label": {
+        "de": "Laufende Kosten",
+        "en": "Running cost",
+        "tr": "İşletme maliyeti"
+      },
+      "wert": "0 €"
+    }
+  ],
+  "screenshots": [
+    {
+      "pfad": "docs/screenshots/mail-check.png",
+      "alt": {
+        "de": "Mail-Domain-Check mit SPF-Baum, Lookup-Zählung und Ampel",
+        "en": "Mail domain check with SPF tree, lookup count and traffic lights",
+        "tr": "SPF ağacı, sorgu sayımı ve trafik ışıklarıyla e-posta alan adı kontrolü"
+      }
+    },
+    {
+      "pfad": "docs/screenshots/header-analysis.png",
+      "alt": {
+        "de": "Mail-Header-Analyse mit Route als Zeitleiste",
+        "en": "Mail header analysis with the route as a timeline",
+        "tr": "Yolu zaman çizelgesi olarak gösteren e-posta başlığı analizi"
+      }
+    },
+    {
+      "pfad": "docs/screenshots/subnet.png",
+      "alt": {
+        "de": "Subnetzrechner mit einem IPv6-Netz",
+        "en": "Subnet calculator with an IPv6 network",
+        "tr": "IPv6 ağı ile alt ağ hesaplayıcı"
+      }
+    },
+    {
+      "pfad": "docs/screenshots/home.png",
+      "alt": {
+        "de": "Startseite mit allen Werkzeugen",
+        "en": "Start page with all tools",
+        "tr": "Tüm araçların bulunduğu başlangıç sayfası"
+      }
+    },
+    {
+      "pfad": "docs/screenshots/helpers-dark.png",
+      "alt": {
+        "de": "Passwort-Generator im Dunkelmodus",
+        "en": "Password generator in dark mode",
+        "tr": "Koyu modda parola oluşturucu"
+      }
+    }
+  ],
   "demo": "https://tools.tiryaki.eu"
 }

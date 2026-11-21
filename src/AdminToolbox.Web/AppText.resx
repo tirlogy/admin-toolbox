@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="home.lead" xml:space="preserve"><value>Check mail security, DNS and networks right in the browser. No account, no server, input stays local.</value></data>
+  <data name="home.privacy" xml:space="preserve"><value>Only the mail domain check and DNS diff send DNS queries to Cloudflare DNS (fallback Google Public DNS). Everything else runs offline.</value></data>
+  <data name="home.title" xml:space="preserve"><value>Tools for IT admins</value></data>
+  <data name="imprint" xml:space="preserve"><value>Imprint</value></data>
+  <data name="language" xml:space="preserve"><value>Language</value></data>
+  <data name="loading" xml:space="preserve"><value>Loading …</value></data>
+  <data name="nav" xml:space="preserve"><value>Tools</value></data>
+  <data name="notfound" xml:space="preserve"><value>Page not found</value></data>
+  <data name="notfound.home" xml:space="preserve"><value>Back to the start page</value></data>
+  <data name="privacy" xml:space="preserve"><value>Privacy</value></data>
+  <data name="privacy.dns" xml:space="preserve"><value>The mail domain check and DNS diff query DNS records via DNS over HTTPS at Cloudflare (cloudflare-dns.com), or at Google (dns.google) if Cloudflare fails. Only the queried names and types are transmitted, plus the device's IP address for technical reasons.</value></data>
+  <data name="privacy.dns.title" xml:space="preserve"><value>DNS queries</value></data>
+  <data name="privacy.hosting" xml:space="preserve"><value>The static files are served via Cloudflare Pages. Cloudflare processes connection data required for delivery.</value></data>
+  <data name="privacy.hosting.title" xml:space="preserve"><value>Hosting</value></data>
+  <data name="privacy.local" xml:space="preserve"><value>Language, color scheme and the history of the mail domain check and subnet calculator are kept in the browser's localStorage. Headers, passwords, tokens and certificates are never stored. The history can be cleared in the tools.</value></data>
+  <data name="privacy.local.title" xml:space="preserve"><value>Local storage</value></data>
+  <data name="privacy.p1" xml:space="preserve"><value>This app has no server component, no accounts and no tracking. All calculations run in the browser.</value></data>
+  <data name="skip" xml:space="preserve"><value>Skip to content</value></data>
+  <data name="theme.dark" xml:space="preserve"><value>Color scheme: dark (switch)</value></data>
+  <data name="theme.light" xml:space="preserve"><value>Color scheme: light (switch)</value></data>
+  <data name="theme.system" xml:space="preserve"><value>Color scheme: system (switch)</value></data>
+  <data name="tool.diff" xml:space="preserve"><value>DNS diff</value></data>
+  <data name="tool.diff.desc" xml:space="preserve"><value>Zone file from before against live DNS. Ideal for DNS migrations.</value></data>
+  <data name="tool.header" xml:space="preserve"><value>Header analysis</value></data>
+  <data name="tool.header.desc" xml:space="preserve"><value>Route as a timeline, SPF/DKIM/DMARC results, spam hints and suspicious mismatches.</value></data>
+  <data name="tool.helpers" xml:space="preserve"><value>Helpers</value></data>
+  <data name="tool.helpers.desc" xml:space="preserve"><value>Passwords, JWT, Base64/URL/hex, hashes and certificates. Works offline.</value></data>
+  <data name="tool.mail" xml:space="preserve"><value>Mail domain check</value></data>
+  <data name="tool.mail.desc" xml:space="preserve"><value>MX, SPF with lookup count, DKIM, DMARC, BIMI, MTA-STS and TLS-RPT with traffic lights and suggestions.</value></data>
+  <data name="tool.subnet" xml:space="preserve"><value>Subnet calculator</value></data>
+  <data name="tool.subnet.desc" xml:space="preserve"><value>IPv4 and IPv6, splitting, summarizing and IP-in-network check.</value></data>
+</root>

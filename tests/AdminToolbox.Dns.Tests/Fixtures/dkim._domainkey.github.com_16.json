@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"dkim._domainkey.github.com","type":16}],"Authority":[{"name":"github.com","type":6,"TTL":900,"data":"ns-1707.awsdns-21.co.uk. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"}]}

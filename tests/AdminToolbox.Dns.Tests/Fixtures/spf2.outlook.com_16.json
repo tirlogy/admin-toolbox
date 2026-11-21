@@ -1,0 +1,1 @@
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":true,"CD":false,"Question":[{"name":"spf2.outlook.com","type":16}],"Answer":[{"name":"spf2.outlook.com","type":16,"TTL":300,"data":"\"v=spf1 ip4:40.92.0.0/16 ip4:52.103.0.0/17 ip6:2a01:111:f403:2800::/53 ip6:2a01:111:f403:d000::/53 -all\""}]}

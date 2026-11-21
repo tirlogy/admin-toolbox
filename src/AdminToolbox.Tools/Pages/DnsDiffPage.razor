@@ -1,0 +1,165 @@
+@page "/dns-diff"
+@using AdminToolbox.Core.Dns
+@using AdminToolbox.Core.DnsDiff
+@implements IDisposable
+
+<PageTitle>@L["diff.title"] · Admin Toolbox</PageTitle>
+
+<h1>@L["diff.title"]</h1>
+<p class="lead">@L["diff.lead"]</p>
+<DnsNotice />
+
+<form class="tool-form" @onsubmit="CompareAsync">
+    <div class="field">
+        <label for="diff-origin">@L["diff.origin"]</label>
+        <input id="diff-origin" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="example.com"
+               aria-describedby="diff-origin-hint" @bind="_origin" @bind:event="oninput" />
+        <small id="diff-origin-hint">@L["diff.origin.hint"]</small>
+    </div>
+    <div class="field">
+        <label for="diff-before">@L["diff.before"]</label>
+        <textarea id="diff-before" rows="12" spellcheck="false" aria-describedby="diff-before-hint" @bind="_before" @bind:event="oninput"></textarea>
+        <small id="diff-before-hint">@L["diff.before.hint"]</small>
+    </div>
+    <div class="button-row">
+        <button type="submit" class="btn" disabled="@_busy">@(_busy ? L["ui.checking"] : L["diff.run"])</button>
+        <button type="button" class="btn btn-secondary" @onclick="LoadSample">@L["diff.sample"]</button>
+    </div>
+</form>
+
+<div aria-live="polite">
+    @if (_error is not null)
+    {
+        <p class="alert" role="alert">@_error</p>
+    }
+    @if (_busy)
+    {
+        <p class="muted">@L["ui.checking"]</p>
+    }
+</div>
+
+@if (_parseErrors.Count > 0)
+{
+    <section class="card" aria-labelledby="h-parse">
+        <h2 id="h-parse">@L["diff.parseerrors"]</h2>
+        <ul>
+            @foreach (var e in _parseErrors)
+            {
+                <li>@L["diff.line", e.Line] @L[e.Code, e.Text]</li>
+            }
+        </ul>
+    </section>
+}
+
+@if (_groups is { } groups)
+{
+    <section class="card" aria-labelledby="h-diff">
+        <h2 id="h-diff">@L["diff.result"]</h2>
+        <p>
+            @foreach (var status in Enum.GetValues<DiffStatus>())
+            {
+                <span class="tag tag-@status.ToString().ToLowerInvariant()">@L["diff.status." + status]: @(groups.Count(g => g.Status == status))</span>
+            }
+        </p>
+        <div class="field-inline">
+            <input id="diff-only" type="checkbox" @bind="_onlyChanges" />
+            <label for="diff-only">@L["diff.onlychanges"]</label>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <caption class="sr-only">@L["diff.result"]</caption>
+                <thead>
+                    <tr><th scope="col">@L["diff.name"]</th><th scope="col">@L["diff.type"]</th><th scope="col">@L["diff.state"]</th><th scope="col">@L["diff.beforecol"]</th><th scope="col">@L["diff.aftercol"]</th></tr>
+                </thead>
+                <tbody>
+                    @foreach (var g in groups.Where(g => !_onlyChanges || g.Status != DiffStatus.Unchanged))
+                    {
+                        <tr>
+                            <td class="mono">@g.Name</td>
+                            <td>@g.Type</td>
+                            <td><span class="tag tag-@g.Status.ToString().ToLowerInvariant()">@L["diff.status." + g.Status]</span></td>
+                            <td class="mono wrap">
+                                @foreach (var v in g.Before)
+                                {
+                                    <div class="@(g.Missing.Contains(v) ? "removed" : "")">@(g.Missing.Contains(v) ? "− " : "")@v</div>
+                                }
+                            </td>
+                            <td class="mono wrap">
+                                @if (g.Error is not null)
+                                {
+                                    <span>@L["dns.error", g.Error]</span>
+                                }
+                                @foreach (var v in g.After)
+                                {
+                                    <div class="@(g.Added.Contains(v) ? "added" : "")">@(g.Added.Contains(v) ? "+ " : "")@v</div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (_skippedSoa)
+        {
+            <p class="muted">@L["diff.soa"]</p>
+        }
+    </section>
+}
+
+@code {
+    private readonly CancellationTokenSource _cts = new();
+    private string _origin = string.Empty;
+    private string _before = string.Empty;
+    private bool _busy;
+    private bool _onlyChanges;
+    private bool _skippedSoa;
+    private string? _error;
+    private List<ZoneError> _parseErrors = new();
+    private IReadOnlyList<DiffGroup>? _groups;
+
+    private void LoadSample()
+    {
+        _origin = "example.com";
+        _before = Samples.Zone;
+    }
+
+    private async Task CompareAsync()
+    {
+        _error = null;
+        _groups = null;
+        var origin = string.Empty;
+        if (!string.IsNullOrWhiteSpace(_origin) && !DomainName.TryNormalize(_origin, out origin))
+        {
+            _error = L["mail.invalid"];
+            return;
+        }
+
+        var parsed = ZoneParser.Parse(_before, origin);
+        _parseErrors = parsed.Errors;
+        if (parsed.Records.Count == 0)
+        {
+            _error = L["diff.empty"];
+            return;
+        }
+
+        _skippedSoa = parsed.Records.Any(r => DnsDiffer.SkippedTypes.Contains(r.Type));
+        _busy = true;
+        try
+        {
+            _groups = await new DnsDiffer(ToolServices.Dns).CompareAsync(parsed.Records, _cts.Token);
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+}

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>AdminToolbox.Dns</RootNamespace>
+    <IsTrimmable>true</IsTrimmable>
+    <Description>DNS-over-HTTPS client (JSON API) with fallback, caching and timeouts.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../AdminToolbox.Core/AdminToolbox.Core.csproj" />
+    <InternalsVisibleTo Include="AdminToolbox.Dns.Tests" />
+  </ItemGroup>
+</Project>

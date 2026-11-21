@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>AdminToolbox.Core</RootNamespace>
+    <IsTrimmable>true</IsTrimmable>
+    <Description>UI-free logic of the Admin Toolbox: mail DNS checks, header analysis, subnet math, DNS diff and offline helpers.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers/wordlist.txt" LogicalName="AdminToolbox.Core.wordlist.txt" />
+    <InternalsVisibleTo Include="AdminToolbox.Core.Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,164 @@
+@page "/mail"
+@using AdminToolbox.Core.Dns
+@inject IJSRuntime JS
+@implements IDisposable
+
+<PageTitle>@L["mail.title"] · Admin Toolbox</PageTitle>
+
+<h1>@L["mail.title"]</h1>
+<p class="lead">@L["mail.lead"]</p>
+<DnsNotice />
+
+<form class="tool-form" @onsubmit="RunAsync">
+    <div class="field-row">
+        <div class="field">
+            <label for="mail-domain">@L["mail.domain"]</label>
+            <input id="mail-domain" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false"
+                   placeholder="example.com" aria-describedby="mail-domain-hint" @bind="_input" @bind:event="oninput" />
+            <small id="mail-domain-hint">@L["mail.domain.hint"]</small>
+        </div>
+        <div class="field">
+            <label for="mail-selector">@L["mail.selector"]</label>
+            <input id="mail-selector" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+                   aria-describedby="mail-selector-hint" @bind="_selector" @bind:event="oninput" />
+            <small id="mail-selector-hint">@L["mail.selector.hint"]</small>
+        </div>
+    </div>
+    <button type="submit" class="btn" disabled="@_busy">@(_busy ? L["ui.checking"] : L["mail.run"])</button>
+</form>
+
+<History Items="_history" OnPick="PickAsync" OnClear="ClearHistoryAsync" />
+
+<div aria-live="polite">
+    @if (_error is not null)
+    {
+        <p class="alert" role="alert">@_error</p>
+    }
+    @if (_busy)
+    {
+        <p class="muted">@L["ui.checking"]</p>
+    }
+</div>
+
+@if (_report is { } r)
+{
+    <section class="results" aria-labelledby="mail-summary">
+        <h2 id="mail-summary">@L["mail.summary", r.Domain]</h2>
+        <ul class="summary-grid">
+            @foreach (var c in r.Checks)
+            {
+                <li><a href="@($"mail#check-{c.Kind}")" @onclick:preventDefault @onclick="() => ScrollAsync(c.Kind)">@L["check." + c.Kind]</a> <Light Severity="c.Severity" /></li>
+            }
+        </ul>
+    </section>
+
+    @foreach (var c in r.Checks)
+    {
+        <section class="card" id="@($"check-{c.Kind}")" aria-labelledby="@($"h-{c.Kind}")" tabindex="-1">
+            <div class="card-head">
+                <h2 id="@($"h-{c.Kind}")">@L["check." + c.Kind]</h2>
+                <Light Severity="c.Severity" />
+            </div>
+            <p class="muted">@L["check." + c.Kind + ".about"]</p>
+            @if (c.Kind == CheckKind.Spf && r.Spf?.Root.Record is not null)
+            {
+                <p><strong>@L["spf.lookups", r.Spf.LookupCount, SpfEvaluator.LookupLimit]</strong></p>
+                <ul class="spf-tree root">
+                    <SpfTree Node="r.Spf.Root" />
+                </ul>
+            }
+            else if (c.Kind == CheckKind.Dkim && r.DkimKeys.Count > 0)
+            {
+                <div class="table-wrap">
+                    <table>
+                        <caption class="sr-only">@L["check.Dkim"]</caption>
+                        <thead><tr><th scope="col">@L["dkim.selector"]</th><th scope="col">@L["dkim.type"]</th><th scope="col">@L["dkim.bits"]</th></tr></thead>
+                        <tbody>
+                            @foreach (var k in r.DkimKeys)
+                            {
+                                <tr><td><code>@k.Selector</code></td><td>@k.KeyType.ToUpperInvariant()</td><td>@(k.Revoked ? L["dkim.revokedshort"] : k.KeyBits?.ToString(CultureInfo.InvariantCulture) ?? "?")</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else if (c.Records.Count > 0)
+            {
+                <pre class="record">@string.Join("\n", c.Records)</pre>
+            }
+            <FindingItems Findings="c.Findings" />
+        </section>
+    }
+}
+
+@code {
+    private const string HistoryKey = "mail";
+    private readonly CancellationTokenSource _cts = new();
+    private string _input = string.Empty;
+    private string _selector = string.Empty;
+    private bool _busy;
+    private string? _error;
+    private MailDomainReport? _report;
+    private List<string> _history = new();
+
+    protected override async Task OnInitializedAsync() => _history = await new BrowserStore(JS).GetHistoryAsync(HistoryKey);
+
+    private async Task RunAsync()
+    {
+        _error = null;
+        if (!DomainName.TryNormalize(_input, out var domain))
+        {
+            _error = L["mail.invalid"];
+            return;
+        }
+
+        _busy = true;
+        _report = null;
+        try
+        {
+            _report = await new MailDomainChecker(ToolServices.Dns).CheckAsync(domain, _selector, _cts.Token);
+            _history = await new BrowserStore(JS).PushHistoryAsync(HistoryKey, domain);
+        }
+        catch (DnsQueryException ex)
+        {
+            _error = L["dns.error", ex.Message];
+        }
+        catch (OperationCanceledException)
+        {
+            // page left
+        }
+        finally
+        {
+            _busy = false;
+        }
+    }
+
+    private async Task PickAsync(string domain)
+    {
+        _input = domain;
+        await RunAsync();
+    }
+
+    private async Task ClearHistoryAsync()
+    {
+        await new BrowserStore(JS).ClearHistoryAsync(HistoryKey);
+        _history = new List<string>();
+    }
+
+    private async Task ScrollAsync(CheckKind kind)
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("atb.focus", "check-" + kind);
+        }
+        catch (JSException)
+        {
+        }
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+}
