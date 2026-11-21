@@ -186,7 +186,7 @@ jobs:
           path: site
       - name: Adapt to the /admin-toolbox/ sub-path
         run: python3 tools/pages-subpath.py site /admin-toolbox/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
       - id: deploy
