@@ -1,0 +1,41 @@
+{
+  "slug": "admin-toolbox",
+  "titel": {
+    "de": "Admin Toolbox",
+    "en": "Admin Toolbox",
+    "tr": "Yönetici Araç Kutusu"
+  },
+  "kurz": {
+    "de": "Werkzeuge für IT-Admins im Browser: Mail-Domain-Check, Header-Analyse, Subnetzrechner, DNS-Vergleich und Helfer. Gebaut mit .NET und Blazor WebAssembly.",
+    "en": "Browser tools for IT admins: mail domain check, header analysis, subnet calculator, DNS diff and helpers. Built with .NET and Blazor WebAssembly.",
+    "tr": "BT yöneticileri için tarayıcı araçları: e-posta alan adı kontrolü, başlık analizi, alt ağ hesaplayıcı, DNS karşılaştırma ve yardımcılar. .NET ve Blazor WebAssembly ile geliştirildi."
+  },
+  "status": "geplant",
+  "flaggschiff": false,
+  "profile": [
+    "it-prozesse"
+  ],
+  "stack": [
+    ".NET (LTS)",
+    "C#",
+    "Blazor WebAssembly",
+    "PWA",
+    "DNS-over-HTTPS",
+    "xUnit",
+    "Playwright",
+    "Cloudflare Pages"
+  ],
+  "repo": "https://github.com/tirlogy/admin-toolbox",
+  "lizenz": "MIT",
+  "zeitraum": {
+    "von": "2026"
+  },
+  "skills": [
+    ".NET / WebAssembly",
+    "Netzwerkgrundlagen",
+    "Microsoft 365 Administration (Exchange Online, SharePoint, Teams)"
+  ],
+  "kennzahlen": [],
+  "screenshots": [],
+  "demo": "https://tools.tiryaki.eu"
+}

@@ -1,0 +1,16 @@
+<Project>
+  <!-- LocalNet7=true lets Core/Dns tests run on an older local SDK; CI always builds net10.0 (see docs/adr/0001). -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework Condition="'$(LocalNet7)' == 'true'">net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Version>1.0.0</Version>
+    <Authors>Ömer Tiryaki</Authors>
+    <Copyright>Copyright (c) 2026 Ömer Tiryaki</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/tirlogy/admin-toolbox</RepositoryUrl>
+  </PropertyGroup>
+</Project>
