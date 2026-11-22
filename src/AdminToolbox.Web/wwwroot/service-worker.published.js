@@ -38,5 +38,10 @@ async function onFetch(event) {
   const request = shouldServeIndexHtml ? 'index.html' : event.request;
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
+  // Cloudflare Pages answers index.html with a 308 to /. Browsers reject a redirected response
+  // for a navigation (ERR_FAILED), so hand out a clean copy without the redirect flag.
+  if (cached && cached.redirected) {
+    return new Response(cached.body, { status: cached.status, statusText: cached.statusText, headers: cached.headers });
+  }
   return cached || fetch(event.request);
 }
