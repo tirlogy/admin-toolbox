@@ -1,0 +1,24 @@
+@* Decorative: a mail domain report with traffic lights. Same drawing as the static shell in wwwroot/index.html. *@
+<svg class="hero-report" viewBox="0 0 360 300" aria-hidden="true" focusable="false">
+    <rect x="8" y="8" width="344" height="284" rx="18" class="hr-card" />
+    <path d="M8 26a18 18 0 0 1 18-18h308a18 18 0 0 1 18 18v20H8z" class="hr-bar" />
+    <circle cx="30" cy="27" r="5" class="hr-dot" /><circle cx="46" cy="27" r="5" class="hr-dot" /><circle cx="62" cy="27" r="5" class="hr-dot" />
+    <text x="28" y="82" class="hr-domain">example.com</text>
+    <rect x="28" y="94" width="120" height="6" rx="3" class="hr-line" />
+    @foreach (var (label, cls, word, y) in Rows)
+    {
+        <g>
+        <text x="28" y="@(y + 17)" class="hr-label">@label</text>
+        <rect x="244" y="@y" width="88" height="26" rx="13" class="hr-pill @cls" />
+        <circle cx="262" cy="@(y + 13)" r="5" class="hr-pill-dot @cls" />
+        <text x="274" y="@(y + 18)" class="hr-pill-text @cls">@word</text>
+        </g>
+    }
+</svg>
+
+@code {
+    private static readonly (string Label, string Cls, string Word, int Y)[] Rows =
+    {
+        ("SPF", "ok", "OK", 126), ("DKIM", "ok", "OK", 166), ("DMARC", "warn", "p=none", 206), ("MTA-STS", "info", "Info", 246),
+    };
+}

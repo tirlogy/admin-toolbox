@@ -35,4 +35,42 @@
   <data name="tool.mail.desc" xml:space="preserve"><value>MX, SPF mit Lookup-Zählung, DKIM, DMARC, BIMI, MTA-STS und TLS-RPT mit Ampel und Vorschlägen.</value></data>
   <data name="tool.subnet" xml:space="preserve"><value>Subnetzrechner</value></data>
   <data name="tool.subnet.desc" xml:space="preserve"><value>IPv4 und IPv6, Aufteilen, Zusammenfassen und Prüfung, ob eine IP im Netz liegt.</value></data>
+  <data name="home.eyebrow" xml:space="preserve"><value>Kostenlos · Open Source · ohne Konto</value></data>
+  <data name="home.cta.mail" xml:space="preserve"><value>Mail-Domain prüfen</value></data>
+  <data name="home.cta.header" xml:space="preserve"><value>Header analysieren</value></data>
+  <data name="home.trust.1" xml:space="preserve"><value>Läuft im Browser</value></data>
+  <data name="home.trust.2" xml:space="preserve"><value>Nichts wird hochgeladen</value></data>
+  <data name="home.trust.3" xml:space="preserve"><value>Helfer auch offline</value></data>
+  <data name="home.trust.4" xml:space="preserve"><value>MIT-Lizenz</value></data>
+  <data name="home.tools.title" xml:space="preserve"><value>Fünf Werkzeuge</value></data>
+  <data name="home.why.title" xml:space="preserve"><value>Warum diese Toolbox?</value></data>
+  <data name="home.why.1" xml:space="preserve"><value>Als IT-Administrator kommen jede Woche die gleichen Fragen: Warum landet unsere Mail im Spam? Stimmen SPF, DKIM und DMARC? Fehlt nach dem DNS-Umzug ein Eintrag? Passt das Subnetz noch?</value></data>
+  <data name="home.why.2" xml:space="preserve"><value>Seit Februar 2024 verlangen Google und Yahoo von Massenversendern gültige SPF-, DKIM- und DMARC-Einträge, Microsoft setzt das seit Mai 2025 für Outlook.com durch. Fehlt ein Eintrag, werden Mails abgelehnt oder landen im Spam. Auch kleine Firmen merken das, sobald Newsletter oder Rechnungen per Mail nicht mehr ankommen.</value></data>
+  <data name="home.why.3" xml:space="preserve"><value>Die üblichen Online-Prüfer zeigen Werbung, wollen ein Konto oder schicken Mail-Header mit internen Adressen an fremde Server. Diese Toolbox rechnet alles im Browser. Nur DNS-Abfragen gehen an Cloudflare DNS, so wie bei jedem Resolver.</value></data>
+  <data name="home.rules.title" xml:space="preserve"><value>Was Postfach-Anbieter erwarten</value></data>
+  <data name="home.rules.spf" xml:space="preserve"><value>Legt fest, welche Server für die Domain senden dürfen. Höchstens 10 DNS-Lookups.</value></data>
+  <data name="home.rules.dkim" xml:space="preserve"><value>Signiert jede Mail, damit Änderungen unterwegs auffallen. Schlüssel mit mindestens 1024, besser 2048 Bit.</value></data>
+  <data name="home.rules.dmarc" xml:space="preserve"><value>Sagt Empfängern, was bei Fehlern von SPF und DKIM passieren soll, und schickt Berichte. Mit p=none starten, dann verschärfen.</value></data>
+  <data name="home.rules.note" xml:space="preserve"><value>Google und Yahoo verlangen das ab etwa 5.000 Mails pro Tag an ihre Nutzer, Microsoft für Outlook.com. Quellen:</value></data>
+  <data name="home.source.google" xml:space="preserve"><value>Google: Richtlinien für E-Mail-Absender</value></data>
+  <data name="home.source.yahoo" xml:space="preserve"><value>Yahoo: Best Practices für Absender</value></data>
+  <data name="home.guide.title" xml:space="preserve"><value>Typische Abläufe</value></data>
+  <data name="home.guide.1.title" xml:space="preserve"><value>Mail landet im Spam</value></data>
+  <data name="home.guide.1" xml:space="preserve"><value>Mail-Domain-Check für die Absenderdomain starten. Rote und gelbe Befunde kommen mit einem konkreten Vorschlag für den DNS-Eintrag.</value></data>
+  <data name="home.guide.2.title" xml:space="preserve"><value>Eine einzelne Mail ist verdächtig</value></data>
+  <data name="home.guide.2" xml:space="preserve"><value>Header kopieren (Outlook: Datei, Eigenschaften; Gmail: Original anzeigen) und in die Header-Analyse einfügen. Sie zeigt den Weg, Verzögerungen und ob der Absender gefälscht ist.</value></data>
+  <data name="home.guide.3.title" xml:space="preserve"><value>DNS-Umzug</value></data>
+  <data name="home.guide.3" xml:space="preserve"><value>Vor dem Umzug die Zonendatei beim alten Anbieter exportieren. Danach vergleicht der DNS-Vergleich sie mit der Live-Abfrage und listet jeden fehlenden Eintrag.</value></data>
+  <data name="home.guide.4.title" xml:space="preserve"><value>Netz planen</value></data>
+  <data name="home.guide.4" xml:space="preserve"><value>Netz in den Subnetzrechner eingeben, in VLANs aufteilen oder prüfen, ob eine Adresse dazugehört. IPv4 und IPv6.</value></data>
+  <data name="home.guide.go" xml:space="preserve"><value>Öffnen</value></data>
+  <data name="home.privacy.title" xml:space="preserve"><value>Was lokal bleibt</value></data>
+  <data name="home.tech.title" xml:space="preserve"><value>Technik</value></data>
+  <data name="home.tech" xml:space="preserve"><value>C# und .NET 10, kompiliert zu WebAssembly (Blazor). Kein Backend: Die App wird als statische Dateien über Cloudflare Pages ausgeliefert.</value></data>
+  <data name="home.tech.link" xml:space="preserve"><value>Quellcode und Tests auf GitHub</value></data>
+  <data name="tool.mail.short" xml:space="preserve"><value>Mail</value></data>
+  <data name="tool.header.short" xml:space="preserve"><value>Header</value></data>
+  <data name="tool.subnet.short" xml:space="preserve"><value>Subnetz</value></data>
+  <data name="tool.diff.short" xml:space="preserve"><value>DNS</value></data>
+  <data name="tool.helpers.short" xml:space="preserve"><value>Helfer</value></data>
 </root>

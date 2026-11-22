@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Toolbox</title>
   <meta name="description" content="Browser tools for IT admins: mail domain check, header analysis, subnet calculator, DNS diff and helpers." />
-  <meta name="theme-color" content="#0b6b6b" />
+  <meta name="theme-color" content="#0f2a33" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflare-dns.com https://dns.google; manifest-src 'self'; worker-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'" />
   <base href="/" />
   <link rel="preload" id="webassembly" />
@@ -18,39 +18,65 @@
 </head>
 <body>
   <div id="app">
-    <!-- Static shell: same markup as MainLayout + Home (English), painted before WebAssembly starts. -->
+    <!-- Static shell: same markup as MainLayout + Home (English), painted before WebAssembly starts.
+         Generated from AppText.resx and the Razor drawings by tools/build-shell.py. -->
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="">
-          <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" /><path d="M8 11l6 5-6 5" /><path d="M16 22h8" /></svg>
-          <span>Admin Toolbox</span>
-        </a>
+        <a class="brand" href=""><svg class="logo" viewBox="0 0 512 512" width="32" height="32" aria-hidden="true" focusable="false"><rect width="512" height="512" rx="112" fill="#0f2a33" /><rect x="72" y="104" width="368" height="288" rx="40" fill="#f2f7f7" /><path d="M72 144a40 40 0 0 1 40-40h288a40 40 0 0 1 40 40v20H72z" fill="#bfe0de" /><circle cx="114" cy="134" r="11" fill="#0f2a33" /><circle cx="148" cy="134" r="11" fill="#0f2a33" /><circle cx="182" cy="134" r="11" fill="#0f2a33" /><path d="M136 220l64 48-64 48" fill="none" stroke="#0b6b6b" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" /><path d="M232 320h88" fill="none" stroke="#0b6b6b" stroke-width="30" stroke-linecap="round" /><circle cx="396" cy="388" r="84" fill="#f0b429" stroke="#0f2a33" stroke-width="20" /><path d="M356 390l28 28 52-56" fill="none" stroke="#0f2a33" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" /></svg><span>Admin Toolbox</span></a>
         <div class="header-controls"></div>
       </div>
       <nav class="container main-nav" aria-label="Tools" data-i18n-label="nav">
-        <a href="mail" data-i18n="tool.mail">Mail domain check</a>
-        <a href="header" data-i18n="tool.header">Header analysis</a>
-        <a href="subnet" data-i18n="tool.subnet">Subnet calculator</a>
-        <a href="dns-diff" data-i18n="tool.diff">DNS diff</a>
-        <a href="helpers" data-i18n="tool.helpers">Helpers</a>
+        <a href="mail"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 7l8.5 6 8.5-6" /></svg><span class="nav-long" data-i18n="tool.mail">Mail domain check</span><span class="nav-short" data-i18n="tool.mail.short">Mail</span></a>
+        <a href="header"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h11M4 18h7" /><circle cx="18" cy="17" r="2.5" /></svg><span class="nav-long" data-i18n="tool.header">Header analysis</span><span class="nav-short" data-i18n="tool.header.short">Header</span></a>
+        <a href="subnet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="19" r="2.5" /><circle cx="19" cy="19" r="2.5" /><path d="M12 7.5v4M12 11.5l-5.5 5.5M12 11.5l5.5 5.5" /></svg><span class="nav-long" data-i18n="tool.subnet">Subnet calculator</span><span class="nav-short" data-i18n="tool.subnet.short">Subnet</span></a>
+        <a href="dns-diff"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h15l-3.5-3.5M20 16H5l3.5 3.5" /></svg><span class="nav-long" data-i18n="tool.diff">DNS diff</span><span class="nav-short" data-i18n="tool.diff.short">DNS</span></a>
+        <a href="helpers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z" /></svg><span class="nav-long" data-i18n="tool.helpers">Helpers</span><span class="nav-short" data-i18n="tool.helpers.short">Helpers</span></a>
       </nav>
     </header>
     <main id="main" class="container">
       <div class="shell-route"><h1></h1><p class="lead"></p></div>
       <p class="loading shell-loading" role="status" data-i18n="loading">Loading …</p>
-      <div class="shell-home">
-      <section class="hero">
-        <h1 data-i18n="home.title">Tools for IT admins</h1>
-        <p class="lead" data-i18n="home.lead">Check mail security, DNS and networks right in the browser. No account, no server, input stays local.</p>
+      <div class="shell-home home">
+      <section class="hero" aria-labelledby="home-title">
+        <div class="hero-text">
+          <p class="eyebrow" data-i18n="home.eyebrow">Free · open source · no account</p>
+          <h1 id="home-title" data-i18n="home.title">Tools for IT admins</h1>
+          <p class="lead" data-i18n="home.lead">Check mail security, DNS and networks right in the browser. No account, no server, input stays local.</p>
+          <p class="actions"><a class="btn" href="mail" data-i18n="home.cta.mail">Check a mail domain</a><a class="btn btn-secondary" href="header" data-i18n="home.cta.header">Analyze a header</a></p>
+          <ul class="trust"><li data-i18n="home.trust.1">Runs in the browser</li><li data-i18n="home.trust.2">Nothing is uploaded</li><li data-i18n="home.trust.3">Helpers work offline</li><li data-i18n="home.trust.4">MIT license</li></ul>
+        </div>
+        <svg class="hero-report" viewBox="0 0 360 300" aria-hidden="true" focusable="false"><rect x="8" y="8" width="344" height="284" rx="18" class="hr-card" /><path d="M8 26a18 18 0 0 1 18-18h308a18 18 0 0 1 18 18v20H8z" class="hr-bar" /><circle cx="30" cy="27" r="5" class="hr-dot" /><circle cx="46" cy="27" r="5" class="hr-dot" /><circle cx="62" cy="27" r="5" class="hr-dot" /><text x="28" y="82" class="hr-domain">example.com</text><rect x="28" y="94" width="120" height="6" rx="3" class="hr-line" /><text x="28" y="143" class="hr-label">SPF</text><rect x="244" y="126" width="88" height="26" rx="13" class="hr-pill ok" /><circle cx="262" cy="139" r="5" class="hr-pill-dot ok" /><text x="274" y="144" class="hr-pill-text ok">OK</text><text x="28" y="183" class="hr-label">DKIM</text><rect x="244" y="166" width="88" height="26" rx="13" class="hr-pill ok" /><circle cx="262" cy="179" r="5" class="hr-pill-dot ok" /><text x="274" y="184" class="hr-pill-text ok">OK</text><text x="28" y="223" class="hr-label">DMARC</text><rect x="244" y="206" width="88" height="26" rx="13" class="hr-pill warn" /><circle cx="262" cy="219" r="5" class="hr-pill-dot warn" /><text x="274" y="224" class="hr-pill-text warn">p=none</text><text x="28" y="263" class="hr-label">MTA-STS</text><rect x="244" y="246" width="88" height="26" rx="13" class="hr-pill info" /><circle cx="262" cy="259" r="5" class="hr-pill-dot info" /><text x="274" y="264" class="hr-pill-text info">Info</text></svg>
       </section>
-      <ul class="tool-grid">
-        <li><a class="tool-card" href="mail"><span class="tool-name" data-i18n="tool.mail">Mail domain check</span><span class="tool-desc" data-i18n="tool.mail.desc">MX, SPF with lookup count, DKIM, DMARC, BIMI, MTA-STS and TLS-RPT with traffic lights and suggestions.</span></a></li>
-        <li><a class="tool-card" href="header"><span class="tool-name" data-i18n="tool.header">Header analysis</span><span class="tool-desc" data-i18n="tool.header.desc">Route as a timeline, SPF/DKIM/DMARC results, spam hints and suspicious mismatches.</span></a></li>
-        <li><a class="tool-card" href="subnet"><span class="tool-name" data-i18n="tool.subnet">Subnet calculator</span><span class="tool-desc" data-i18n="tool.subnet.desc">IPv4 and IPv6, splitting, summarizing and IP-in-network check.</span></a></li>
-        <li><a class="tool-card" href="dns-diff"><span class="tool-name" data-i18n="tool.diff">DNS diff</span><span class="tool-desc" data-i18n="tool.diff.desc">Zone file from before against live DNS. Ideal for DNS migrations.</span></a></li>
-        <li><a class="tool-card" href="helpers"><span class="tool-name" data-i18n="tool.helpers">Helpers</span><span class="tool-desc" data-i18n="tool.helpers.desc">Passwords, JWT, Base64/URL/hex, hashes and certificates. Works offline.</span></a></li>
-      </ul>
-      <p class="notice" data-i18n="home.privacy">Only the mail domain check and DNS diff send DNS queries to Cloudflare DNS (fallback Google Public DNS). Everything else runs offline.</p>
+      <section class="block" aria-labelledby="tools-title">
+        <h2 id="tools-title" data-i18n="home.tools.title">Five tools</h2>
+        <ul class="tool-grid">
+          <li><a class="tool-card" href="mail"><span class="tool-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 7l8.5 6 8.5-6" /></svg></span><span class="tool-name" data-i18n="tool.mail">Mail domain check</span><span class="tool-desc" data-i18n="tool.mail.desc">MX, SPF with lookup count, DKIM, DMARC, BIMI, MTA-STS and TLS-RPT with traffic lights and suggestions.</span></a></li>
+          <li><a class="tool-card" href="header"><span class="tool-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h11M4 18h7" /><circle cx="18" cy="17" r="2.5" /></svg></span><span class="tool-name" data-i18n="tool.header">Header analysis</span><span class="tool-desc" data-i18n="tool.header.desc">Route as a timeline, SPF/DKIM/DMARC results, spam hints and suspicious mismatches.</span></a></li>
+          <li><a class="tool-card" href="subnet"><span class="tool-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="19" r="2.5" /><circle cx="19" cy="19" r="2.5" /><path d="M12 7.5v4M12 11.5l-5.5 5.5M12 11.5l5.5 5.5" /></svg></span><span class="tool-name" data-i18n="tool.subnet">Subnet calculator</span><span class="tool-desc" data-i18n="tool.subnet.desc">IPv4 and IPv6, splitting, summarizing and IP-in-network check.</span></a></li>
+          <li><a class="tool-card" href="dns-diff"><span class="tool-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h15l-3.5-3.5M20 16H5l3.5 3.5" /></svg></span><span class="tool-name" data-i18n="tool.diff">DNS diff</span><span class="tool-desc" data-i18n="tool.diff.desc">Zone file from before against live DNS. Ideal for DNS migrations.</span></a></li>
+          <li><a class="tool-card" href="helpers"><span class="tool-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z" /></svg></span><span class="tool-name" data-i18n="tool.helpers">Helpers</span><span class="tool-desc" data-i18n="tool.helpers.desc">Passwords, JWT, Base64/URL/hex, hashes and certificates. Works offline.</span></a></li>
+        </ul>
+      </section>
+      <section class="block why" aria-labelledby="why-title">
+        <div class="prose"><h2 id="why-title" data-i18n="home.why.title">Why this toolbox?</h2><p data-i18n="home.why.1">As an IT administrator, the same questions come up every week: Why does our mail end up in spam? Are SPF, DKIM and DMARC right? Did a record go missing after the DNS move? Does the subnet still fit?</p><p data-i18n="home.why.2">Since February 2024, Google and Yahoo require bulk senders to have valid SPF, DKIM and DMARC records, and Microsoft has enforced the same for Outlook.com since May 2025. If a record is missing, mail is rejected or lands in spam. Small companies notice it too, as soon as newsletters or invoices sent by mail stop arriving.</p><p data-i18n="home.why.3">The usual online checkers show ads, want an account or send mail headers with internal addresses to third-party servers. This toolbox does all the work in the browser. Only DNS lookups go to Cloudflare DNS, just like with any resolver.</p></div>
+        <div class="rules"><h3 data-i18n="home.rules.title">What mailbox providers expect</h3><dl><div><dt>SPF</dt><dd data-i18n="home.rules.spf">Lists the servers allowed to send for the domain. At most 10 DNS lookups.</dd></div><div><dt>DKIM</dt><dd data-i18n="home.rules.dkim">Signs every mail so changes on the way are noticed. Keys with at least 1024, better 2048 bits.</dd></div><div><dt>DMARC</dt><dd data-i18n="home.rules.dmarc">Tells receivers what to do when SPF and DKIM fail, and sends reports. Start with p=none, then tighten.</dd></div></dl>
+          <p class="small muted" data-i18n="home.rules.note">Google and Yahoo require this from around 5,000 mails a day to their users, Microsoft for Outlook.com. Sources:</p>
+          <ul class="sources"><li><a href="https://support.google.com/a/answer/81126" rel="noopener" data-i18n="home.source.google">Google: Email sender guidelines</a></li><li><a href="https://senders.yahooinc.com/best-practices/" rel="noopener" data-i18n="home.source.yahoo">Yahoo: Sender best practices</a></li></ul>
+        </div>
+      </section>
+      <section class="block" aria-labelledby="guide-title">
+        <h2 id="guide-title" data-i18n="home.guide.title">Typical workflows</h2>
+        <ol class="steps">
+          <li class="step"><h3><a href="mail" data-i18n="home.guide.1.title">Mail lands in spam</a></h3><p data-i18n="home.guide.1">Run the mail domain check for the sending domain. Red and yellow findings come with a concrete suggestion for the DNS record.</p><p class="step-tool"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3.5 7l8.5 6 8.5-6" /></svg><span data-i18n="tool.mail">Mail domain check</span></p></li>
+          <li class="step"><h3><a href="header" data-i18n="home.guide.2.title">A single mail looks suspicious</a></h3><p data-i18n="home.guide.2">Copy the headers (Outlook: File, Properties; Gmail: Show original) and paste them into the header analysis. It shows the route, delays and whether the sender is faked.</p><p class="step-tool"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h11M4 18h7" /><circle cx="18" cy="17" r="2.5" /></svg><span data-i18n="tool.header">Header analysis</span></p></li>
+          <li class="step"><h3><a href="dns-diff" data-i18n="home.guide.3.title">Moving DNS</a></h3><p data-i18n="home.guide.3">Export the zone file at the old provider before the move. Afterwards the DNS diff compares it with live DNS and lists every missing record.</p><p class="step-tool"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h15l-3.5-3.5M20 16H5l3.5 3.5" /></svg><span data-i18n="tool.diff">DNS diff</span></p></li>
+          <li class="step"><h3><a href="subnet" data-i18n="home.guide.4.title">Planning a network</a></h3><p data-i18n="home.guide.4">Enter a network in the subnet calculator, split it into VLANs or check whether an address belongs to it. IPv4 and IPv6.</p><p class="step-tool"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="19" r="2.5" /><circle cx="19" cy="19" r="2.5" /><path d="M12 7.5v4M12 11.5l-5.5 5.5M12 11.5l5.5 5.5" /></svg><span data-i18n="tool.subnet">Subnet calculator</span></p></li>
+        </ol>
+      </section>
+      <section class="block split">
+        <div class="note-card"><h2 data-i18n="home.privacy.title">What stays local</h2><p data-i18n="home.privacy">Only the mail domain check and DNS diff send DNS queries to Cloudflare DNS (fallback Google Public DNS). Everything else runs offline.</p></div>
+        <div class="note-card"><h2 data-i18n="home.tech.title">Under the hood</h2><p data-i18n="home.tech">C# and .NET 10 compiled to WebAssembly (Blazor). No backend: the app is served as static files from Cloudflare Pages.</p><p><a href="https://github.com/tirlogy/admin-toolbox" rel="noopener" data-i18n="home.tech.link">Source code and tests on GitHub</a></p></div>
+      </section>
       </div>
       <noscript><p class="alert">This app needs JavaScript and WebAssembly.</p></noscript>
     </main>

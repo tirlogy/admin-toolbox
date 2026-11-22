@@ -6,7 +6,7 @@
 <header class="site-header">
     <div class="container header-inner">
         <a class="brand" href="">
-            <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" /><path d="M8 11l6 5-6 5" /><path d="M16 22h8" /></svg>
+            <Logo Size="32" />
             <span>Admin Toolbox</span>
         </a>
         <div class="header-controls">
@@ -17,16 +17,15 @@
                 <option value="tr">Türkçe</option>
             </select>
             <button type="button" class="icon-button" @onclick="CycleThemeAsync" aria-label="@T["theme." + _theme]" title="@T["theme." + _theme]">
-                <span aria-hidden="true">@(_theme switch { "light" => "☀", "dark" => "☾", _ => "◐" })</span>
+                <Icon Name="@_theme" />
             </button>
         </div>
     </div>
     <nav class="container main-nav" aria-label="@T["nav"]">
-        <NavLink href="mail">@T["tool.mail"]</NavLink>
-        <NavLink href="header">@T["tool.header"]</NavLink>
-        <NavLink href="subnet">@T["tool.subnet"]</NavLink>
-        <NavLink href="dns-diff">@T["tool.diff"]</NavLink>
-        <NavLink href="helpers">@T["tool.helpers"]</NavLink>
+        @foreach (var (key, href) in NavItems)
+        {
+            <NavLink href="@href"><Icon Name="@key" /><span class="nav-long">@T["tool." + key]</span><span class="nav-short">@T["tool." + key + ".short"]</span></NavLink>
+        }
     </nav>
 </header>
 
@@ -47,6 +46,11 @@
 </footer>
 
 @code {
+    private static readonly (string Key, string Href)[] NavItems =
+    {
+        ("mail", "mail"), ("header", "header"), ("subnet", "subnet"), ("diff", "dns-diff"), ("helpers", "helpers"),
+    };
+
     private string _lang = System.Globalization.CultureInfo.CurrentUICulture.Name;
     private string _theme = "system";
 

@@ -7,7 +7,7 @@
   "scope": "./",
   "display": "standalone",
   "background_color": "#f4f6f8",
-  "theme_color": "#0b6b6b",
+  "theme_color": "#0f2a33",
   "lang": "en",
   "categories": ["utilities", "developer"],
   "icons": [
