@@ -35,4 +35,42 @@
   <data name="tool.mail.desc" xml:space="preserve"><value>MX, SPF with lookup count, DKIM, DMARC, BIMI, MTA-STS and TLS-RPT with traffic lights and suggestions.</value></data>
   <data name="tool.subnet" xml:space="preserve"><value>Subnet calculator</value></data>
   <data name="tool.subnet.desc" xml:space="preserve"><value>IPv4 and IPv6, splitting, summarizing and IP-in-network check.</value></data>
+  <data name="home.eyebrow" xml:space="preserve"><value>Free · open source · no account</value></data>
+  <data name="home.cta.mail" xml:space="preserve"><value>Check a mail domain</value></data>
+  <data name="home.cta.header" xml:space="preserve"><value>Analyze a header</value></data>
+  <data name="home.trust.1" xml:space="preserve"><value>Runs in the browser</value></data>
+  <data name="home.trust.2" xml:space="preserve"><value>Nothing is uploaded</value></data>
+  <data name="home.trust.3" xml:space="preserve"><value>Helpers work offline</value></data>
+  <data name="home.trust.4" xml:space="preserve"><value>MIT license</value></data>
+  <data name="home.tools.title" xml:space="preserve"><value>Five tools</value></data>
+  <data name="home.why.title" xml:space="preserve"><value>Why this toolbox?</value></data>
+  <data name="home.why.1" xml:space="preserve"><value>As an IT administrator, the same questions come up every week: Why does our mail end up in spam? Are SPF, DKIM and DMARC right? Did a record go missing after the DNS move? Does the subnet still fit?</value></data>
+  <data name="home.why.2" xml:space="preserve"><value>Since February 2024, Google and Yahoo require bulk senders to have valid SPF, DKIM and DMARC records, and Microsoft has enforced the same for Outlook.com since May 2025. If a record is missing, mail is rejected or lands in spam. Small companies notice it too, as soon as newsletters or invoices sent by mail stop arriving.</value></data>
+  <data name="home.why.3" xml:space="preserve"><value>The usual online checkers show ads, want an account or send mail headers with internal addresses to third-party servers. This toolbox does all the work in the browser. Only DNS lookups go to Cloudflare DNS, just like with any resolver.</value></data>
+  <data name="home.rules.title" xml:space="preserve"><value>What mailbox providers expect</value></data>
+  <data name="home.rules.spf" xml:space="preserve"><value>Lists the servers allowed to send for the domain. At most 10 DNS lookups.</value></data>
+  <data name="home.rules.dkim" xml:space="preserve"><value>Signs every mail so changes on the way are noticed. Keys with at least 1024, better 2048 bits.</value></data>
+  <data name="home.rules.dmarc" xml:space="preserve"><value>Tells receivers what to do when SPF and DKIM fail, and sends reports. Start with p=none, then tighten.</value></data>
+  <data name="home.rules.note" xml:space="preserve"><value>Google and Yahoo require this from around 5,000 mails a day to their users, Microsoft for Outlook.com. Sources:</value></data>
+  <data name="home.source.google" xml:space="preserve"><value>Google: Email sender guidelines</value></data>
+  <data name="home.source.yahoo" xml:space="preserve"><value>Yahoo: Sender best practices</value></data>
+  <data name="home.guide.title" xml:space="preserve"><value>Typical workflows</value></data>
+  <data name="home.guide.1.title" xml:space="preserve"><value>Mail lands in spam</value></data>
+  <data name="home.guide.1" xml:space="preserve"><value>Run the mail domain check for the sending domain. Red and yellow findings come with a concrete suggestion for the DNS record.</value></data>
+  <data name="home.guide.2.title" xml:space="preserve"><value>A single mail looks suspicious</value></data>
+  <data name="home.guide.2" xml:space="preserve"><value>Copy the headers (Outlook: File, Properties; Gmail: Show original) and paste them into the header analysis. It shows the route, delays and whether the sender is faked.</value></data>
+  <data name="home.guide.3.title" xml:space="preserve"><value>Moving DNS</value></data>
+  <data name="home.guide.3" xml:space="preserve"><value>Export the zone file at the old provider before the move. Afterwards the DNS diff compares it with live DNS and lists every missing record.</value></data>
+  <data name="home.guide.4.title" xml:space="preserve"><value>Planning a network</value></data>
+  <data name="home.guide.4" xml:space="preserve"><value>Enter a network in the subnet calculator, split it into VLANs or check whether an address belongs to it. IPv4 and IPv6.</value></data>
+  <data name="home.guide.go" xml:space="preserve"><value>Open</value></data>
+  <data name="home.privacy.title" xml:space="preserve"><value>What stays local</value></data>
+  <data name="home.tech.title" xml:space="preserve"><value>Under the hood</value></data>
+  <data name="home.tech" xml:space="preserve"><value>C# and .NET 10 compiled to WebAssembly (Blazor). No backend: the app is served as static files from Cloudflare Pages.</value></data>
+  <data name="home.tech.link" xml:space="preserve"><value>Source code and tests on GitHub</value></data>
+  <data name="tool.mail.short" xml:space="preserve"><value>Mail</value></data>
+  <data name="tool.header.short" xml:space="preserve"><value>Header</value></data>
+  <data name="tool.subnet.short" xml:space="preserve"><value>Subnet</value></data>
+  <data name="tool.diff.short" xml:space="preserve"><value>DNS</value></data>
+  <data name="tool.helpers.short" xml:space="preserve"><value>Helpers</value></data>
 </root>

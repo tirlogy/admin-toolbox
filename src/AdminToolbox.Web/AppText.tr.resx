@@ -35,4 +35,42 @@
   <data name="tool.mail.desc" xml:space="preserve"><value>MX, sorgu sayımlı SPF, DKIM, DMARC, BIMI, MTA-STS ve TLS-RPT; trafik ışıkları ve önerilerle.</value></data>
   <data name="tool.subnet" xml:space="preserve"><value>Alt ağ hesaplayıcı</value></data>
   <data name="tool.subnet.desc" xml:space="preserve"><value>IPv4 ve IPv6, bölme, birleştirme ve IP'nin ağda olup olmadığının kontrolü.</value></data>
+  <data name="home.eyebrow" xml:space="preserve"><value>Ücretsiz · açık kaynak · hesap gerekmez</value></data>
+  <data name="home.cta.mail" xml:space="preserve"><value>E-posta alan adını kontrol et</value></data>
+  <data name="home.cta.header" xml:space="preserve"><value>Başlığı analiz et</value></data>
+  <data name="home.trust.1" xml:space="preserve"><value>Tarayıcıda çalışır</value></data>
+  <data name="home.trust.2" xml:space="preserve"><value>Hiçbir şey yüklenmez</value></data>
+  <data name="home.trust.3" xml:space="preserve"><value>Yardımcılar çevrimdışı da çalışır</value></data>
+  <data name="home.trust.4" xml:space="preserve"><value>MIT lisansı</value></data>
+  <data name="home.tools.title" xml:space="preserve"><value>Beş araç</value></data>
+  <data name="home.why.title" xml:space="preserve"><value>Neden bu araç kutusu?</value></data>
+  <data name="home.why.1" xml:space="preserve"><value>BT yöneticisi olarak her hafta aynı sorular gelir: E-postalarımız neden spam klasörüne düşüyor? SPF, DKIM ve DMARC doğru mu? DNS taşımasından sonra bir kayıt eksik mi? Alt ağ hâlâ yeterli mi?</value></data>
+  <data name="home.why.2" xml:space="preserve"><value>Şubat 2024'ten beri Google ve Yahoo, toplu gönderim yapanlardan geçerli SPF, DKIM ve DMARC kayıtları istiyor; Microsoft da Mayıs 2025'ten beri Outlook.com için aynısını uyguluyor. Bir kayıt eksikse e-postalar reddedilir veya spam klasörüne düşer. Bülten ya da faturalar e-postayla ulaşmamaya başladığında küçük şirketler de bunu fark eder.</value></data>
+  <data name="home.why.3" xml:space="preserve"><value>Bilinen çevrimiçi kontrol araçları reklam gösterir, hesap ister ya da iç adresler içeren e-posta başlıklarını yabancı sunuculara gönderir. Bu araç kutusu her şeyi tarayıcıda hesaplar. Yalnızca DNS sorguları, her çözümleyicide olduğu gibi Cloudflare DNS'e gider.</value></data>
+  <data name="home.rules.title" xml:space="preserve"><value>E-posta sağlayıcılarının beklentileri</value></data>
+  <data name="home.rules.spf" xml:space="preserve"><value>Alan adı adına hangi sunucuların gönderebileceğini belirler. En fazla 10 DNS sorgusu.</value></data>
+  <data name="home.rules.dkim" xml:space="preserve"><value>Her e-postayı imzalar, böylece yoldaki değişiklikler fark edilir. Anahtar en az 1024, tercihen 2048 bit.</value></data>
+  <data name="home.rules.dmarc" xml:space="preserve"><value>SPF ve DKIM başarısız olduğunda alıcılara ne yapacaklarını söyler ve rapor gönderir. p=none ile başlayın, sonra sıkılaştırın.</value></data>
+  <data name="home.rules.note" xml:space="preserve"><value>Google ve Yahoo bunu kullanıcılarına günde yaklaşık 5.000 e-postadan itibaren, Microsoft ise Outlook.com için istiyor. Kaynaklar:</value></data>
+  <data name="home.source.google" xml:space="preserve"><value>Google: E-posta gönderen yönergeleri</value></data>
+  <data name="home.source.yahoo" xml:space="preserve"><value>Yahoo: Gönderenler için en iyi uygulamalar</value></data>
+  <data name="home.guide.title" xml:space="preserve"><value>Tipik iş akışları</value></data>
+  <data name="home.guide.1.title" xml:space="preserve"><value>E-posta spam klasörüne düşüyor</value></data>
+  <data name="home.guide.1" xml:space="preserve"><value>Gönderen alan adı için e-posta alan adı kontrolünü çalıştırın. Kırmızı ve sarı bulgular, DNS kaydı için somut bir öneriyle gelir.</value></data>
+  <data name="home.guide.2.title" xml:space="preserve"><value>Tek bir e-posta şüpheli görünüyor</value></data>
+  <data name="home.guide.2" xml:space="preserve"><value>Başlıkları kopyalayın (Outlook: Dosya, Özellikler; Gmail: Orijinali göster) ve başlık analizine yapıştırın. Yolu, gecikmeleri ve gönderenin sahte olup olmadığını gösterir.</value></data>
+  <data name="home.guide.3.title" xml:space="preserve"><value>DNS taşıma</value></data>
+  <data name="home.guide.3" xml:space="preserve"><value>Taşımadan önce eski sağlayıcıdan bölge dosyasını dışa aktarın. Ardından DNS karşılaştırma onu canlı DNS ile karşılaştırır ve eksik her kaydı listeler.</value></data>
+  <data name="home.guide.4.title" xml:space="preserve"><value>Ağ planlama</value></data>
+  <data name="home.guide.4" xml:space="preserve"><value>Ağı alt ağ hesaplayıcıya girin, VLAN'lara bölün veya bir adresin ona ait olup olmadığını kontrol edin. IPv4 ve IPv6.</value></data>
+  <data name="home.guide.go" xml:space="preserve"><value>Aç</value></data>
+  <data name="home.privacy.title" xml:space="preserve"><value>Yerelde kalanlar</value></data>
+  <data name="home.tech.title" xml:space="preserve"><value>Teknik</value></data>
+  <data name="home.tech" xml:space="preserve"><value>C# ve .NET 10, WebAssembly'ye derlenmiş (Blazor). Arka uç yok: Uygulama, Cloudflare Pages üzerinden statik dosyalar olarak sunulur.</value></data>
+  <data name="home.tech.link" xml:space="preserve"><value>GitHub'da kaynak kodu ve testler</value></data>
+  <data name="tool.mail.short" xml:space="preserve"><value>E-posta</value></data>
+  <data name="tool.header.short" xml:space="preserve"><value>Başlık</value></data>
+  <data name="tool.subnet.short" xml:space="preserve"><value>Alt ağ</value></data>
+  <data name="tool.diff.short" xml:space="preserve"><value>DNS</value></data>
+  <data name="tool.helpers.short" xml:space="preserve"><value>Yardımcı</value></data>
 </root>

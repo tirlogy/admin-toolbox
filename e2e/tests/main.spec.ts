@@ -10,7 +10,7 @@ test('main flow: home to mail domain check with SPF tree', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tools for IT admins');
   await waitForBlazor(page);
 
-  await page.getByRole('navigation', { name: 'Tools' }).getByRole('link', { name: 'Mail domain check' }).click();
+  await page.getByRole('navigation', { name: 'Tools' }).getByRole('link', { name: /^(Mail domain check|Mail)$/ }).click(); // phones show the short tab label
   await expect(page).toHaveURL(/\/mail$/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mail domain check');
 

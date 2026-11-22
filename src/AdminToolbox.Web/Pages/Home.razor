@@ -3,28 +3,104 @@
 
 <PageTitle>Admin Toolbox</PageTitle>
 
-<section class="hero">
-    <h1>@T["home.title"]</h1>
-    <p class="lead">@T["home.lead"]</p>
-</section>
+<div class="home">
+    <section class="hero" aria-labelledby="home-title">
+        <div class="hero-text">
+            <p class="eyebrow">@T["home.eyebrow"]</p>
+            <h1 id="home-title">@T["home.title"]</h1>
+            <p class="lead">@T["home.lead"]</p>
+            <p class="actions">
+                <a class="btn" href="mail">@T["home.cta.mail"]</a>
+                <a class="btn btn-secondary" href="header">@T["home.cta.header"]</a>
+            </p>
+            <ul class="trust">
+                @for (var i = 1; i <= 4; i++)
+                {
+                    <li>@T["home.trust." + i]</li>
+                }
+            </ul>
+        </div>
+        <HeroReport />
+    </section>
 
-<ul class="tool-grid">
-    @foreach (var (key, href) in Tools)
-    {
-        <li>
-            <a class="tool-card" href="@href">
-                <span class="tool-name">@T["tool." + key]</span>
-                <span class="tool-desc">@T["tool." + key + ".desc"]</span>
-            </a>
-        </li>
-    }
-</ul>
+    <section class="block" aria-labelledby="tools-title">
+        <h2 id="tools-title">@T["home.tools.title"]</h2>
+        <ul class="tool-grid">
+            @foreach (var (key, href) in Tools)
+            {
+                <li>
+                    <a class="tool-card" href="@href">
+                        <span class="tool-icon"><Icon Name="@key" /></span>
+                        <span class="tool-name">@T["tool." + key]</span>
+                        <span class="tool-desc">@T["tool." + key + ".desc"]</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </section>
 
-<p class="notice">@T["home.privacy"]</p>
+    <section class="block why" aria-labelledby="why-title">
+        <div class="prose">
+            <h2 id="why-title">@T["home.why.title"]</h2>
+            <p>@T["home.why.1"]</p>
+            <p>@T["home.why.2"]</p>
+            <p>@T["home.why.3"]</p>
+        </div>
+        <div class="rules">
+            <h3>@T["home.rules.title"]</h3>
+            <dl>
+                @foreach (var (name, key) in Rules)
+                {
+                    <div><dt>@name</dt><dd>@T["home.rules." + key]</dd></div>
+                }
+            </dl>
+            <p class="small muted">@T["home.rules.note"]</p>
+            <ul class="sources">
+                <li><a href="https://support.google.com/a/answer/81126" rel="noopener">@T["home.source.google"]</a></li>
+                <li><a href="https://senders.yahooinc.com/best-practices/" rel="noopener">@T["home.source.yahoo"]</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="block" aria-labelledby="guide-title">
+        <h2 id="guide-title">@T["home.guide.title"]</h2>
+        <ol class="steps">
+            @for (var i = 0; i < Guide.Length; i++)
+            {
+                var n = i + 1;
+                var (key, href) = Guide[i];
+                <li class="step">
+                    <h3><a href="@href">@T[$"home.guide.{n}.title"]</a></h3>
+                    <p>@T[$"home.guide.{n}"]</p>
+                    <p class="step-tool"><Icon Name="@key" /><span>@T["tool." + key]</span></p>
+                </li>
+            }
+        </ol>
+    </section>
+
+    <section class="block split">
+        <div class="note-card">
+            <h2>@T["home.privacy.title"]</h2>
+            <p>@T["home.privacy"]</p>
+        </div>
+        <div class="note-card">
+            <h2>@T["home.tech.title"]</h2>
+            <p>@T["home.tech"]</p>
+            <p><a href="https://github.com/tirlogy/admin-toolbox" rel="noopener">@T["home.tech.link"]</a></p>
+        </div>
+    </section>
+</div>
 
 @code {
     private static readonly (string Key, string Href)[] Tools =
     {
         ("mail", "mail"), ("header", "header"), ("subnet", "subnet"), ("diff", "dns-diff"), ("helpers", "helpers"),
     };
+
+    private static readonly (string Key, string Href)[] Guide =
+    {
+        ("mail", "mail"), ("header", "header"), ("diff", "dns-diff"), ("subnet", "subnet"),
+    };
+
+    private static readonly (string Name, string Key)[] Rules = { ("SPF", "spf"), ("DKIM", "dkim"), ("DMARC", "dmarc") };
 }
